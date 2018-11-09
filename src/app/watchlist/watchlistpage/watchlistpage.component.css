@@ -34,3 +34,8 @@ td{
     border-radius: 2.25rem !important;
     border: thin #eeeeee solid;
 }
+
+.modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }

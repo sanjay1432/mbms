@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding:2rem">
+<div class="container-fluid" style="padding:2rem" *ngIf ="!simlarUsers">
   <h3 class="watchlist text-uppercase text-center"> Add to WatchList</h3>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
   <div class="row">
@@ -24,4 +24,8 @@
     </div>
   </div>
   </form>
+</div>
+
+<div class="container-fluid" style="padding:2rem" *ngIf ="simlarUsers">
+   <app-possible-match (onExist) = "onexistuser($event)"></app-possible-match>
 </div>

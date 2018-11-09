@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="container" style="    background-color: #B41F1F;
+  color: white; ">
+  <div class="row">
+    <div class="col-sm-1" style="padding:1rem">
+        <img src="../../../assets/icons/warning.png">
+    </div>
+    <!-- <div class="col-sm"> -->
+        <h4 class="title text-uppercase">
+            possible match detected
+         </h4>
+      <!-- </div> -->
+  </div>
+  
+  
+  <p style="font-size: 15.9px;    padding-bottom: 15px;">
+    You entered the name of a previous visitor. Please review the possible match
+    below to make sure the person you are adding is not already in the database.
+    Simply click on a person to view their details. If a visitor record belongs to the
+    person you are adding, Click the Use Existing button. If there is no match, add new person.
+  </p>
+</div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-1 col-xs-1">
+          <img src="../../../assets/icons/{{newUser.image}}" class="rounded">
+        </div>
+        <div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+          {{newUser.firstName}}, {{newUser.lastName}}
+        </div>
+        <div class="col-sm-3" style="margin-top: 20px;">
+          {{newUser.company}}
+        </div>
+        <div class="col-sm-3" style="margin-top: 20px;">
+          {{newUser.comment}}
+        </div>
+        <div class="col-sm-2" style="margin-top: 15px;">
+          <button type="submit" class="btn btn-success save" (click)= "onAdd(newUser)">&nbsp;&nbsp;Add New&nbsp;&nbsp;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <h3 class="title text-uppercase">
+    Possible Match(es)
+  </h3>
+
+  <div class="card" *ngFor="let existUser of existing">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-1 col-xs-1">
+          <img src="../../../assets/icons/{{existUser.image}}" class="rounded">
+        </div>
+        <div class="col-sm-3 col-xs-3" style="margin-top: 20px;">
+          {{existUser.firstName}}, {{existUser.lastName}}
+        </div>
+        <div class="col-sm-3" style="margin-top: 20px;">
+          {{existUser.company}}
+        </div>
+        <div class="col-sm-3" style="margin-top: 20px;">
+          {{existUser.comment}}
+        </div>
+        <div class="col-sm-2" style="margin-top: 15px;">
+          <button type="submit" class="btn btn-success save" (click) ="onexistuser()">Use Existing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-success cancel" data-dismiss="modal">Cancel</button>
+  <br/>
+  
+</div>

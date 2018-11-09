@@ -42,6 +42,14 @@ export class InMemoryDataService implements InMemoryDbService {
           lastName: 'Steve',
           company:'Travelocity',
           comment:''
+        },
+        {
+          id:6,
+          image:'man.jpg',
+          firstName: 'Wilko',
+          lastName: 'man',
+          company:'ebay',
+          comment:''
         }
       ]
     return {users};

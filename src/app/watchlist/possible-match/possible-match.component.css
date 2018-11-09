@@ -1,0 +1,25 @@
+.title{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 24px;
+}
+.rounded {
+    border-radius: 2.25rem !important;
+    border: thin #eeeeee solid;
+}
+.save{
+    float:right;
+        background-color: #8FC600;
+        border: 0;
+        border-radius: 0;
+        padding: 6px 30px;
+}
+.cancel{
+    float:right;
+    background-color: #999999;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 59px;
+}
+.card-body{
+padding: 0.5rem;
+}

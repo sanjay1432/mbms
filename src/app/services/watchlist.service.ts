@@ -16,9 +16,16 @@ const httpOptions = {
 })
 export class WatchlistService {
   usersUrl = 'api/users';  // URL to web api
+  sUser = [];
   constructor(private http: HttpClient) { }
+  getsimilarUser(): any {
+      return this.sUser;
+  }
 
-
+  setsimilarUser(user: any) {
+      this.sUser = user;
+  }
+ 
   getUsers (): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl)
   }

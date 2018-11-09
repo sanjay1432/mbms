@@ -1,9 +1,8 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WatchlistpageComponent } from './watchlistpage/watchlistpage.component';
-
 const routes: Routes = [
-  { path: '', component: WatchlistpageComponent },
+  { path: '', component: WatchlistpageComponent }
 ];
 
 @NgModule({

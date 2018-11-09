@@ -48,10 +48,12 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" [ngStyle]="{'display':display}">
-    <div class="modal-dialog" role="document" style="    margin-top: 5%;">
-      <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
-          <app-addtowatchlist></app-addtowatchlist>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog " [ngClass]="modalClassName" role="document" style="    margin-top: 5%;">
+      <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;"> 
+          <button id = "close" data-dismiss="modal" style="display:none"></button>
+        <app-addtowatchlist (changedFocus) = "onSimUser($event)" (closeModal) = "onclose($event)"></app-addtowatchlist>
+        
       </div>
     </div>
   </div>

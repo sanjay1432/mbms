@@ -8,11 +8,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class WatchlistpageComponent implements OnInit {
   users:any;
-  constructor(private watchlistService:WatchlistService,private router: Router) { }
+  private focused : boolean;
+  modalClassName;
+  
+  constructor(private watchlistService:WatchlistService,private router: Router) {
+    
+   }
 
   ngOnInit() {
     this.getUsersList()
   }
+
+  onSimUser(e){
+    this.modalClassName = "modal-xl";
+  }
+  onclose(e){
+   
+    let element:HTMLElement = document.getElementById('close') as HTMLElement;
+    element.click();
+    this.modalClassName = "";
+  }
+
 
   getUsersList(){
     this.watchlistService.getUsers().subscribe(user =>  this.users = user)
@@ -22,9 +38,12 @@ export class WatchlistpageComponent implements OnInit {
         element.click();
   }
   onRemove(id){
+    var removeIndex = this.users.map(function(user) { return user.id; })
+                       .indexOf(id);
+                      this.users.splice(removeIndex, 1)
     this.watchlistService.deleteUser(id).subscribe(
       user => 
-      this.getUsersList()
+      this.getUsersList()   
      );
   }
 

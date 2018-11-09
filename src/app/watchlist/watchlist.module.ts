@@ -10,6 +10,7 @@ import { InMemoryDataService }  from '../in-memory-data.service';
 import { WatchlistpageComponent } from './watchlistpage/watchlistpage.component';
 import { AddtowatchlistComponent } from './addtowatchlist/addtowatchlist.component';
 import { WatchlistService } from '../services/watchlist.service';
+import { PossibleMatchComponent } from './possible-match/possible-match.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,7 +27,7 @@ import { WatchlistService } from '../services/watchlist.service';
 
   ],
   
-  declarations: [WatchlistpageComponent, AddtowatchlistComponent],
+  declarations: [WatchlistpageComponent, AddtowatchlistComponent, PossibleMatchComponent],
   providers   : [
     WatchlistService
   ]
