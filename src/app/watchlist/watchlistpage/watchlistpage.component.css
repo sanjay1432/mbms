@@ -1,0 +1,36 @@
+.container-fluid {
+  padding: 2rem;
+}
+
+table {
+  background-color: white !important;
+}
+
+.form-control{
+    border-radius: 0px !important;
+    height: 50px !important;
+}
+input[type="text"], textarea {
+    outline: none;
+    box-shadow:none !important;
+    border:1px solid #ccc !important;
+}
+.btn:focus {
+    outline: none;
+    box-shadow:none !important;
+}
+.watchlist{
+    font-family: 'Raleway', sans-serif;
+}
+
+th{
+    vertical-align: middle !important;
+}
+td{
+    vertical-align: middle !important;
+}
+
+.rounded {
+    border-radius: 2.25rem !important;
+    border: thin #eeeeee solid;
+}
