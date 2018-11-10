@@ -42,3 +42,7 @@ input[type="text"], textarea {
     border: thin #9e9e9e6b solid;
     height: 80px;
 }
+
+.disbale{
+    pointer-events: none;
+}
