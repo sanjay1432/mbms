@@ -1,31 +1,59 @@
-<div class="container-fluid" style="padding:2rem" *ngIf ="!simlarUsers">
+<div class="container-fluid" style="padding:2rem" *ngIf ="!simlarUsers && !upload">
   <h3 class="watchlist text-uppercase text-center"> Add to WatchList</h3>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-  <div class="row">
-    <div class="col-sm -6">
-      <input class="form-control form-control-lg" type="text" placeholder="First Name" formControlName="firstName" required>
-    </div>
-    <div class="col-sm-6">
-      <input class="form-control form-control-lg" type="text" placeholder="Last Name" formControlName="lastName" required>
-    </div>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #formDir="ngForm" class="needs-validation" novalidate>
+    <!-- <div [hidden]="formDir.submitted"> -->
+      <div class="row">
+      <div class="col-sm -6">
+        <input id="name" class="form-control form-control-lg" type="text" placeholder="First Name" formControlName="firstName" required>
+        <div *ngIf="fname.invalid && (fname.dirty || fname.touched)"
+        class="alert alert-danger">
+        <div *ngIf="fname.errors.required">
+            firstName is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <input class="form-control form-control-lg" type="text" placeholder="Last Name" formControlName="lastName" required>
+        <div *ngIf="lname.invalid && (lname.dirty || lname.touched)"
+        class="alert alert-danger">
+        <div *ngIf="lname.errors.required">
+            lastName is required.
+          </div>
+        </div>
+      </div>
 
 
-    <div class="col-sm-12">
-      <input class="form-control form-control-lg" type="text" placeholder="Company (Optional)" formControlName="company">
-      
+      <div class="col-sm-12">
+        <input class="form-control form-control-lg" type="text" placeholder="Company (Optional)" formControlName="company">
+        
+      </div>
+      <div class="col-sm-12">
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="comment"></textarea>
+      </div>
+      <div class="col-sm-12">
+          <button type="button" class="btn btn-primary upload"  (click) = "onUpload()">Upload Photo</button>
+          <span style="margin: 0px 50px;" *ngIf ='isFile'>
+            <img [src]="imageurl" class="rounded">
+          </span>
+          <button type="submit" class="btn btn-success save" [disabled]="userForm.invalid">Save</button>
+          <button id = "close" data-dismiss="modal" style="display:none"></button>
+      </div>
+      <!-- </div> -->
     </div>
-    <div class="col-sm-12">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="comment"></textarea>
-    </div>
-    <div class="col-sm-12">
-        <button type="button" class="btn btn-primary upload" >Upload Photo</button>
-        <button type="submit" class="btn btn-success save">Save</button>
-        <button id = "close" data-dismiss="modal" style="display:none"></button>
-    </div>
-  </div>
   </form>
 </div>
 
-<div class="container-fluid" style="padding:2rem" *ngIf ="simlarUsers">
+<div class="container-fluid" style="padding:2rem" *ngIf ="simlarUsers && !upload">
    <app-possible-match (onExist) = "onexistuser($event)"></app-possible-match>
+</div>
+
+<div *ngIf = "upload" style="padding:2rem">
+    <file-drop headertext=" Drag & Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    </file-drop>
+    <hr>
+    <p class="text-center">OR</p>
+    <div class="text-center">
+    <input type="file" id = "Photo" (change)="dropped($event)" />
+    </div>
 </div>

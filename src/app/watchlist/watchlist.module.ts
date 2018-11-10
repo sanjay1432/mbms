@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WatchlistRoutingModule } from './watchlist-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { FileDropModule } from 'ngx-file-drop';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { InMemoryDataService }  from '../in-memory-data.service';
@@ -18,6 +18,7 @@ import { EdituserComponent } from './edituser/edituser.component';
     WatchlistRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FileDropModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {
       dataEncapsulation: false,

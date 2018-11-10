@@ -1,5 +1,5 @@
 
-<div class="container-fluid" style="padding:2rem">
+<div class="container-fluid" style="padding:2rem" *ngIf ="!upload">
   <h3 class="watchlist text-uppercase text-center"> Edit WatchList Entry</h3>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
   <div class="row">
@@ -19,14 +19,28 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="comment"></textarea>
     </div>
     <div class="col-sm-12">
-        <button type="button" class="btn btn-primary upload" >Upload Photo</button>
-        <span style="    margin: 0px 50px;">
-        <img src="../../../assets/icons/{{user?.image}}" class="rounded ">
-      </span>
+        <button type="button" class="btn btn-primary upload" (click) = "onUpload()">Upload Photo</button>
+        <span style="    margin: 0px 50px;" *ngIf ='!isFile'>
+          <img src="../../../assets/icons/{{user?.image}}" class="rounded ">
+        </span>
+        <span style="margin: 0px 50px;" *ngIf ='isFile'>
+            <img [src]="imageurl" class="rounded">
+          </span>
         <button type="submit" class="btn btn-success save" >Save</button>
         <button id = "close1" data-dismiss="modal" style="display:none"></button>
     </div>
   </div>
   </form>
   
+</div>
+
+<div *ngIf = "upload" style="padding:2rem">
+    <file-drop headertext=" Drag & Drop files here" (onFileDrop)="dropped($event)" 
+    (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    </file-drop>
+    <hr>
+    <p class="text-center">OR</p>
+    <div class="text-center">
+    <input type="file" id = "Photo" (change)="dropped($event)" />
+    </div>
 </div>

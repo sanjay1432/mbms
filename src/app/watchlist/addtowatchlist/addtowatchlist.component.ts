@@ -1,8 +1,9 @@
 import { Component, OnInit , Output, EventEmitter} from '@angular/core';
 import { WatchlistService } from '../../services/watchlist.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { WatchlistpageComponent } from '../watchlistpage/watchlistpage.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 @Component({
   providers:[WatchlistpageComponent ],
   selector: 'app-addtowatchlist',
@@ -12,21 +13,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddtowatchlistComponent implements OnInit {
   @Output() changedFocus : EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() closeModal : EventEmitter<boolean> = new EventEmitter<boolean>();
-  userForm = new FormGroup({
-    id: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    image: new FormControl(''),
-    company: new FormControl(''),
-    comment: new FormControl(''),
-  });
+  userForm: FormGroup;
+  
   simlarUsers:boolean = false;
-   element:HTMLElement = document.getElementById('close') as HTMLElement;
+  upload:boolean = false;
+  imageurl: any;
+  isFile: boolean;
   constructor(private watchlistService: WatchlistService, private watchlistpageComponent: WatchlistpageComponent,private router: Router) { }
 
   ngOnInit() {
+    console.log(this.upload)
+    this.userForm = new FormGroup({
+      'id': new FormControl(''),
+      'firstName': new FormControl('', [
+        Validators.required]),
+      'lastName': new FormControl('', [
+        Validators.required]),
+      'image': new FormControl(''),
+      'company': new FormControl(''),
+      'comment': new FormControl(''),
+    });
   }
 
+  get fname() { return this.userForm.get('firstName'); }
+  get lname() { return this.userForm.get('lastName'); }
   onSubmit(){
     let user  = this.userForm.value;
      if(user.image == ''){
@@ -42,8 +52,10 @@ export class AddtowatchlistComponent implements OnInit {
           that.watchlistService.saveUsers(user).subscribe(
             user => {
               // console.log(user)
+              let element:HTMLElement = document.getElementById('close') as HTMLElement;
+              element.click();
               that.watchlistpageComponent.closeModalDialog()
-              that.element.click();
+              
               that.userForm.reset();
               
             })
@@ -79,6 +91,83 @@ export class AddtowatchlistComponent implements OnInit {
   onexistuser(e){
     this.simlarUsers =false
     this.closeModal.emit(true);
+  }
+
+  onUpload(){
+    this.upload = true;
+  }
+  public files: UploadFile[] = [];
+ 
+  public dropped(event) {
+    if(event.files){
+    for (const droppedFile of event.files) {
+ 
+ 
+      // Is it a file?
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+ 
+          // Here you can access the real file
+          console.log(droppedFile.relativePath, file);
+          var reader = new FileReader();
+
+          reader.readAsDataURL(file); // read file as data url
+    
+          reader.onload = (event:any) => { // called once readAsDataURL is completed
+    
+            console.log(event)
+            this.imageurl = event.target.result;
+            this.upload = false;
+            this.isFile = true;
+          }
+ 
+          /**
+          // You could upload it like this:
+          const formData = new FormData()
+          formData.append('logo', file, relativePath)
+ 
+          // Headers
+          const headers = new HttpHeaders({
+            'security-token': 'mytoken'
+          })
+ 
+          this.http.post('https://mybackend.com/api/upload/sanitize-and-save-logo', formData, { headers: headers, responseType: 'blob' })
+          .subscribe(data => {
+            // Sanitized logo returned from backend
+          })
+          **/
+ 
+        });
+      } else {
+        // // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+       console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }else{
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event:any) => { // called once readAsDataURL is completed
+
+        console.log(event)
+        this.imageurl = event.target.result;
+        this.upload = false;
+        this.isFile = true;
+      }
+    }
+  }
+  }
+ 
+  public fileOver(event){
+    console.log(event);
+  }
+ 
+  public fileLeave(event){
+    console.log(event);
   }
 
 }
