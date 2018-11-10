@@ -10,6 +10,7 @@ export class WatchlistpageComponent implements OnInit {
   users:any;
   private focused : boolean;
   modalClassName;
+  user: any;
   
   constructor(private watchlistService:WatchlistService,private router: Router) {
     
@@ -23,10 +24,16 @@ export class WatchlistpageComponent implements OnInit {
     this.modalClassName = "modal-xl";
   }
   onclose(e){
-   
+    this.getUsersList()
     let element:HTMLElement = document.getElementById('close') as HTMLElement;
     element.click();
+    this.user = null;
     this.modalClassName = "";
+  }
+  onEdit(user){
+    this.user = user;
+    let element:HTMLElement = document.getElementById('openedit') as HTMLElement;
+        element.click();
   }
 
 

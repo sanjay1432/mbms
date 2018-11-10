@@ -1,0 +1,32 @@
+
+<div class="container-fluid" style="padding:2rem">
+  <h3 class="watchlist text-uppercase text-center"> Edit WatchList Entry</h3>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(user)" class="needs-validation" novalidate>
+  <div class="row">
+    <div class="col-sm -6">
+      <input class="form-control form-control-lg" type="text" placeholder="First Name" formControlName="firstName" required>
+    </div>
+    <div class="col-sm-6">
+      <input class="form-control form-control-lg" type="text" placeholder="Last Name" formControlName="lastName" required>
+    </div>
+
+
+    <div class="col-sm-12">
+      <input class="form-control form-control-lg" type="text" placeholder="Company (Optional)" formControlName="company">
+      
+    </div>
+    <div class="col-sm-12">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="comment"></textarea>
+    </div>
+    <div class="col-sm-12">
+        <button type="button" class="btn btn-primary upload" >Upload Photo</button>
+        <span style="    margin: 0px 50px;">
+        <img src="../../../assets/icons/{{user?.image}}" class="rounded ">
+      </span>
+        <button type="submit" class="btn btn-success save" >Save</button>
+        <button id = "close1" data-dismiss="modal" style="display:none"></button>
+    </div>
+  </div>
+  </form>
+  
+</div>

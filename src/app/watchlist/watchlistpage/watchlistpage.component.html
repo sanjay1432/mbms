@@ -38,7 +38,7 @@
           <td>{{user.firstName}}, {{user.lastName}}</td>
           <td>{{user.company}}</td>
           <td>{{user.comment}}</td>
-          <td><img src="../../../assets/icons/edit.png"></td>
+          <td><a href="javscript:void(0);" (click) = "onEdit(user)"><img src="../../../assets/icons/edit.png"></a></td>
           <td><a href="javscript:void(0);" (click) = "onRemove(user.id)"><img src="../../../assets/icons/close.png"></a></td>
         </tr>
       </tbody>
@@ -47,12 +47,24 @@
   </div>
 </div>
 
-
+<!-- ADD USER -->
+<button id ="openedit" data-toggle="modal" data-target="#editModal" style="display:none"></button>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog " [ngClass]="modalClassName" role="document" style="    margin-top: 5%;">
       <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;"> 
           <button id = "close" data-dismiss="modal" style="display:none"></button>
         <app-addtowatchlist (changedFocus) = "onSimUser($event)" (closeModal) = "onclose($event)"></app-addtowatchlist>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT USER -->
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true" >
+    <div class="modal-dialog "  role="document" style="    margin-top: 5%;">
+      <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;"> 
+          <button id = "close" data-dismiss="modal" style="display:none"></button>
+          <app-edituser [user] = "user" (closeModal) = "onclose($event)"></app-edituser>
         
       </div>
     </div>

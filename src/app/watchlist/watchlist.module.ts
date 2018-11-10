@@ -11,6 +11,7 @@ import { WatchlistpageComponent } from './watchlistpage/watchlistpage.component'
 import { AddtowatchlistComponent } from './addtowatchlist/addtowatchlist.component';
 import { WatchlistService } from '../services/watchlist.service';
 import { PossibleMatchComponent } from './possible-match/possible-match.component';
+import { EdituserComponent } from './edituser/edituser.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +28,7 @@ import { PossibleMatchComponent } from './possible-match/possible-match.componen
 
   ],
   
-  declarations: [WatchlistpageComponent, AddtowatchlistComponent, PossibleMatchComponent],
+  declarations: [WatchlistpageComponent, AddtowatchlistComponent, PossibleMatchComponent, EdituserComponent],
   providers   : [
     WatchlistService
   ]
