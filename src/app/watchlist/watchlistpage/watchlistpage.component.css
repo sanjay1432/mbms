@@ -35,6 +35,22 @@ td{
     border: thin #eeeeee solid;
 }
 
+.remove{
+    float:left;
+        background-color: rgb(198, 40, 0);
+        border: 0;
+        border-radius: 0;
+        padding: 6px 45px;
+}
+
+.cancel{
+    float:right;
+        background-color: rgb(70, 67, 65);
+        border: 0;
+        border-radius: 0;
+        padding: 6px 45px;
+}
+
 .modal-xl {
     width: 90%;
    max-width:1200px;
