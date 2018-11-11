@@ -6,53 +6,103 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:1,
           image:'man.jpg',
-          firstName: 'Anderson',
-          lastName: 'Steve',
+          firstName: 'Steve',
+          lastName: 'Anderson',
           company:'',
           comment:''
         },
         {
           id:2,
           image:'man.jpg',
-          firstName: 'Bardocz',
-          lastName: 'Steve',
+          firstName: 'Steve',
+          lastName: 'Bardocz',
           company:'Savance',
           comment:'Be careful. Person very dangerous.'
         },
         {
           id:3,
           image:'no-image.jpg',
-          firstName: 'Jhonson',
-          lastName: 'Steve',
+          firstName: 'Steve',
+          lastName: 'Jhonson',
           company:'Apple',
           comment:''
         },
         {
           id:4,
           image:'no-image.jpg',
-          firstName: 'Lucas',
-          lastName: 'Steve',
+          firstName: 'Steve',
+          lastName: 'Lucas',
           company:'Microsoft',
           comment:''
         },
         {
           id:5,
           image:'man.jpg',
-          firstName: 'Wilko',
-          lastName: 'Steve',
+          firstName: 'Steve',
+          lastName: 'Wilko',
           company:'Travelocity',
           comment:''
         },
         {
           id:6,
           image:'man.jpg',
-          firstName: 'Wilko',
-          lastName: 'man',
+          firstName: 'man',
+          lastName: 'Wilko',
+          company:'ebay',
+          comment:''
+        }
+      ];
+      const visitors = [
+        {
+          id:1,
+          image:'man.jpg',
+          firstName: 'Carl',
+          lastName: 'Carlson',
+          company:'Google',
+          comment:''
+        },
+        {
+          id:2,
+          image:'man.jpg',
+          firstName: 'Steve',
+          lastName: 'Anderson',
+          company:'Savance',
+          comment:''
+        },
+        {
+          id:3,
+          image:'no-image.jpg',
+          firstName: 'Steve',
+          lastName: 'Smith',
+          company:'Apple',
+          comment:''
+        },
+        {
+          id:4,
+          image:'no-image.jpg',
+          firstName: 'Steve',
+          lastName: 'Lucas',
+          company:'Microsoft',
+          comment:''
+        },
+        {
+          id:5,
+          image:'man.jpg',
+          firstName: 'Steve',
+          lastName: 'Wilko',
+          company:'Travelocity',
+          comment:''
+        },
+        {
+          id:6,
+          image:'man.jpg',
+          firstName: 'man',
+          lastName: 'Wilko',
           company:'ebay',
           comment:''
         }
       ]
-    return {users};
+    return {users,visitors};
   }
 
   genId(users: User[]): number {

@@ -1,0 +1,54 @@
+<div class="container-fluid" style="padding:2rem">
+  <h3 class="watchlist text-uppercase"> find or add visitor</h3>
+
+  <div class="container">
+    <div class="card w-100" style="border: 0;border-radius: 0;">
+      <div class="card-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-sm">
+              <label>
+                First Name:
+              </label>
+              <input type="text" class="form-control form-control-lg" formControlName="firstName" required>
+
+            </div>
+            <div class="col-sm">
+              <label>
+                Last Name:
+              </label>
+              <input type="text" class="form-control form-control-lg" formControlName="lastName">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <label>
+                Company:
+              </label>
+              <input type="text" class="form-control form-control-lg" formControlName="company">
+
+            </div>
+            <div class="col-sm"></div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-sm-2">
+               <p>Pre-Register Visitor?</p>
+            </div>
+            <div class="col-sm-4 text-right">
+                 <button type="submit" class="btn btn-primary" [ngClass]="yesClass" (click) = "preRegister('yes')">Yes</button>
+                 &nbsp;&nbsp;&nbsp;
+                 <button type="submit" class="btn btn-primary" [ngClass]="noClass" (click) = "preRegister('no')">No</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" class="btn btn-primary signIn
+                " [disabled]="!profileForm.valid">Sign In</button>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
