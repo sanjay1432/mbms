@@ -18,6 +18,15 @@ export class FindVisitorComponent implements OnInit {
   });
   watchlistusers;
   visitors;
+  exactMatch: boolean = false;
+  exactMatchUser: any;
+  possibleMatch: boolean = false;
+  possibleMatchUsers: any = [];
+  exactWatchListMatch: boolean;
+  topResult: boolean;
+  possibleUsersList: any = [];
+  possibleMatchFound: boolean;
+  results = "Search Results";
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
               private mannedVisitorMangementService: MannedVisitorMangementService) { }
@@ -48,12 +57,52 @@ export class FindVisitorComponent implements OnInit {
   }
 
   onSubmit() {
-   let user = this.profileForm.value;
-   let watchlist = this.watchlistusers;
-   let visitors = this.visitors;
-   console.log(user)
-   console.log(watchlist)
-   console.log(visitors)
+    let user = this.profileForm.value;
+    let watchlist = this.watchlistusers;
+    let visitors = this.visitors;
+    if(user.firstName === '' && user.lastName !='' && user.company !=''){
+      this.possibleMatch = false;
+    }
+    if(user.firstName !='' && user.lastName ==='' && user.company !=''){
+      this.possibleMatch = false;
+    }
+    if(user.firstName !='' && user.lastName !='' && user.company ===''){
+      this.possibleMatch = false;
+    }
+    if(user.firstName !='' && user.lastName ==='' && user.company ===''){
+      this.possibleMatch = true;
+    }
+    if(user.firstName ==='' && user.lastName ==='' && user.company !=''){
+      this.possibleMatch = true;
+    }
+    if(user.firstName ==='' && user.lastName !='' && user.company !=''){
+      this.possibleMatch = true;
+    }
+    if(user.firstName !='' && user.lastName !='' && user.company !=''){
+      this.possibleMatch = true;
+      this.topResult = true;
+    }
+    visitors.filter((e)=>{
+      if(e.firstName === user.firstName && e.lastName === user.lastName && e.company === user.company){
+      this.exactMatch = true;
+      this.exactMatchUser = e;
+      this.results ="Top Result(s)"
+      }
+      if(e.firstName === user.firstName || e.lastName === user.lastName || e.company === user.company){
+      this.possibleMatchFound = true;
+      this.possibleMatchUsers.push(e);
+      }
+    })
+
+    this.possibleMatchUsers.filter((possible)=>{
+      watchlist.forEach(watchlistuser => {
+
+        if(possible.firstName === watchlistuser.firstName || possible.lastName === watchlistuser.lastName || possible.company === watchlistuser.company){
+          possible['isInWatchlist'] = true;
+          this.possibleUsersList.push(possible);
+        }
+      });
+    })
   }
 
 }

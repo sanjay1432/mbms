@@ -34,6 +34,12 @@ input[type="text"], textarea {
         border-radius: 0;
         padding: 10px 45px;
 }
+.search{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 0px 55px;
+}
 .btn:focus {
     outline: none;
     box-shadow:none !important;

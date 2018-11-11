@@ -37,13 +37,19 @@
                <p>Pre-Register Visitor?</p>
             </div>
             <div class="col-sm-4 text-right">
-                 <button type="submit" class="btn btn-primary" [ngClass]="yesClass" (click) = "preRegister('yes')">Yes</button>
+                 <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click) = "preRegister('yes')">YES</button>
                  &nbsp;&nbsp;&nbsp;
-                 <button type="submit" class="btn btn-primary" [ngClass]="noClass" (click) = "preRegister('no')">No</button>
+                 <button type="button" class="btn btn-primary" [ngClass]="noClass" (click) = "preRegister('no')">NO</button>
             </div>
             <div class="col-sm-6 text-right">
                 <button type="submit" class="btn btn-primary signIn
-                " [disabled]="!profileForm.valid">Sign In</button>
+                " [disabled]="!profileForm.valid" *ngIf = "!exactMatch && !possibleMatchFound">
+                Sign In
+              </button>
+              <button type="submit" class="btn btn-primary search
+                " [disabled]="!profileForm.valid" *ngIf = "exactMatch || possibleMatchFound">
+                <p style="transform: rotate(310deg); margin: 0; font-size: 2rem">&#9906;</p>
+                </button>
             </div>
           </div>
           
@@ -51,4 +57,21 @@
       </div>
     </div>
   </div>
+  <br/>
+  <div class="container" *ngIf = "exactMatch||possibleMatchFound">
+      <div class="card w-100" style="border: 0;border-radius: 0;">
+          <div class="card-body" style="padding:0">
+              <nav class="navbar navbar-light bg-light" style="    border-bottom: 2px solid #ECECEC;">
+                  <p class="watchlist">
+                    {{results}}
+                  </p>
+                </nav>
+                <div class="container">
+                  lkdlsf
+                </div>
+          </div>
+      </div>
+
+  </div>
+
 </div>

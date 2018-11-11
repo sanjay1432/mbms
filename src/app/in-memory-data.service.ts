@@ -98,7 +98,7 @@ export class InMemoryDataService implements InMemoryDbService {
           image:'man.jpg',
           firstName: 'man',
           lastName: 'Wilko',
-          company:'ebay',
+          company:'Google',
           comment:''
         }
       ]
