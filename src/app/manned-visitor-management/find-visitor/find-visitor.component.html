@@ -70,8 +70,15 @@
 
           </p>
           <div class="text-right">
-            <button (click)='onGrid()'>Grid</button>
-            <button (click)='onList()'>List</button>
+            <button (click)='onGrid()' style="border: 0; background: #F8F9FA;">
+              <img src="../../../assets/icons/grid-blue.png" *ngIf ='isGrid'>
+              <img src="../../../assets/icons/grid-gray.png" *ngIf ='!isGrid'>
+            </button>
+            
+            <button (click)='onList()' style="border: 0;background: #F8F9FA;">
+              <img src="../../../assets/icons/row-gray.png" *ngIf ='isGrid'>
+              <img src="../../../assets/icons/row-blue.png" *ngIf ='!isGrid'>
+            </button>
           </div>
         </nav>
         <div class="container" *ngIf="exactMatch">
@@ -114,8 +121,8 @@
         </nav>
         <div class="container" style="background-color: #f8f9fa75">
             <div class="scrollbar" id="style-13">
-              <div class="row" style="margin: 0; min-height: 450px;">
-                <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; min-height: 25px;    background-color: white;">
+              <div class="row" style="margin: 0; ">
+                <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; background-color: white;">
                   <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
                     <div class="row" *ngIf='isGrid'>
 
@@ -167,7 +174,8 @@
               <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
                 <div class="row" *ngIf='isGrid'>
                   <div class="col-sm-3" style="padding: 25px">
-                    <button class="newVisitor">+</button>
+                    <button style="border: 0;
+                    background: white;"><img src="../../../assets/icons/addvisitor.png"></button>
                   </div>
                   <div class="col-sm-3">
                   </div>
@@ -178,11 +186,12 @@
                 <div class="row" *ngIf='!isGrid'>
                   <div class="col-sm-1" style="padding-left: 20px;
                     padding-top: 5px;">
-                    <button class="newVisitorList">+</button>
+                    <button style="border: 0;
+                    background: white;"><img src="../../../assets/icons/addvisitor.png" style="    height: 40px;"></button>
                   </div>
 
                   <div class="col-sm-5 watchlist text-uppercase" style="padding: 5px">
-                    <h5 style="padding-top: 1rem; font-weight: bold">Add As New Visitor</h5>
+                    <h5 style="padding-top: 0.5rem; font-weight: bold">Add As New Visitor</h5>
                   </div>
                   <div class="col-sm-6">
                   </div>
