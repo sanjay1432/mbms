@@ -20,21 +20,37 @@ export class WatchlistpageComponent implements OnInit {
 
   ngOnInit() {
     this.getUsersList()
+
   }
 
+  onSearch(v){
+    this.values = v
+    let found =[]
+    this.users.filter((e)=>{
+      if(e.firstName.includes(this.values) || e.lastName.includes(this.values)|| e.company.includes(this.values)){
+        found.push(e)
+      }
+    })
+    if(!this.values){
+      this.getUsersList()
+    }
+    this.users = found; 
+
+    //reload the data
+    this.getDummy()
+  }
   onKey(event) {
     this.values = event.target.value.toString() ;
-    let y =[]
+    let found =[]
     this.users.filter((e)=>{
-      console.log(e.firstName)
-      if(e.firstName.includes(this.values) ){
-        console.log('gdf')
-        y.push(e)
+      if(e.firstName.includes(this.values) || e.lastName.includes(this.values)|| e.company.includes(this.values)){
+        found.push(e)
       }
-      
     })
-    console.log(y)
-    this.users = y; 
+    if(!this.values){
+      this.getUsersList()
+    }
+    this.users = found; 
 
     //reload the data
     this.getDummy() 
@@ -62,7 +78,7 @@ export class WatchlistpageComponent implements OnInit {
   }
 
   getUsersList(){
-    this.watchlistService.getUsers().subscribe(user =>  this.users = user)
+    this.watchlistService.getUsers().subscribe(user =>this.users = user)
   }
   closeModalDialog(){
         let element:HTMLElement = document.getElementById('reload') as HTMLElement;

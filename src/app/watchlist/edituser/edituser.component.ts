@@ -44,6 +44,11 @@ export class EdituserComponent implements OnInit {
 
   onSubmit(){
     let user  = this.userForm.value;
+    if(user.image == '' && this.imageurl == ''){
+      user['image'] = 'no-image.jpg'
+    }
+
+    user['imageurl'] = this.imageurl
     let element:HTMLElement = document.getElementById('close1') as HTMLElement;
     
     this.watchlistService.updateUser(user).subscribe((user)=>{

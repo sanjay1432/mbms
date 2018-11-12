@@ -4,9 +4,9 @@
       <h1 class="watchlist text-uppercase">WatchList</h1>
       <br/>
       <div class="input-group mb-3 input-group-lg">
-        <input type="text" class="form-control"  (keyup)="onKey($event)" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" #search class="form-control"  (keyup)="onKey($event)" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <span ><img src="../../../assets/icons/seach.png"></span>
+          <span ><button style="padding: 0;border: 0;" (click) = "onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
         </div>
       </div>
     </div>
@@ -35,7 +35,14 @@
       </thead>
       <tbody>
         <tr *ngFor ="let user of users">
-          <th scope="row"><img src="../../../assets/icons/{{user.image}}" class="rounded"></th>
+          <th scope="row" >
+            <span *ngIf = "user.imageurl === ''"><img src="../../../assets/icons/{{user.image}}" class="rounded">
+            </span>
+
+            <span *ngIf = "user.imageurl !=''">
+                <img src="{{user.imageurl}}" class="rounded">
+            </span>
+          </th>
           <td>{{user.lastName}}, {{user.firstName}}</td>
           <td>{{user.company}}</td>
           <td>{{user.comment}}</td>

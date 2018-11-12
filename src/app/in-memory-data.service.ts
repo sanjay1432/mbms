@@ -6,6 +6,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:1,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Anderson',
           company:'',
@@ -14,6 +15,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:2,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Bardocz',
           company:'Savance',
@@ -22,6 +24,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:3,
           image:'no-image.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Jhonson',
           company:'Apple',
@@ -30,6 +33,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:4,
           image:'no-image.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Lucas',
           company:'Microsoft',
@@ -38,6 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:5,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Wilko',
           company:'Travelocity',
@@ -46,6 +51,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:6,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'man',
           lastName: 'Wilko',
           company:'ebay',
@@ -56,6 +62,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:1,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Carl',
           lastName: 'Carlson',
           company:'Google',
@@ -64,6 +71,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:2,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Anderson',
           company:'Savance',
@@ -72,6 +80,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:3,
           image:'no-image.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Smith',
           company:'Apple',
@@ -80,6 +89,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:4,
           image:'no-image.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Lucas',
           company:'Microsoft',
@@ -88,6 +98,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:5,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'Steve',
           lastName: 'Wilko',
           company:'Travelocity',
@@ -96,6 +107,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id:6,
           image:'man.jpg',
+          imageurl:'',
           firstName: 'man',
           lastName: 'Wilko',
           company:'Google',

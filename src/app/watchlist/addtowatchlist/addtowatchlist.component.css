@@ -42,6 +42,7 @@ input[type="text"], textarea {
     border-radius: 3.25rem !important;
     border: thin #9e9e9e6b solid;
     height: 80px;
+    width: 80px;
 }
 
 file-drop /deep/.drop-zone{

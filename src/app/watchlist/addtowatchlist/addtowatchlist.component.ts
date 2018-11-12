@@ -39,9 +39,11 @@ export class AddtowatchlistComponent implements OnInit {
   get lname() { return this.userForm.get('lastName'); }
   onSubmit(){
     let user  = this.userForm.value;
-     if(user.image == ''){
+     if(user.image == '' && this.imageurl == ''){
        user['image'] = 'no-image.jpg'
      }
+
+     user['imageurl'] = this.imageurl
 
      
      let that = this;

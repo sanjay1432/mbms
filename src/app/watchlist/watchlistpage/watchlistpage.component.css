@@ -31,8 +31,10 @@ td{
 }
 
 .rounded {
-    border-radius: 2.25rem !important;
+    border-radius: 3.25rem !important;
     border: thin #eeeeee solid;
+    height: 80px;
+    width: 80px;
 }
 
 .remove{
