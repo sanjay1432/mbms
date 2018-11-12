@@ -27,6 +27,8 @@ export class FindVisitorComponent implements OnInit {
   possibleUsersList: any = [];
   possibleMatchFound: boolean;
   results = "Search Results";
+  gridList = 'col-sm-6'
+  isGrid: boolean = true;
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
               private mannedVisitorMangementService: MannedVisitorMangementService) { }
@@ -60,22 +62,23 @@ export class FindVisitorComponent implements OnInit {
     let user = this.profileForm.value;
     let watchlist = this.watchlistusers;
     let visitors = this.visitors;
-    if(user.firstName === '' && user.lastName !='' && user.company !=''){
+    this.possibleMatchUsers = []
+    if(user.firstName != '' && user.lastName === '' && user.company ===''){
       this.possibleMatch = false;
     }
-    if(user.firstName !='' && user.lastName ==='' && user.company !=''){
+    if(user.firstName ==='' && user.company !='' && user.lastName ===''  ){
       this.possibleMatch = false;
     }
-    if(user.firstName !='' && user.lastName !='' && user.company ===''){
+    if(user.company ==='' && user.firstName ==='' && user.lastName !='' ){
       this.possibleMatch = false;
-    }
-    if(user.firstName !='' && user.lastName ==='' && user.company ===''){
-      this.possibleMatch = true;
-    }
-    if(user.firstName ==='' && user.lastName ==='' && user.company !=''){
-      this.possibleMatch = true;
     }
     if(user.firstName ==='' && user.lastName !='' && user.company !=''){
+      this.possibleMatch = true;
+    }
+    if(user.firstName !='' && user.lastName ==='' && user.company !=''){
+      this.possibleMatch = true;
+    }
+    if(user.firstName !='' && user.lastName !='' && user.company ===''){
       this.possibleMatch = true;
     }
     if(user.firstName !='' && user.lastName !='' && user.company !=''){
@@ -90,6 +93,7 @@ export class FindVisitorComponent implements OnInit {
       }
       if(e.firstName === user.firstName || e.lastName === user.lastName || e.company === user.company){
       this.possibleMatchFound = true;
+      console.log(e)
       this.possibleMatchUsers.push(e);
       }
     })
@@ -99,10 +103,21 @@ export class FindVisitorComponent implements OnInit {
 
         if(possible.firstName === watchlistuser.firstName || possible.lastName === watchlistuser.lastName || possible.company === watchlistuser.company){
           possible['isInWatchlist'] = true;
-          this.possibleUsersList.push(possible);
+          // this.possibleUsersList.push(possible);
+          // console.log(this.possibleUsersList)
         }
       });
     })
+    console.log(this.possibleMatchUsers)
+  }
+
+  onGrid(){
+    this.gridList = 'col-sm-6'
+    this.isGrid = true;
+  }
+  onList(){
+    this.gridList = 'col-sm-12'
+    this.isGrid = false;
   }
 
 }
