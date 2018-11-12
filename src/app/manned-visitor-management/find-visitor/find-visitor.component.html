@@ -113,42 +113,44 @@
           </p>
         </nav>
         <div class="container" style="background-color: #f8f9fa75">
-          <div class="row" style="margin: 0">
-            <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px">
-              <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
-                <div class="row" *ngIf='isGrid'>
+            <div class="scrollbar" id="style-13">
+              <div class="row" style="margin: 0; min-height: 450px;">
+                <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; min-height: 25px;    background-color: white;">
+                  <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
+                    <div class="row" *ngIf='isGrid'>
 
-                  <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
-                    <img src="../../../assets/icons/{{possibleUser.image}}" style="height: 8rem;    border: 1px solid #d0c8c8;
-                  margin-left: 5px;">
-                  </div>
-                  <div class="col-sm-8 watchlist" style="padding-top: 1rem;">
-                    <h3 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
-                    <h5 style="color: black">{{possibleUser.company}}</h5>
-                  </div>
+                      <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
+                        <img src="../../../assets/icons/{{possibleUser.image}}" style="height: 8rem;    border: 1px solid #d0c8c8;
+                      margin-left: 5px;">
+                      </div>
+                      <div class="col-sm-8 watchlist" style="padding-top: 1rem;">
+                        <h3 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
+                        <h5 style="color: black">{{possibleUser.company}}</h5>
+                      </div>
 
-                </div>
+                    </div>
 
 
-                <div class="row" *ngIf='!isGrid' style="    border-bottom: 1px solid #ECECEC;">
-                  <div class="col-sm-1" style="margin: 5px 5px 5px 0px;">
-                    <img src="../../../assets/icons/{{possibleUser.image}}" class="rounded-list">
-                  </div>
-                  <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                    <h4 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
-                  </div>
-                  <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                    <h5 style="color: black">{{possibleUser.company}}</h5>
-                  </div>
-                  <div class="col-sm-4 watchlist text-right" style="padding-top: 1.5rem" *ngIf="possibleUser.isInWatchlist">
-                    <h5 style="color: #ab2d2b;font-weight: bold"><span style="font-size: 2rem;">&#9888;</span>
-                      WATCHLIST
-                      X</h5>
+                    <div class="row" *ngIf='!isGrid' style="    border-bottom: 1px solid #ECECEC;">
+                      <div class="col-sm-1" style="margin: 5px 5px 5px 0px;">
+                        <img src="../../../assets/icons/{{possibleUser.image}}" class="rounded-list">
+                      </div>
+                      <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                        <h4 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
+                      </div>
+                      <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                        <h5 style="color: black">{{possibleUser.company}}</h5>
+                      </div>
+                      <div class="col-sm-4 watchlist text-right" style="padding-top: 1.5rem" *ngIf="possibleUser.isInWatchlist">
+                        <h5 style="color: #ab2d2b;font-weight: bold"><span style="font-size: 2rem;">&#9888;</span>
+                          WATCHLIST
+                          X</h5>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
         </div>
 
