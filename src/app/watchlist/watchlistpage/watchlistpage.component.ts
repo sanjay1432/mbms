@@ -7,11 +7,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./watchlistpage.component.css']
 })
 export class WatchlistpageComponent implements OnInit {
-  users:any;
+  users:any = [];
   private focused : boolean;
   modalClassName;
   user: any;
   deletedID: any;
+  values: string;
   
   constructor(private watchlistService:WatchlistService,private router: Router) {
     
@@ -19,6 +20,24 @@ export class WatchlistpageComponent implements OnInit {
 
   ngOnInit() {
     this.getUsersList()
+  }
+
+  onKey(event) {
+    this.values = event.target.value.toString() ;
+    let y =[]
+    this.users.filter((e)=>{
+      console.log(e.firstName)
+      if(e.firstName.includes(this.values) ){
+        console.log('gdf')
+        y.push(e)
+      }
+      
+    })
+    console.log(y)
+    this.users = y; 
+
+    //reload the data
+    this.getDummy() 
   }
 
   onSimUser(e){
@@ -37,6 +56,10 @@ export class WatchlistpageComponent implements OnInit {
         element.click();
   }
 
+  getDummy(){
+    let element:HTMLElement = document.getElementById('dummy') as HTMLElement;
+        element.click();
+  }
 
   getUsersList(){
     this.watchlistService.getUsers().subscribe(user =>  this.users = user)

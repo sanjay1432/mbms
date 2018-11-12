@@ -4,7 +4,7 @@
       <h1 class="watchlist text-uppercase">WatchList</h1>
       <br/>
       <div class="input-group mb-3 input-group-lg">
-        <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" class="form-control"  (keyup)="onKey($event)" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <span ><img src="../../../assets/icons/seach.png"></span>
         </div>
@@ -20,7 +20,8 @@
   </div>
   <div class="row>">
     <!-- <div class="container"> -->
-      <button (click) = "getUsersList()" id = 'reload' style="display:none">reloadS</button>
+      <button (click) = "getUsersList()" id = 'reload' style="display:none"></button>
+      <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
     <table class="table">
       <thead>
         <tr style="background-color:#f8f8f8; height: 70px">
