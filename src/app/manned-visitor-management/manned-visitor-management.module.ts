@@ -10,6 +10,7 @@ import { InMemoryDataService }  from '../in-memory-data.service';
 import { WatchlistService } from '../services/watchlist.service';
 import { MannedVisitorMangementService } from '../services/manned-visitor-mangement.service';
 import { FindVisitorComponent } from './find-visitor/find-visitor.component';
+import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { FindVisitorComponent } from './find-visitor/find-visitor.component';
     )
 
   ],
-  declarations: [FindVisitorComponent],
+  declarations: [FindVisitorComponent, VisitorProfileComponent],
   providers   : [
     WatchlistService,MannedVisitorMangementService
   ]

@@ -116,3 +116,47 @@ input[type="text"], textarea {
 											  transparent,
 											  transparent)
 }
+
+newVisitorGrid{
+    border: 1px solid #d0d0d0de !important;
+    background-color: #f8f8f8 !important;
+    margin: 0 !important;
+
+}
+newVisitorList{
+    border:0px solid #d0d0d0de; 
+}
+
+.title{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 24px;
+}
+
+.possibelWatchlistYes{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 35px;
+}
+.possibelWatchlistNo{
+    background-color: #B41F1F;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 36px;
+}
+
+.ok{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 70px;
+    margin-bottom: 2rem;
+}
+
+.ignore{
+    background-color: #B41F1F;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 50px;
+    margin-bottom: 2rem;
+}

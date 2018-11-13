@@ -71,13 +71,13 @@
           </p>
           <div class="text-right">
             <button (click)='onGrid()' style="border: 0; background: #F8F9FA;">
-              <img src="../../../assets/icons/grid-blue.png" *ngIf ='isGrid'>
-              <img src="../../../assets/icons/grid-gray.png" *ngIf ='!isGrid'>
+              <img src="../../../assets/icons/grid-blue.png" *ngIf='isGrid'>
+              <img src="../../../assets/icons/grid-gray.png" *ngIf='!isGrid'>
             </button>
-            
+
             <button (click)='onList()' style="border: 0;background: #F8F9FA;">
-              <img src="../../../assets/icons/row-gray.png" *ngIf ='isGrid'>
-              <img src="../../../assets/icons/row-blue.png" *ngIf ='!isGrid'>
+              <img src="../../../assets/icons/row-gray.png" *ngIf='isGrid'>
+              <img src="../../../assets/icons/row-blue.png" *ngIf='!isGrid'>
             </button>
           </div>
         </nav>
@@ -120,44 +120,44 @@
           </p>
         </nav>
         <div class="container" style="background-color: #f8f9fa75">
-            <div class="scrollbar" id="style-13">
-              <div class="row" style="margin: 0; ">
-                <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; background-color: white;">
-                  <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
-                    <div class="row" *ngIf='isGrid'>
+          <div class="scrollbar" id="style-13">
+            <div class="row" style="margin: 0; ">
+              <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; background-color: white;">
+                <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
+                  <div class="row" *ngIf='isGrid'>
 
-                      <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
-                        <img src="../../../assets/icons/{{possibleUser.image}}" style="height: 8rem;    border: 1px solid #d0c8c8;
+                    <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
+                      <img src="../../../assets/icons/{{possibleUser.image}}" style="height: 8rem;    border: 1px solid #d0c8c8;
                       margin-left: 5px;">
-                      </div>
-                      <div class="col-sm-8 watchlist" style="padding-top: 1rem;">
-                        <h3 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
-                        <h5 style="color: black">{{possibleUser.company}}</h5>
-                      </div>
-
+                    </div>
+                    <div class="col-sm-8 watchlist" style="padding-top: 1rem;">
+                      <h3 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
+                      <h5 style="color: black">{{possibleUser.company}}</h5>
                     </div>
 
+                  </div>
 
-                    <div class="row" *ngIf='!isGrid' style="    border-bottom: 1px solid #ECECEC;">
-                      <div class="col-sm-1" style="margin: 5px 5px 5px 0px;">
-                        <img src="../../../assets/icons/{{possibleUser.image}}" class="rounded-list">
-                      </div>
-                      <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                        <h4 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
-                      </div>
-                      <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                        <h5 style="color: black">{{possibleUser.company}}</h5>
-                      </div>
-                      <div class="col-sm-4 watchlist text-right" style="padding-top: 1.5rem" *ngIf="possibleUser.isInWatchlist">
-                        <h5 style="color: #ab2d2b;font-weight: bold"><span style="font-size: 2rem;">&#9888;</span>
-                          WATCHLIST
-                          X</h5>
-                      </div>
+
+                  <div class="row" *ngIf='!isGrid' style="    border-bottom: 1px solid #ECECEC;">
+                    <div class="col-sm-1" style="margin: 5px 5px 5px 0px;">
+                      <img src="../../../assets/icons/{{possibleUser.image}}" class="rounded-list">
+                    </div>
+                    <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                      <h4 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
+                    </div>
+                    <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                      <h5 style="color: black">{{possibleUser.company}}</h5>
+                    </div>
+                    <div class="col-sm-4 watchlist text-right" style="padding-top: 1.5rem" *ngIf="possibleUser.isInWatchlist">
+                      <h5 style="color: #ab2d2b;font-weight: bold"><span style="font-size: 2rem;">&#9888;</span>
+                        WATCHLIST
+                        X</h5>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
         </div>
 
@@ -171,15 +171,17 @@
         <div class="container">
           <div class="row" style="padding: 5px">
             <div [ngClass]="gridList">
-              <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
-                <div class="row" *ngIf='isGrid'>
+              <div>
+                <div class="row" *ngIf='isGrid' style="border: 1px solid #d0d0d0de !important;
+                background-color: #f8f8f8 !important;
+                margin: 0 !important;">
                   <div class="col-sm-3" style="padding: 25px">
                     <button style="border: 0;
-                    background: white;"><img src="../../../assets/icons/addvisitor.png"></button>
+                    background:  #f8f8f8;"><img src="../../../assets/icons/addvisitor.png"></button>
                   </div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-2">
                   </div>
-                  <div class="col-sm-5 watchlist text-uppercase" style="padding: 25px">
+                  <div class="col-sm-6 watchlist text-uppercase" style="padding: 25px">
                     <h5 style="padding-top: 2rem; font-weight: bold">Add As New Visitor</h5>
                   </div>
                 </div>
@@ -187,7 +189,8 @@
                   <div class="col-sm-1" style="padding-left: 20px;
                     padding-top: 5px;">
                     <button style="border: 0;
-                    background: white;"><img src="../../../assets/icons/addvisitor.png" style="    height: 40px;"></button>
+                    background: #fff;"><img src="../../../assets/icons/addvisitor.png"
+                        style="    height: 40px;"></button>
                   </div>
 
                   <div class="col-sm-5 watchlist text-uppercase" style="padding: 5px">
@@ -206,7 +209,102 @@
     </div>
 
   </div>
-<div class="text-right" *ngIf="exactMatch||possibleMatchFound" style="padding-top: 1rem;">
-  <button class="btn btn-primary signIn">Next</button>
+  <div class="text-right" *ngIf="exactMatch||possibleMatchFound" style="padding-top: 1rem;">
+    <button class="btn btn-primary signIn" (click)="onNext()">Next</button>
+     admin:<input type="checkbox" id="admin" (change)="isAdmin($event)">
+  </div>
 </div>
+
+<button id="isInWatchList" data-toggle="modal" data-target="#exampleModal" style="display:none"></button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document" style="margin-top: 5%;">
+    <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
+      <button id="close" data-dismiss="modal" style="display:none"></button>
+      <div class="container" style="padding: 0.5rem">
+        <div class="container" style="    background-color: #B41F1F;
+          color: white; ">
+          <div class="row">
+            <div class="col-sm-2" style="padding:1rem 25px">
+              <img src="../../../assets/icons/warning.png">
+            </div>
+            <div class="col-sm-10">
+              <h4 class="title text-uppercase">
+                possible watchlist visitor
+              </h4>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" style="padding: 2rem;font-size: 20px;">
+
+          <p style="margin:0">The visitor name entered is on the Watchlist.</p>
+          <p style="padding-left: 40px;">Are you sure you want to proceed?</p>
+
+        </div>
+        <div class="row">
+          <div class="col-sm-4 text-right">
+            <button class=" btn btn-primary possibelWatchlistYes" (click) = "onConfirm()">Yes</button>
+          </div>
+          <div class="col-sm-6 text-left">
+            <p style="font-size: 14px;color: #615e5e;">
+              I'm confident this is not the person on the Watchlist
+            </p>
+          </div>
+          <div class="col-sm-2">
+
+          </div>
+
+          <div class="col-sm-4 text-right">
+            <button class=" btn btn-primary possibelWatchlistNo" id ="close" data-dismiss="modal">No&nbsp;</button>
+          </div>
+          <div class="col-sm-6 text-left">
+            <p style="font-size: 14px;color: #615e5e;">
+              I need to verify whether this person is allowed the entry
+            </p>
+          </div>
+          <div class="col-sm-2">
+            
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<button id="secondCheck" data-toggle="modal" data-target="#forceNextStep" style="display:none"></button>
+<div class="modal fade" id="forceNextStep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top: 5%;">
+      <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
+        <button id="close" data-dismiss="modal" style="display:none"></button>
+        <div class="container" style="padding: 0.5rem">
+          <div class="container" style="    background-color: #B41F1F;
+            color: white; ">
+            <div class="row">
+              <div class="col-sm-2" style="padding:1rem 25px">
+                <img src="../../../assets/icons/warning.png">
+              </div>
+              <div class="col-sm-10">
+                <h5 class="title text-uppercase">
+                 This perosn is on the Watchlist
+                </h5>
+              </div>
+            </div>
+  
+          </div>
+  
+          <div class="text-center" style="padding: 1rem; ">
+  
+            <h3>STOP</h3>
+            <p>This person is not allowed entry.</p>
+  
+          </div>
+         <div class="text-center">
+            <button class=" btn btn-primary ok" data-dismiss="modal" id = "oknext">OK</button><br/>
+            <button class=" btn btn-primary ignore"  *ngIf = 'admin' (click) = "onIgnore()">IGNORE</button>
+         </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+

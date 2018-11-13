@@ -1,0 +1,82 @@
+<div class="container-fluid" style="padding:2rem">
+  <h3 class="watchlist text-uppercase"> {{visitor?.lastName}}, {{visitor?.firstName}} | {{visitor?.company}}</h3>
+  <div class="container">
+    <nav *ngIf = "isPreRegisters" class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
+        <h5 class="watchlist" style="padding: 1rem">Pre-Registeration Detail</h5>
+      </nav>
+    <div class="row newBar" *ngIf = "isPreRegisters">
+      <div class="col-sm">
+        <p>Visitor Picture</p>
+      </div>
+      <div class="col-sm">
+        <button class=" btn btn-primary host" (click)="back()" id="host">back</button>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
+      <h5 class="watchlist" style="padding: 1rem">Visitor Host</h5>
+    </nav>
+    <div class="row newBar">
+      <div class="col-sm">
+        <p>Company host for this visit:</p>
+      </div>
+      <div class="col-sm">
+        <button class=" btn btn-primary host" data-dismiss="modal" id="host">Select Host</button>
+      </div>
+    </div>
+
+
+    <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
+      <h5 class="watchlist" style="padding: 1rem">Questions</h5>
+    </nav>
+    <div class="row newBar">
+      <div class="col-sm-6">
+        <p>What visitor category does person belongs to?</p>
+      </div>
+      <div class="col-sm-6">
+
+      </div>
+
+      <div class="col-sm-6">
+        <p>What is the purpose of visit?</p>
+      </div>
+      <div class="col-sm-6">
+
+      </div>
+
+      <div class="col-sm-6">
+        <p>What is visitor's favourite food?</p>
+      </div>
+      <div class="col-sm-6">
+
+      </div>
+
+      <div class="col-sm-6">
+        <p>What is visitor's email address?</p>
+      </div>
+      <div class="col-sm-6">
+
+      </div>
+
+      <div class="col-sm-6">
+        <p>Is visitor vegetarian?</p>
+      </div>
+      <div class="col-sm-6">
+
+      </div>
+    </div>
+
+    <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
+        <h5 class="watchlist" style="padding: 1rem">Visitor Picture</h5>
+      </nav>
+    <div class="row newBar">
+      <div class="col-sm">
+        <p>Visitor Picture</p>
+      </div>
+      <div class="col-sm">
+        <button class=" btn btn-primary host" (click)="back()" id="host">back</button>
+      </div>
+    </div>
+
+  </div>
+</div>

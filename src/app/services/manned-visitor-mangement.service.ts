@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Visitor } from '../visitors';
 import { User } from '../users';
 import { HttpHeaders } from '@angular/common/http';
-
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,10 +15,18 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class MannedVisitorMangementService {
+  private visitor = new BehaviorSubject<object>({});
   visitorsUrl = 'api/visitors';  // URL to web api
   constructor(private http: HttpClient) { }
 
   getVisitors (): Observable<Visitor[]> {
     return this.http.get<Visitor[]>(this.visitorsUrl)
+  }
+
+  setVisitor(visitor: Object) { 
+    this.visitor.next(visitor); 
+  } 
+  getVisitor(): Observable<any> { 
+      return this.visitor.asObservable(); 
   }
 }

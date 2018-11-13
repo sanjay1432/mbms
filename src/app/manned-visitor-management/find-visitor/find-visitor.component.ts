@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { WatchlistService } from '../../services/watchlist.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-find-visitor',
   templateUrl: './find-visitor.component.html',
@@ -29,9 +30,12 @@ export class FindVisitorComponent implements OnInit {
   results = "Search Results";
   gridList = 'col-sm-6'
   isGrid: boolean = true;
+  hasWatchlistUser: boolean = false;
+  admin: any;
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
-              private mannedVisitorMangementService: MannedVisitorMangementService) { }
+              private mannedVisitorMangementService: MannedVisitorMangementService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getWatchListUsers()
@@ -63,6 +67,7 @@ export class FindVisitorComponent implements OnInit {
     let watchlist = this.watchlistusers;
     let visitors = this.visitors;
     this.possibleMatchUsers = []
+    this.exactMatch = false;
     if(user.firstName != '' && user.lastName === '' && user.company ===''){
       this.possibleMatch = false;
     }
@@ -103,11 +108,22 @@ export class FindVisitorComponent implements OnInit {
 
         if(possible.firstName === watchlistuser.firstName || possible.lastName === watchlistuser.lastName || possible.company === watchlistuser.company){
           possible['isInWatchlist'] = true;
+          this.hasWatchlistUser = true;
           // this.possibleUsersList.push(possible);
           // console.log(this.possibleUsersList)
         }
       });
     })
+
+    if(!this.exactMatch && !this.possibleMatchFound){
+      this.router.navigate(['/mannedvisitormanagement/visitor'])
+
+      let visitor = {
+        profile: this.profileForm.value,
+        isPreRegistered: this.isPreRegistered
+      }
+      this.mannedVisitorMangementService.setVisitor(visitor)
+    }
     console.log(this.possibleMatchUsers)
   }
 
@@ -118,6 +134,49 @@ export class FindVisitorComponent implements OnInit {
   onList(){
     this.gridList = 'col-sm-12'
     this.isGrid = false;
+  }
+
+
+  onNext(){
+    if(this.hasWatchlistUser){
+      let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
+      element.click();
+    }else{
+      this.router.navigate(['/mannedvisitormanagement/visitor'])
+
+    let visitor = {
+      profile: this.profileForm.value,
+      isPreRegistered: this.isPreRegistered
+    }
+    this.mannedVisitorMangementService.setVisitor(visitor)
+    }
+  }
+  isAdmin(e){
+        if(!this.admin){
+          this.admin = true
+        }else{
+          this.admin =false
+        }
+  }
+  onConfirm(){
+    if(this.hasWatchlistUser){
+      let element:HTMLElement = document.getElementById('close') as HTMLElement;
+          element.click();
+          let element1:HTMLElement = document.getElementById('secondCheck') as HTMLElement;
+          element1.click();
+    }
+  }
+
+  onIgnore(){
+    let element:HTMLElement = document.getElementById('oknext') as HTMLElement;
+          element.click();
+    this.router.navigate(['/mannedvisitormanagement/visitor'])
+
+    let visitor = {
+      profile: this.profileForm.value,
+      isPreRegistered: this.isPreRegistered
+    }
+    this.mannedVisitorMangementService.setVisitor(visitor)
   }
 
 }
