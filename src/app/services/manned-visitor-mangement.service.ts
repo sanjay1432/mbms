@@ -23,6 +23,10 @@ export class MannedVisitorMangementService {
     return this.http.get<Visitor[]>(this.visitorsUrl)
   }
 
+  saveVisitors (visitor: Visitor): Observable<Visitor> {
+    return this.http.post<Visitor>(this.visitorsUrl, visitor, httpOptions)
+  }
+
   setVisitor(visitor: Object) { 
     this.visitor.next(visitor); 
   } 

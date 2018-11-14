@@ -160,3 +160,18 @@ newVisitorList{
     padding: 10px 50px;
     margin-bottom: 2rem;
 }
+
+.selected-color{
+    background-color: #122d51;
+  }
+
+  .nonselected-color{
+    background: #f8f9fa75
+  }
+
+  .selected-text-color{
+    color: white
+  }
+  .nonselected-text-color{
+      color: black
+  }

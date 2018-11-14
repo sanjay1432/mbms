@@ -1,5 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { User } from './users';
+import { Visitor } from './visitors';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const users = [
@@ -34,9 +35,9 @@ export class InMemoryDataService implements InMemoryDbService {
           id:4,
           image:'no-image.jpg',
           imageurl:'',
-          firstName: 'Steve',
-          lastName: 'Lucas',
-          company:'Microsoft',
+          firstName: 'Steven',
+          lastName: 'Smith',
+          company:'Apple',
           comment:''
         },
         {
@@ -119,5 +120,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
   genId(users: User[]): number {
     return users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 1;
+  }
+  genId1(visitors: Visitor[]): number {
+    return visitors.length > 0 ? Math.max(...visitors.map(visitor => visitor.id)) + 1 : 1;
   }
 }

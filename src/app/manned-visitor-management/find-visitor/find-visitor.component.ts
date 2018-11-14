@@ -29,9 +29,15 @@ export class FindVisitorComponent implements OnInit {
   possibleMatchFound: boolean;
   results = "Search Results";
   gridList = 'col-sm-6'
+  selectedColor = 'white';
   isGrid: boolean = true;
   hasWatchlistUser: boolean = false;
   admin: any;
+  selectedIndex: any;
+  topClass = "#122d51"
+  topClasstext: string = "white";
+  visitorToSave: any;
+  hasSelecteduser: boolean;
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
               private mannedVisitorMangementService: MannedVisitorMangementService,
@@ -41,7 +47,12 @@ export class FindVisitorComponent implements OnInit {
     this.getWatchListUsers()
     this.getVisitors()
   }
-
+  
+  selectTop(){
+    this.topClass = "#122d51"
+    this.topClasstext = "white"
+    this.selectedIndex = null
+  }
   preRegister(value){
     if(value  === 'yes'){
       this.yesClass = value
@@ -142,14 +153,17 @@ export class FindVisitorComponent implements OnInit {
       let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
       element.click();
     }else{
-      this.router.navigate(['/mannedvisitormanagement/visitor'])
-
-    let visitor = {
-      profile: this.profileForm.value,
-      isPreRegistered: this.isPreRegistered
-    }
-    this.mannedVisitorMangementService.setVisitor(visitor)
-    }
+        this.router.navigate(['/mannedvisitormanagement/visitor'])
+  
+      let visitor = {
+        profile: this.profileForm.value,
+        isPreRegistered: this.isPreRegistered
+      }
+      this.mannedVisitorMangementService.setVisitor(visitor)
+      }
+    
+    
+    
   }
   isAdmin(e){
         if(!this.admin){
@@ -168,15 +182,40 @@ export class FindVisitorComponent implements OnInit {
   }
 
   onIgnore(){
-    let element:HTMLElement = document.getElementById('oknext') as HTMLElement;
-          element.click();
-    this.router.navigate(['/mannedvisitormanagement/visitor'])
+     if(this.hasSelecteduser){
+        let element:HTMLElement = document.getElementById('oknext') as HTMLElement;
+        element.click();
+        this.router.navigate(['/mannedvisitormanagement/visitor'])
 
-    let visitor = {
-      profile: this.profileForm.value,
-      isPreRegistered: this.isPreRegistered
-    }
-    this.mannedVisitorMangementService.setVisitor(visitor)
+        let visitor = {
+          profile: this.visitorToSave,
+          isPreRegistered: this.isPreRegistered
+        }
+        this.mannedVisitorMangementService.setVisitor(visitor)
+
+      }else{
+          let element:HTMLElement = document.getElementById('oknext') as HTMLElement;
+                element.click();
+          this.router.navigate(['/mannedvisitormanagement/visitor'])
+
+          let visitor = {
+            profile: this.profileForm.value,
+            isPreRegistered: this.isPreRegistered
+          }
+          this.mannedVisitorMangementService.setVisitor(visitor)
+        }
   }
 
+  onSelectPossible(i, user){
+    this.hasSelecteduser = true;
+    this.visitorToSave = user
+    this.selectedIndex = i;
+    this.topClass = 'white'
+    this.topClasstext = 'black'
+  }
+
+
+  onAddToVisitors(){
+    this.mannedVisitorMangementService.saveVisitors(this.visitorToSave)    
+  }
 }

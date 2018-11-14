@@ -10,7 +10,7 @@
               <label>
                 First Name:
               </label>
-              <input type="text" class="form-control form-control-lg" formControlName="firstName" required>
+              <input type="text" class="form-control form-control-lg" formControlName="firstName" >
 
             </div>
             <div class="col-sm">
@@ -83,14 +83,14 @@
         </nav>
         <div class="container" *ngIf="exactMatch">
           <div class="row" style="margin: 0">
-            <div [ngClass]="gridList" style="background-color: #122d51">
+            <div [ngClass]="gridList" [ngStyle]="{'background-color': topClass}" (click)="selectTop()">
               <div class="row" *ngIf='isGrid'>
                 <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
                   <img src="../../../assets/icons/{{exactMatchUser.image}}" style="height: 8rem;">
                 </div>
                 <div class="col-sm-8 watchlist" style="padding-top: 1rem">
-                  <h3 style="color: white">{{exactMatchUser.lastName}}, {{exactMatchUser.firstName}}</h3>
-                  <h5 style="color: white">{{exactMatchUser.company}}</h5>
+                  <h3 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.lastName}}, {{exactMatchUser.firstName}}</h3>
+                  <h5 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.company}}</h5>
                 </div>
               </div>
               <div class="row" *ngIf='!isGrid'>
@@ -98,10 +98,10 @@
                   <img src="../../../assets/icons/{{exactMatchUser.image}}" class="rounded-list">
                 </div>
                 <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                  <h4 style="color: white">{{exactMatchUser.lastName}}, {{exactMatchUser.firstName}}</h4>
+                  <h4 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.lastName}}, {{exactMatchUser.firstName}}</h4>
                 </div>
                 <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                  <h5 style="color: white">{{exactMatchUser.company}}</h5>
+                  <h5 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.company}}</h5>
                 </div>
               </div>
             </div>
@@ -122,8 +122,8 @@
         <div class="container" style="background-color: #f8f9fa75">
           <div class="scrollbar" id="style-13">
             <div class="row" style="margin: 0; ">
-              <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers" style="padding: 5px; background-color: white;">
-                <div style="border:1px solid #d0d0d0de; background-color: #f8f8f8">
+              <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers; let i= index" style="padding: 5px; background-color: white">
+                <div  [ngClass]="{'selected-color' : i==selectedIndex,'nonselected-color' : i!= selectedIndex}"  (click)="onSelectPossible(i, possibleUser)" style="border:1px solid #d0d0d0de;">
                   <div class="row" *ngIf='isGrid'>
 
                     <div class="col-sm-3" style="margin: 5px 5px 5px 0px;">
@@ -131,8 +131,8 @@
                       margin-left: 5px;">
                     </div>
                     <div class="col-sm-8 watchlist" style="padding-top: 1rem;">
-                      <h3 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
-                      <h5 style="color: black">{{possibleUser.company}}</h5>
+                      <h3 [ngClass]="{'selected-text-color' : i==selectedIndex,'nonselected-text-color' : i!= selectedIndex}" >{{possibleUser.lastName}}, {{possibleUser.firstName}}</h3>
+                      <h5 [ngClass]="{'selected-text-color' : i==selectedIndex,'nonselected-text-color' : i!= selectedIndex}" >{{possibleUser.company}}</h5>
                     </div>
 
                   </div>
@@ -143,10 +143,10 @@
                       <img src="../../../assets/icons/{{possibleUser.image}}" class="rounded-list">
                     </div>
                     <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                      <h4 style="color: black">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
+                      <h4 [ngClass]="{'selected-text-color' : i==selectedIndex,'nonselected-text-color' : i!= selectedIndex}">{{possibleUser.lastName}}, {{possibleUser.firstName}}</h4>
                     </div>
                     <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                      <h5 style="color: black">{{possibleUser.company}}</h5>
+                      <h5 [ngClass]="{'selected-text-color' : i==selectedIndex,'nonselected-text-color' : i!= selectedIndex}">{{possibleUser.company}}</h5>
                     </div>
                     <div class="col-sm-4 watchlist text-right" style="padding-top: 1.5rem" *ngIf="possibleUser.isInWatchlist">
                       <h5 style="color: #ab2d2b;font-weight: bold"><span style="font-size: 2rem;">&#9888;</span>

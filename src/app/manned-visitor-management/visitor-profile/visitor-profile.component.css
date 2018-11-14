@@ -15,3 +15,74 @@
         padding-top: 2rem;
         padding-bottom: 2rem;
 }
+
+.form-control{
+    border-radius: 0px !important;
+    margin: 10px 0px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+/* input[type=time]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+} */
+
+.rounded {
+    border-radius: 3.25rem !important;
+    border: thin #eeeeee solid;
+    height: 80px;
+    width: 80px;
+}
+
+.upload{
+    background-color: #169AED;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 30px;
+    margin-top: 25px
+}
+
+.takeNew{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 30px;
+    margin-top: 25px
+}
+
+
+.yes{
+    background-color: #169AED;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 35px;
+}
+.no{
+    background-color: #DDDDDD;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 35px;
+}
