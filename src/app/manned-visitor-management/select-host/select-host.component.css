@@ -1,0 +1,24 @@
+.form-control{
+    border-radius: 0px !important;
+    margin: 10px 0px;
+}
+.title{
+    font-family: 'Raleway', sans-serif;
+    margin-top: 24px;
+}
+
+.rounded {
+    border-radius: 3.25rem !important;
+    height: 60px;
+    width: 60px;
+    margin-top: 7px;
+}
+
+
+.my-custom-class .tooltip-inner {
+    background-color: darkgreen;
+    font-size: 125%;
+  }
+.my-custom-class .arrow::before {
+border-top-color: darkgreen;
+}

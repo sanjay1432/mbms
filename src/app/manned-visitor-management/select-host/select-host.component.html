@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
+      <h1 class="watchlist text-uppercase">select visitor host</h1>
+      <br />
+      <div class="input-group mb-3 input-group-lg">
+        <input type="text" #search class="form-control" (keyup)="onKey($event)" placeholder="Search" aria-label="Search"
+          aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <span><button style="padding: 0;border: 0;margin-top: 9px;" (click)="onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let host of hosts">
+      <div class="row" style="background: white;
+        margin: 0;
+        height: 70px;
+        margin-bottom: 20px;
+        cursor: pointer;
+    "
+        [ngStyle]="{'border-right': '6px solid'+host.status}"
+        (click) = "onSelectHost(host)"
+        >
+        <div class="col-sm-3">
+          <img src="../../../assets/icons/{{host.image}}" class="rounded"  [ngStyle]="{'border': 'thin solid'+host.status}">
+        </div>
+        <div class="col-sm-7">
+          <p class="title">{{host.firstName}}{{host.lastName}}</p>
+        </div>
+        <div class="col-sm-1" style="margin-top: 21px;">
+            <ng-template #tipContent> <p style="font-size: 12px">Email: {{host.email}} </p><br/> Gender:  {{host.gender}}</ng-template>
+            <a href = "javascript:void(0)" [ngbTooltip]="tipContent" tooltipClass="my-custom-class">&#9432;</a>  
+        </div>
+      </div>
+      <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
+   
+    </div>
+  </div>
+</div>

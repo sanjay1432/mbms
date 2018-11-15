@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FileDropModule } from 'ngx-file-drop';
@@ -11,15 +11,18 @@ import { WatchlistService } from '../services/watchlist.service';
 import { MannedVisitorMangementService } from '../services/manned-visitor-mangement.service';
 import { FindVisitorComponent } from './find-visitor/find-visitor.component';
 import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
-
+import { SelectHostComponent } from './select-host/select-host.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     FileDropModule,
     MVMRoutingModule,
+    NgbModule,
     HttpClientInMemoryWebApiModule.forFeature(
       InMemoryDataService,{
       dataEncapsulation: false,
@@ -29,7 +32,7 @@ import { VisitorProfileComponent } from './visitor-profile/visitor-profile.compo
     )
 
   ],
-  declarations: [FindVisitorComponent, VisitorProfileComponent],
+  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent],
   providers   : [
     WatchlistService,MannedVisitorMangementService
   ]

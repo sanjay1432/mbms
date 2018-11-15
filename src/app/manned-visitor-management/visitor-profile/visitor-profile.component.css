@@ -3,7 +3,7 @@
 }
 
 .host{
-    background-color: rgb(198, 106, 0);
+    background-color: #ef8004;
     border: 0;
     border-radius: 0;
     padding: 10px 70px;
@@ -86,3 +86,33 @@ input[type=date]::-webkit-inner-spin-button {
     border-radius: 0;
     padding: 10px 35px;
 }
+@media (min-width: 768px) {
+    .modal-xl {
+      width: 90%;
+     max-width:1200px;
+    }
+  }
+
+
+  .cancel{
+    background-color: #727070;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 30px;
+    color: white
+  }
+
+  .back{
+    background-color: #727070;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }
+  .next{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }
