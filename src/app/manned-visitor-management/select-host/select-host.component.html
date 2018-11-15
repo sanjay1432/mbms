@@ -7,7 +7,7 @@
         <input type="text" #search class="form-control" (keyup)="onKey($event)" placeholder="Search" aria-label="Search"
           aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <span><button style="padding: 0;border: 0;margin-top: 9px;" (click)="onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
+          <span><button style="padding: 0;border: 0;margin-top: 9px;" ><img src="../../../assets/icons/seach.png"></button></span>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
           <img src="../../../assets/icons/{{host.image}}" class="rounded"  [ngStyle]="{'border': 'thin solid'+host.status}">
         </div>
         <div class="col-sm-7">
-          <p class="title">{{host.firstName}}{{host.lastName}}</p>
+          <p class="title">{{host.firstName}} {{host.lastName}}</p>
         </div>
         <div class="col-sm-1" style="margin-top: 21px;">
             <ng-template #tipContent> <p style="font-size: 12px">Email: {{host.email}} </p><br/> Gender:  {{host.gender}}</ng-template>

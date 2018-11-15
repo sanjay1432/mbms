@@ -76,8 +76,10 @@
                   <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius: 0;padding: 0px 10px;
                   height: 48px;
                   margin-top: 10px;
-                  border: 1px solid;
-                  background: white;">v</button>
+                  border-right: 1px solid #CED4DA;
+    border-bottom: 1px solid #CED4DA;
+    border-top: 1px solid #CED4DA;
+                  background: white;"><img src="../../../assets/icons/dropdown.png"></button>
                   <div class="dropdown-menu" >
                     <a class="dropdown-item" href="javascript:void(0)" *ngFor ="let cat of visitorCategory" (click) = "onSelectCategory(cat)">{{cat}}</a>
                   </div>
@@ -135,28 +137,29 @@
             <button type="button" class="btn btn-primary upload"  data-toggle="modal" data-target="#exampleModal">Upload Photo</button>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-primary takeNew"  (click) = "ontakeNew()">Take New Photo</button>
+            <button type="button" class="btn btn-primary takeNew"  >Take New Photo</button>
         </div>
       </div>
-
+      <br/>
+      <div class="row">
+        <div class="col-sm text-left">
+            <button class=" btn cancel" id="host">Cancel</button>
+        </div>
+        <div class="col-sm text-right">
+            <button class=" btn back" (click)="back()" id="host" style="margin: 0px 15px;">Back</button>
+           
+            <button  type = "submit" class=" btn next" id="host">Next</button>
+        </div>
+      </div>
     </div>
   
-  <div class="row" style="padding: 3.2rem;">
-    <div class="col-sm text-left">
-        <button class=" btn cancel" id="host">Cancel</button>
-    </div>
-    <div class="col-sm text-right">
-        <button class=" btn back" (click)="back()" id="host">Back</button>
-        &nbsp;&nbsp;&nbsp;
-        <button  type = "submit" class=" btn next" id="host">Next</button>
-    </div>
-  </div>
+  
 </form>
 </div>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-  <div class="modal-dialog " [ngClass]="modalClassName" role="document" style="    margin-top: 5%;">
+  <div class="modal-dialog "  role="document" style="    margin-top: 5%;">
     <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;"> 
       <div  style="padding:2rem">
         <file-drop headertext=" Drag & Drop files here" (onFileDrop)="dropped($event)" 
