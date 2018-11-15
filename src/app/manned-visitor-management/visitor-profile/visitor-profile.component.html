@@ -137,7 +137,7 @@
             <button type="button" class="btn btn-primary upload"  data-toggle="modal" data-target="#exampleModal">Upload Photo</button>
         </div>
         <div class="col-sm-2">
-            <button type="button" class="btn btn-primary takeNew"  >Take New Photo</button>
+            <button type="button" class="btn btn-primary takeNew"  data-toggle="modal" data-target="#takePhoto" >Take New Photo</button>
         </div>
       </div>
       <br/>
@@ -183,6 +183,16 @@
       <div  style="padding:2rem"> 
       <app-select-host (host) = "onSelectHost($event)"></app-select-host>
       </div>
+    <button id = "closeed" data-dismiss="modal" style="display:none"></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="takePhoto" tabindex="-1" role="dialog" aria-labelledby="takePhotoLabel" aria-hidden="true" >
+  <div class="modal-dialog"  role="document" style="    margin-top: 5%;">
+    <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
+      <span class="watchlist text-uppercase"> Photo Capture | {{visitor?.firstName}} {{visitor?.lastName}} </span>
+      <app-camera (pictureTaken)="handleImage($event)"></app-camera>
     <button id = "closeed" data-dismiss="modal" style="display:none"></button>
     </div>
   </div>

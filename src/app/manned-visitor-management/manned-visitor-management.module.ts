@@ -12,7 +12,9 @@ import { MannedVisitorMangementService } from '../services/manned-visitor-mangem
 import { FindVisitorComponent } from './find-visitor/find-visitor.component';
 import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
 import { SelectHostComponent } from './select-host/select-host.component';
+import {WebcamModule} from 'ngx-webcam';
 import { FormsModule } from '@angular/forms';
+import { AppCameraComponent } from './app-camera/app-camera.component';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     FileDropModule,
     MVMRoutingModule,
     NgbModule,
+    WebcamModule,
     HttpClientInMemoryWebApiModule.forFeature(
       InMemoryDataService,{
       dataEncapsulation: false,
@@ -32,7 +35,7 @@ import { FormsModule } from '@angular/forms';
     )
 
   ],
-  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent],
+  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent, AppCameraComponent],
   providers   : [
     WatchlistService,MannedVisitorMangementService
   ]

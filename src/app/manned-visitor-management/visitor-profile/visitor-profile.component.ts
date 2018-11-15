@@ -3,6 +3,7 @@ import { MannedVisitorMangementService } from '../../services/manned-visitor-man
 import { Location } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import {WebcamImage} from 'ngx-webcam';
 @Component({
   selector: 'app-visitor-profile',
   templateUrl: './visitor-profile.component.html',
@@ -31,6 +32,8 @@ export class VisitorProfileComponent implements OnInit {
 
   category:any;
   purpose:any;
+  // latest snapshot
+  public webcamImage: WebcamImage = null;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,) { }
@@ -41,6 +44,10 @@ export class VisitorProfileComponent implements OnInit {
     this.isPreRegisters = v.isPreRegistered;
     this.visitor = v.profile;
     })
+  }
+
+  handleImage(webcamImage: WebcamImage) {
+    this.webcamImage = webcamImage;
   }
   onSelectHost(host){
     this.host = host;

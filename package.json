@@ -34,6 +34,7 @@
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
     "ngx-file-drop": "^5.0.0",
+    "ngx-webcam": "0.1.6",
     "path": "^0.12.7",
     "rxjs": "^6.0.0",
     "typescript": "~2.7.2",
