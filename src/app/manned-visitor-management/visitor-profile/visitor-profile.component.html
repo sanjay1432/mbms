@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col-sm" style="display: flex;">
               <!-- <input type="date" class="form-control form-control-lg" formControlName="startDate"> -->
-              <input matInput [matDatepicker]="picker" readonly formControlName="startDate" class="form-control form-control-lg"
+              <input matInput [matDatepicker]="picker" readonly formControlName="startDate" class="form-control form-control-lg startDate"
                 style="border-right:0;     background: white;">
               <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -54,7 +54,7 @@
           <div class="row">
             <div class="col-sm" style="display: flex;">
               <!-- <input type="date" class="form-control form-control-lg" formControlName="endDate"> -->
-              <input matInput [matDatepicker]="pickerTo" readonly formControlName="endDate" class="form-control form-control-lg"
+              <input matInput [matDatepicker]="pickerTo" readonly formControlName="endDate" class="form-control form-control-lg startDate"
                 style="border-right:0;     background: white;">
               <mat-datepicker-toggle matSuffix [for]="pickerTo" class="input-field"></mat-datepicker-toggle>
               <mat-datepicker #pickerTo></mat-datepicker>
