@@ -15,6 +15,13 @@ import { SelectHostComponent } from './select-host/select-host.component';
 import {WebcamModule} from 'ngx-webcam';
 import { FormsModule } from '@angular/forms';
 import { AppCameraComponent } from './app-camera/app-camera.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule}  from '@angular/material';
+import {MatInputModule} from '@angular/material/input';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { VisitorConfirmationComponent } from './visitor-confirmation/visitor-confirmation.component';
 
 @NgModule({
   imports: [
@@ -26,6 +33,12 @@ import { AppCameraComponent } from './app-camera/app-camera.component';
     MVMRoutingModule,
     NgbModule,
     WebcamModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    NgxMaterialTimepickerModule.forRoot(),
     HttpClientInMemoryWebApiModule.forFeature(
       InMemoryDataService,{
       dataEncapsulation: false,
@@ -35,9 +48,9 @@ import { AppCameraComponent } from './app-camera/app-camera.component';
     )
 
   ],
-  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent, AppCameraComponent],
+  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent, AppCameraComponent, VisitorConfirmationComponent],
   providers   : [
-    WatchlistService,MannedVisitorMangementService
+    WatchlistService,MannedVisitorMangementService,MatDatepickerModule
   ]
 })
 export class MannedVisitorManagementModule { }

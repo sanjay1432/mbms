@@ -17,6 +17,7 @@ const httpOptions = {
 })
 export class MannedVisitorMangementService {
   private visitor = new BehaviorSubject<object>({});
+  private visitorProfile = new BehaviorSubject<object>({});
   visitorsUrl = 'api/visitors';  // URL to web api
   hostsUrl = 'api/hosts';  // URL to web api
   constructor(private http: HttpClient) { }
@@ -38,5 +39,13 @@ export class MannedVisitorMangementService {
   } 
   getVisitor(): Observable<any> { 
       return this.visitor.asObservable(); 
+  }
+
+
+  setVisitorProfile(visitor: Object) { 
+    this.visitorProfile.next(visitor); 
+  } 
+  getVisitorProfile(): Observable<any> { 
+      return this.visitorProfile.asObservable(); 
   }
 }

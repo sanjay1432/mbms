@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {WebcamImage} from 'ngx-webcam';
+import { NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-visitor-profile',
   templateUrl: './visitor-profile.component.html',
@@ -11,6 +13,7 @@ import {WebcamImage} from 'ngx-webcam';
 })
 export class VisitorProfileComponent implements OnInit {
   isPreRegisters: boolean;
+  isVegetarion:boolean;
   visitor: any;
   visitorCategory = ['Contractor','Developer','Designer','Broker','Politician'];
   isPreRegistered = true;
@@ -29,14 +32,19 @@ export class VisitorProfileComponent implements OnInit {
   });
   hostSelected: boolean = false;
   host: any;
-
+  checked = false;
   category:any;
+  value:any;
   purpose:any;
+  food:any;
+  email:any;
+  profile:any  = 'Private'
   // latest snapshot
   public webcamImage: WebcamImage = null;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
-              private fb: FormBuilder,) { }
+              private fb: FormBuilder,
+              private route: Router) { }
 
   ngOnInit() {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
@@ -57,15 +65,15 @@ export class VisitorProfileComponent implements OnInit {
       element.click();
     }
   }
-  preRegister(value){
+  isVeg(value){
     if(value  === 'yes'){
       this.yesClass = value
       this.noClass = 'no'
-      this.isPreRegistered = true;
+      this.isVegetarion = true;
     }else if(value  === 'no'){
       this.yesClass = value
       this.noClass = 'yes'
-      this.isPreRegistered = false;
+      this.isVegetarion = false;
     }
     
   }
@@ -77,6 +85,16 @@ export class VisitorProfileComponent implements OnInit {
 
   onUpload(){
     this.upload = true;
+  }
+
+  onChange(e){
+    if(!e.checked){
+      // this.checked = false;
+      this.profile = 'Private'
+    }else{
+      // this.checked = true;
+      this.profile = 'Public'
+    }
   }
 
   onSelectCategory(c){
@@ -163,7 +181,23 @@ export class VisitorProfileComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.purpose)
+    let visitorProfile = {
+      preRegisterData:this.preRegForm.value,
+      profileData:{
+        category: this.value,
+        food: this.food,
+        purpose:this.purpose,
+        email: this.email,
+        veg:this.isVegetarion,
+        image: this.visitor?this.visitor.image:'',
+        uploadedImage: this.imageurl?this.imageurl:this.webcamImage
+      },
+      host: this.host,
+      visitor: this.visitor
+    }
+
+    this.mannedVisitorMangementService.setVisitorProfile(visitorProfile)
+    this.route.navigate(['/mannedvisitormanagement/visitor-confirmation'])
   }
 
 }

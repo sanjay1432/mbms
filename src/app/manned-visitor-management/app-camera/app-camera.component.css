@@ -13,3 +13,26 @@
     padding-bottom: 20px;
   }
   
+
+  .retry{
+    background-color: #727070;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 30px;
+    color: white
+  }
+
+  .cancel{
+    background-color: #a50101;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }
+  .keep{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }

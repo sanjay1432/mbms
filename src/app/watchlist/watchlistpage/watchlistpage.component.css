@@ -57,3 +57,11 @@ td{
     width: 90%;
    max-width:1200px;
   }
+
+  table {
+    width: 100%;
+  }
+  
+  th.mat-sort-header-sorted {
+    color: black;
+  }

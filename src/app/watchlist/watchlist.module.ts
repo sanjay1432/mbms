@@ -12,6 +12,9 @@ import { AddtowatchlistComponent } from './addtowatchlist/addtowatchlist.compone
 import { WatchlistService } from '../services/watchlist.service';
 import { PossibleMatchComponent } from './possible-match/possible-match.component';
 import { EdituserComponent } from './edituser/edituser.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule, MatSortModule} from '@angular/material';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,6 +22,10 @@ import { EdituserComponent } from './edituser/edituser.component';
     HttpClientModule,
     ReactiveFormsModule,
     FileDropModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+   
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {
       dataEncapsulation: false,

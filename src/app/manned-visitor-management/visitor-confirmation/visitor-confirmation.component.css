@@ -1,0 +1,50 @@
+.watchlist{
+    font-family: 'Raleway', sans-serif;
+}
+.newBar{
+    padding: 1rem;
+        background: white;
+        margin: 0;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+}
+.yes{
+    background-color: #169AED;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 35px;
+}
+.no{
+    background-color: #DDDDDD;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 35px;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow:none !important;
+}
+
+.cancel{
+    background-color: #727070;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 30px;
+    color: white
+  }
+
+  .back{
+    background-color: #727070;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }
+  .next{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 6px 40px;
+    color: white
+  }

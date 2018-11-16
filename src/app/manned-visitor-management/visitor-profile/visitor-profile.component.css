@@ -119,3 +119,29 @@ input[type=date]::-webkit-inner-spin-button {
   .dropdown-toggle::after {
     display:none;
 }
+
+/* mat-select /deep/ .mat-select-arrow {
+    width: 0;
+    height: 0;
+    background-image: url("../../../assets/icons/dropdown.png")!important;
+    margin: 0 4px;
+} */
+
+>>> .mat-datepicker-toggle {
+    background: url("../../../assets/icons/date.png") no-repeat !important;
+}
+
+>>> .mat-datepicker-toggle-default-icon{
+    display: none;
+}
+ngx-material-timepicker-toggle /deep/ .ngx-material-timepicker-toggle{
+    padding: 0px !important;
+}
+
+.input-field{
+    border-right: 1px solid #ced4da;
+              height: 48px;
+              margin-top: 10px;
+              border-bottom: 1px solid #ced4da;
+              border-top: 1px solid #ced4da;
+}

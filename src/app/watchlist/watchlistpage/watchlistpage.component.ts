@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { WatchlistService } from '../../services/watchlist.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatPaginator, MatSort} from '@angular/material';
+import {MatTableDataSource} from '@angular/material';
+import { User } from '../../users';
+import {merge, Observable, of as observableOf} from 'rxjs';
+// import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+
 @Component({
   selector: 'app-watchlistpage',
   templateUrl: './watchlistpage.component.html',
@@ -14,13 +20,22 @@ export class WatchlistpageComponent implements OnInit {
   deletedID: any;
   values: string;
   
+  displayedColumns: string[] = ['image','firstName', 'lastName', 'company', 'comment','edit','remove'];
+  dataSource = new MatTableDataSource(this.users);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(private watchlistService:WatchlistService,private router: Router) {
     
    }
 
   ngOnInit() {
     this.getUsersList()
+    
+  }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   onSearch(v){
@@ -78,7 +93,13 @@ export class WatchlistpageComponent implements OnInit {
   }
 
   getUsersList(){
-    this.watchlistService.getUsers().subscribe(user =>this.users = user)
+    this.watchlistService.getUsers().subscribe(user =>{
+      this.users = user
+      this.dataSource = new MatTableDataSource<User>(user)
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+    )
   }
   closeModalDialog(){
         let element:HTMLElement = document.getElementById('reload') as HTMLElement;
