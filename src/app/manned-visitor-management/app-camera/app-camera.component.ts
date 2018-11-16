@@ -8,7 +8,7 @@ import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
   styleUrls: ['./app-camera.component.css']
 })
 export class AppCameraComponent implements OnInit {
-  @Output() capturedImage : EventEmitter<string> = new EventEmitter<string>();
+  @Output() iscapturedImage : EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output()
   public pictureTaken = new EventEmitter<WebcamImage>();
 
@@ -70,9 +70,11 @@ export class AppCameraComponent implements OnInit {
   }
 
   onKeep(image){
-   this.capturedImage.emit(image)
+    this.hasCapture = true;
+   this.iscapturedImage.emit(true)
   }
   onCancel(){
+    this.iscapturedImage.emit(false)
   }
   onRetry(){
     this.hasCapture = false;

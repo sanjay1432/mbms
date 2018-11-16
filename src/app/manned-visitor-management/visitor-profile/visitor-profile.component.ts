@@ -40,7 +40,7 @@ export class VisitorProfileComponent implements OnInit {
   email:any;
   profile:any  = 'Private'
   // latest snapshot
-  public webcamImage: WebcamImage = null;
+  public webcamImage;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -48,14 +48,25 @@ export class VisitorProfileComponent implements OnInit {
 
   ngOnInit() {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
-    console.log(v)
     this.isPreRegisters = v.isPreRegistered;
     this.visitor = v.profile;
     })
   }
 
   handleImage(webcamImage: WebcamImage) {
-    this.webcamImage = webcamImage;
+    this.imageurl = webcamImage.imageAsDataUrl;
+    this.isFile = true;
+  }
+  onKeep(e){
+    console.log(e)
+    if(e){
+      let element:HTMLElement = document.getElementById('closeCamera') as HTMLElement;
+            element.click();
+    }else{
+      let element:HTMLElement = document.getElementById('closeCamera') as HTMLElement;
+            element.click();
+      this.imageurl =''
+    }
   }
   onSelectHost(host){
     this.host = host;

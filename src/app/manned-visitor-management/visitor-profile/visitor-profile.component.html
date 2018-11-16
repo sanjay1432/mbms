@@ -250,8 +250,8 @@
   <div class="modal-dialog" role="document" style="    margin-top: 5%;">
     <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
       <span class="watchlist text-uppercase"> Photo Capture | {{visitor?.firstName}} {{visitor?.lastName}} </span>
-      <app-camera (pictureTaken)="handleImage($event)"></app-camera>
-      <button id="closeed" data-dismiss="modal" style="display:none"></button>
+      <app-camera (pictureTaken)="handleImage($event)" (iscapturedImage) = "onKeep($event)"></app-camera>
+      <button id="closeCamera" data-dismiss="modal" style="display:none"></button>
     </div>
   </div>
 </div>

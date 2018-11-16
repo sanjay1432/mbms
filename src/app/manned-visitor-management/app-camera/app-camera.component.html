@@ -11,9 +11,14 @@
   <div class="snapshot" *ngIf ='hasCapture'>
     <img [src]="image" style="height: 390px;
     width: 500px;"/>
+    <div class="row" style="display:flex;display: flex;
+    padding: 15px 80px;">
     <button (click) = "onRetry()" class=" retry">Retry</button>
+    &nbsp;&nbsp;
     <button (click) = "onKeep(image)" class=" keep">Keep</button>
+    &nbsp;&nbsp;
     <button (click) = "onCancel()" class=" cancel">Cancel</button>
+  </div>
   </div>
 </div>
 

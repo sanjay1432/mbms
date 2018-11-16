@@ -3,12 +3,12 @@
     <div class="col-sm">
       <h1 class="watchlist text-uppercase">WatchList</h1>
       <br/>
-      <div class="input-group mb-3 input-group-lg">
+      <!-- <div class="input-group mb-3 input-group-lg">
         <input type="text" #search class="form-control"  (keyup)="onKey($event)" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
         <div class="input-group-append">
           <span ><button style="padding: 0;border: 0;" (click) = "onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="col-sm">
       <div style="float:right"> 
@@ -22,7 +22,7 @@
     <!-- <div class="container"> -->
       <button (click) = "getUsersList()" id = 'reload' style="display:none"></button>
       <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
-    <table class="table">
+    <!-- <table class="table">
       <thead>
         <tr style="background-color:#f8f8f8; height: 70px">
           <th scope="col"></th>
@@ -50,11 +50,17 @@
           <td><a href="javscript:void(0);" (click) = "openDeleteModal(user.id)"><img src="../../../assets/icons/close.png"></a></td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
 
     <div class="mat-elevation-z8">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <!-- <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter"> -->
+        <div class="input-group mb-3 input-group-lg" style="width: 50%;">
+          <input type="text" #search class="form-control"  (keyup)="applyFilter($event.target.value)"  placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <span ><button style="padding: 0;border: 0;" (click) = "onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
+          </div>
+        </div>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <!-- Position Column -->
             <ng-container matColumnDef="image">

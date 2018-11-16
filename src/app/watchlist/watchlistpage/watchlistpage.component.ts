@@ -21,7 +21,7 @@ export class WatchlistpageComponent implements OnInit {
   values: string;
   
   displayedColumns: string[] = ['image','firstName', 'lastName', 'company', 'comment','edit','remove'];
-  dataSource = new MatTableDataSource(this.users);
+  dataSource = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -35,7 +35,9 @@ export class WatchlistpageComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if(this.dataSource.data){
+    this.dataSource.filter = filterValue.trim();
+    }
   }
 
   onSearch(v){
@@ -82,9 +84,12 @@ export class WatchlistpageComponent implements OnInit {
     this.modalClassName = "";
   }
   onEdit(user){
+    console.log(user)
     this.user = user;
+    
     let element:HTMLElement = document.getElementById('openedit') as HTMLElement;
         element.click();
+        // this.dataSource = user;
   }
 
   getDummy(){
