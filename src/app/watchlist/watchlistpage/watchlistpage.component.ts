@@ -25,6 +25,7 @@ export class WatchlistpageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  modalImage: any;
   constructor(private watchlistService:WatchlistService,private router: Router) {
     
    }
@@ -33,7 +34,12 @@ export class WatchlistpageComponent implements OnInit {
     this.getUsersList()
     
   }
-
+  openImageModal(imageurl){
+    console.log(imageurl)
+    this.modalImage = imageurl;
+    let element:HTMLElement = document.getElementById('image') as HTMLElement;
+        element.click();
+  }
   applyFilter(filterValue: string) {
     if(this.dataSource.data){
     this.dataSource.filter = filterValue.trim();

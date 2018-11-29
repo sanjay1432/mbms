@@ -26,7 +26,10 @@ export class SelectHostComponent implements OnInit {
       let values = event.target.value.toString() ;
       let found =[]
       this.hosts.filter((e)=>{
-        if(e.firstName.includes(values) || e.lastName.includes(values)){
+          var firstname = e.firstName.toLowerCase()
+          var lastname = e.lastName.toLowerCase()
+           values = values.toLowerCase()
+        if(firstname.includes(values) || lastname.includes(values)){
           found.push(e)
         }
       })

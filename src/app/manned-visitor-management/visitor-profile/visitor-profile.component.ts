@@ -41,6 +41,7 @@ export class VisitorProfileComponent implements OnInit {
   profile:any  = 'Private'
   // latest snapshot
   public webcamImage;
+  modalImage: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -53,6 +54,14 @@ export class VisitorProfileComponent implements OnInit {
     })
   }
 
+
+  openImageModal(imageurl){
+    console.log(imageurl)
+    this.modalImage = imageurl;
+    let element:HTMLElement = document.getElementById('image') as HTMLElement;
+        element.click();
+  }
+  
   handleImage(webcamImage: WebcamImage) {
     this.imageurl = webcamImage.imageAsDataUrl;
     this.isFile = true;

@@ -27,14 +27,14 @@
           <div class="row">
             <div class="col-sm" style="display: flex;">
               <!-- <input type="date" class="form-control form-control-lg" formControlName="startDate"> -->
-              <input matInput [matDatepicker]="picker" readonly formControlName="startDate" class="form-control form-control-lg startDate"
+              <input matInput [matDatepicker]="picker"  formControlName="startDate" class="form-control form-control-lg startDate"
                 style="border-right:0;     background: white;">
               <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </div>
             <div class="col-sm" style="display: flex;">
               <!-- <input type="time" class="form-control form-control-lg" formControlName="startTime"> -->
-              <input [ngxTimepicker]="toggleIcon" [disableClick]="true" readonly class="form-control form-control-lg"
+              <input [ngxTimepicker]="toggleIcon" [disableClick]="true"  class="form-control form-control-lg"
                 formControlName="startTime" style="border-right:0;    background: white;">
               <ngx-material-timepicker-toggle [for]="toggleIcon" class="input-field">
                 <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
@@ -54,14 +54,14 @@
           <div class="row">
             <div class="col-sm" style="display: flex;">
               <!-- <input type="date" class="form-control form-control-lg" formControlName="endDate"> -->
-              <input matInput [matDatepicker]="pickerTo" readonly formControlName="endDate" class="form-control form-control-lg startDate"
+              <input matInput [matDatepicker]="pickerTo"  formControlName="endDate" class="form-control form-control-lg startDate"
                 style="border-right:0;     background: white;">
               <mat-datepicker-toggle matSuffix [for]="pickerTo" class="input-field"></mat-datepicker-toggle>
               <mat-datepicker #pickerTo></mat-datepicker>
             </div>
             <div class="col-sm" style="display: flex;">
               <!-- <input type="time" class="form-control form-control-lg" formControlName="endTime"> -->
-              <input [ngxTimepicker]="toggleIcon1" [disableClick]="true" readonly class="form-control form-control-lg"
+              <input [ngxTimepicker]="toggleIcon1" [disableClick]="true"  class="form-control form-control-lg"
                 formControlName="endTime" style="border-right:0;    background: white;">
               <ngx-material-timepicker-toggle [for]="toggleIcon1" class="input-field">
                 <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
@@ -85,13 +85,13 @@
         <div class="col-sm">
           <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="!hostSelected">Select
             Host</button>
-          <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.firstName}}</button>
+          <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.firstName}} {{host.lastName}}</button>
         </div>
       </div>
       <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
         <h5 class="watchlist" style="padding: 1rem">Questions</h5>
       </nav>
-      <div class="row newBar" style="max-height: 300px; overflow-x: hidden; overflow-y: scroll">
+      <div class="row newBar">
         <div class="col-sm-6">
           <p style="margin-top: 1rem;">What visitor category does person belongs to?</p>
         </div>
@@ -131,7 +131,7 @@
         </div>
         <div class="col-sm-6">
           <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="isVeg('yes')">YES</button>
-          &nbsp;&nbsp;&nbsp;
+         
           <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="isVeg('no')">NO</button>
         </div>
 
@@ -140,7 +140,7 @@
         </div>
         <div class="col-sm-6">
           <div class="input-group flex">
-            <input matInput [matDatepicker]="picker" readonly class="form-control form-control-lg" style="border-right:0;     background: white;">
+            <input matInput [matDatepicker]="picker"  class="form-control form-control-lg" style="border-right:0;     background: white;">
             <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </div>
@@ -151,7 +151,7 @@
         </div>
         <div class="col-sm-6">
           <div class="input-group" style="display: flex">
-            <input [ngxTimepicker]="toggleIcon" [disableClick]="true" readonly class="form-control form-control-lg"
+            <input [ngxTimepicker]="toggleIcon" [disableClick]="true"  class="form-control form-control-lg"
               style="border-right:0;    background: white;">
             <ngx-material-timepicker-toggle [for]="toggleIcon" class="input-field">
               <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
@@ -179,14 +179,20 @@
       </nav>
       <div class="row newBar">
         <div class="col-sm-2">
-          <span *ngIf="visitor?.imageurl === '' && !isFile"><img src="../../../assets/icons/{{visitor?.image}}" class="rounded">
+          <span *ngIf="visitor?.imageurl === '' && !isFile">
+              <a href="javascript:void(0)" (click) = "openImageModal('../../../assets/icons/'+visitor?.image)"> <img src="../../../assets/icons/{{visitor?.image}}" class="rounded">
+                </a>
           </span>
 
           <span *ngIf="visitor?.imageurl !='' && !isFile">
-            <img src="{{visitor?.imageurl}}" class="rounded">
+              <a href="javascript:void(0)" (click) = "openImageModal(visitor?.imageurl)">
+                <img src="{{visitor?.imageurl}}" class="rounded">
+                </a>
           </span>
           <span style="margin: 0px 50px;" *ngIf='isFile'>
-            <img [src]="imageurl" class="rounded">
+              <a href="javascript:void(0)" (click) = "openImageModal(imageurl)">
+                <img [src]="imageurl" class="rounded">
+                </a>
           </span>
         </div>
         <div class="col-sm-2">
@@ -215,6 +221,19 @@
   </form>
 </div>
 
+
+
+<button id ="image" data-toggle="modal" data-target="#imageModal" style="display:none"></button>
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true" >
+    <div class="modal-dialog "  role="document" style="    margin-top: 5%;">
+    <div class="modal-content" style="border: 0;">       
+           <img src="{{modalImage}}" >
+      </div>
+    </div>
+  </div>
+
+
+  
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog " role="document" style="    margin-top: 5%;">
