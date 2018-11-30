@@ -153,12 +153,27 @@ newVisitorList{
     margin-bottom: 2rem;
 }
 
+
+.okVis{
+    background-color: #8FC600;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 40px;
+}
+
 .ignore{
     background-color: #B41F1F;
     border: 0;
     border-radius: 0;
     padding: 10px 50px;
     margin-bottom: 2rem;
+}
+
+.noVis{
+    background-color: #B41F1F;
+    border: 0;
+    border-radius: 0;
+    padding: 10px 50px;
 }
 
 .selected-color{
@@ -174,4 +189,9 @@ newVisitorList{
   }
   .nonselected-text-color{
       color: black
+  }
+
+  .modal-xl {
+    width: 45%;
+   max-width:1200px;
   }

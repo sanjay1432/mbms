@@ -215,7 +215,22 @@ export class FindVisitorComponent implements OnInit {
   }
 
 
-  onAddToVisitors(){
-    this.mannedVisitorMangementService.saveVisitors(this.visitorToSave)    
+  onAddToVisitors(newVis){
+    console.log(newVis.value)
+    let element1:HTMLElement = document.getElementById('closeNewVis') as HTMLElement;
+    element1.click();
+    this.router.navigate(['/mannedvisitormanagement/visitor'])
+    let visitor = {
+      profile: newVis.value,
+      isPreRegistered: this.isPreRegistered
+    }
+    this.mannedVisitorMangementService.setVisitor(visitor)
+    // this.mannedVisitorMangementService.saveVisitors(this.visitorToSave)    
+  }
+
+  addNewVisitor(e){
+    let element1:HTMLElement = document.getElementById('newVisitor') as HTMLElement;
+          element1.click();
+
   }
 }
