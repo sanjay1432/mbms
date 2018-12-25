@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
+import { PrintBadgeModule } from './print-badge/print-badge.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -15,6 +16,7 @@ import {MatSortModule} from '@angular/material/sort';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSortModule,
+    PrintBadgeModule,
 
   ],
   providers: [],

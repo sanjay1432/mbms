@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'mannedvisitormanagement',
     loadChildren: './manned-visitor-management/manned-visitor-management.module#MannedVisitorManagementModule'
+  },
+  {
+    path: 'printbadge',
+    loadChildren: './print-badge/print-badge.module#PrintBadgeModule'
   }
 
 ];
