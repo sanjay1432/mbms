@@ -1,3 +1,78 @@
-<p>
-  print-activate-badge works!
-</p>
+<div class="container-fluid" style="padding:1rem">
+  <div class="container">
+    <h5 class="watchlist text-uppercase">Print, Assign & Activate</h5>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            Print Label
+          </div>
+          <div class="card-body">
+            <div class="text-center" style="padding-bottom: 2rem;">
+              <img src="../../../assets/icons/snap-yellow.png" />
+            </div>
+            <h5>Preview?</h5>
+            <div class="text-center" style="padding-bottom: 1rem;">
+              <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="printBadge('yes')">YES</button>
+              <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="printBadge('no')">NO</button>
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary go">
+              Go
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card">
+              <div class="card-header">
+                Print Label
+              </div>
+              <div class="card-body">
+                <div class="text-center" style="padding-bottom: 2rem;">
+                  <img src="../../../assets/icons/snap-yellow.png" />
+                </div>
+                <h5>Preview?</h5>
+                <div class="text-center" style="padding-bottom: 1rem;">
+                  <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="printBadge('yes')">YES</button>
+                  <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="printBadge('no')">NO</button>
+                </div>
+                <h5>Assign/Activate?</h5>
+                <div class="text-center" style="padding-bottom: 1rem;">
+                  <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="printBadge('yes')">YES</button>
+                  <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="printBadge('no')">NO</button>
+                </div>
+              </div>
+              <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-primary go">
+                  Go
+                </button>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="card">
+              <div class="card-header">
+                Print Label
+              </div>
+              <div class="card-body">
+                <div class="text-center" style="padding-bottom: 2rem;">
+                  <img src="../../../assets/icons/snap-yellow.png" />
+                </div>
+                <h5>Preview?</h5>
+                <div class="text-center" style="padding-bottom: 1rem;">
+                  <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="printBadge('yes')">YES</button>
+                  <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="printBadge('no')">NO</button>
+                </div>
+              </div>
+              <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-primary go">
+                  Go
+                </button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
