@@ -71,7 +71,8 @@
         </div>
       </div>
     </div>
+    <app-print-label *ngIf='isPrintLabel'></app-print-label>
     <button type="submit" [routerLink]="['/printbadge']" class=" btn next" id="host">Finish</button>
   </div>
-  <app-print-label *ngIf='isPrintLabel'></app-print-label>
+ 
 </div>
