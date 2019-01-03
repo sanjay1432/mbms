@@ -17,6 +17,7 @@ export class PrintActivateBadgeComponent implements OnInit {
   isGo: boolean = false;
   isPrintLabel:boolean = false;
   isPrintBadge:boolean = false;
+  isPrintAssignBadge: boolean = false;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService) { }
 
   ngOnInit() {                    
@@ -66,6 +67,11 @@ export class PrintActivateBadgeComponent implements OnInit {
   onPrintBadge(){
     this.isGo = true;
     this.isPrintBadge = true;
+  }
+
+  onPrintAssignBadge(){
+    this.isGo = true;
+    this.isPrintAssignBadge = true;
   }
 
 }
