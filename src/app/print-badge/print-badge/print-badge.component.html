@@ -1,3 +1,65 @@
-<p>
-  print-badge works!
-</p>
+<h5 class="watchlist text-uppercase">Print Badge</h5>
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        Templates
+      </div>
+      <div class="card-body" style="padding: 0;">
+        <ul class="list-group" style="border-radius:0; padding-bottom: 3rem">
+          <li class="list-group-item" [ngClass]="{'active': selectedItem == item}" (click)="listClick($event, item)" *ngFor="let item of groups">
+            {{ item }}
+         </li>
+        </ul>
+        <div style="padding:1rem" class="d-flex justify-content-around">
+          <mat-checkbox style="padding-top:8px">Default Template</mat-checkbox>
+          <img src="../../../assets/icons/edit.png">
+          <img src="../../../assets/icons/plus.png">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header watchlist">
+        Preview | {{visitor.visitor.firstName}}, {{visitor.profileData.category}}
+      </div>
+      <div class="card-body text-center" style="padding: 2.9rem;">
+        <img src="../../../assets/icons/template_graphics.png" class="img-fluid">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" style="    padding-top: 1rem;">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header" style="padding: 1rem 1.25rem;">
+        Print Settings
+      </div>
+      <div class="card-body d-flex justify-content-around" style="padding: 1rem;">
+        <p style="padding-top:8px">Printer: </p>
+         <mat-select class="form-control form-control-lg" style="width:50%; border-radius: 0">
+            <mat-option *ngFor="let printer of printers" [value]="printer">
+              {{printer}}
+            </mat-option>
+          </mat-select>
+
+          <mat-checkbox style="padding-top:12px">Default Printer</mat-checkbox>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row  d-flex justify-content-between" style="padding-top:0.5rem;padding-bottom:0.5rem">
+  <div class="col watchlist">
+    <mat-checkbox style="padding-top:12px">Don't show this screen again</mat-checkbox>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" [ngClass]="yesBadge" (click)="printBadge('yes')">YES</button>
+      <button type="button" class="btn btn-primary" [ngClass]="noBadge" (click)="printBadge('no')">NO</button>
+     Assign or Activate Badge
+    <button type="submit"  class=" btn next" id="host">Print</button>
+  </div>
+</div>

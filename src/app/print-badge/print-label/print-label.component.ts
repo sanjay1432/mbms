@@ -8,18 +8,16 @@ import { Location } from '@angular/common';
 })
 export class PrintLabelComponent implements OnInit {
   printers = ['printer1','printer2','printer3']
+  groups = ['Contractor 1','Contractor 2','Day Visitor','Delivery Person','Long Term Visitor']
+  selectedItem: any = this.groups[0];
+  visitor: any;
   constructor(private mannedVisitorMangementService:MannedVisitorMangementService) { }
 
   ngOnInit() {
-    this.mannedVisitorMangementService.getVisitorProfile()
-    .subscribe((profile)=> 
-     {
-       console.log(profile)
-      //  this.preRegData = profile.preRegisterData,
-      //  this.profileData = profile.profileData
-      //  this.host = profile.host
-      //  this.visitor = profile.visitor
-     })
+   this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
   }
 
+  listClick(event, newValue) {
+    this.selectedItem = newValue; 
+}
 }

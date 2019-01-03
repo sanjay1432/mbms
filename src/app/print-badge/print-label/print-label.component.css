@@ -21,3 +21,7 @@
     float: right;
     margin-top: 5px;
   }
+  .list-group-item.active {
+    background-color: #122d51;
+    border-color: #122d51;
+}

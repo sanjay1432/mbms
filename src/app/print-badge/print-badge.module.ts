@@ -8,6 +8,7 @@ import { PrintAssignBadgeComponent } from './print-assign-badge/print-assign-bad
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
+import { MannedVisitorMangementService } from '../services/manned-visitor-mangement.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSelectModule,
     HttpClientModule
   ],
-  declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent]
+  declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent],
+  providers   : [
+    MannedVisitorMangementService
+  ]
 })
 export class PrintBadgeModule { }

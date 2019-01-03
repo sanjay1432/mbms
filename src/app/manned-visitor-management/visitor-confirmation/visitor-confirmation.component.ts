@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-visitor-confirmation',
   templateUrl: './visitor-confirmation.component.html',
@@ -13,8 +14,10 @@ export class VisitorConfirmationComponent implements OnInit {
   host:any;
   yesClass = 'yes';
   noClass  = 'no';
+  visitorProfile: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
-              private _location:Location) { }
+              private _location:Location,
+              private router: Router) { }
 
   ngOnInit() {
     this.getProfile();
@@ -24,6 +27,7 @@ export class VisitorConfirmationComponent implements OnInit {
     this.mannedVisitorMangementService.getVisitorProfile()
                                       .subscribe((profile)=> 
                                        {
+                                         this.visitorProfile = profile
                                          this.preRegData = profile.preRegisterData,
                                          this.profileData = profile.profileData
                                          this.host = profile.host
@@ -46,6 +50,11 @@ export class VisitorConfirmationComponent implements OnInit {
 
   back(){
     this._location.back();
+  }
+
+  onConfirm(){
+   this.mannedVisitorMangementService.setFinalVisitor(this.visitorProfile)
+   this.router.navigate(['printbadge'])
   }
 
 }

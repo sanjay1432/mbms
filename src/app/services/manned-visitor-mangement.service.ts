@@ -18,12 +18,20 @@ const httpOptions = {
 export class MannedVisitorMangementService {
   private visitor = new BehaviorSubject<object>({});
   private visitorProfile = new BehaviorSubject<object>({});
+  private finalvisitorProfile = new BehaviorSubject<object>({});
   visitorsUrl = 'api/visitors';  // URL to web api
   hostsUrl = 'api/hosts';  // URL to web api
   constructor(private http: HttpClient) { }
 
   getVisitors (): Observable<Visitor[]> {
     return this.http.get<Visitor[]>(this.visitorsUrl)
+  }
+  getFinalVisitor(): Observable<any> { 
+    var retrievedObject = localStorage.getItem('visitor');
+      return JSON.parse(retrievedObject); 
+  }
+  setFinalVisitor(visitor: Object) { 
+    localStorage.setItem('visitor', JSON.stringify(visitor));
   }
 
   getHosts (): Observable<Host[]> {

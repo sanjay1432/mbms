@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 @Component({
   selector: 'app-print-activate-badge',
   templateUrl: './print-activate-badge.component.html',
@@ -16,9 +16,10 @@ export class PrintActivateBadgeComponent implements OnInit {
   noBadgeAssign  = 'no';
   isGo: boolean = false;
   isPrintLabel:boolean = false;
-  constructor() { }
+  isPrintBadge:boolean = false;
+  constructor(private mannedVisitorMangementService: MannedVisitorMangementService) { }
 
-  ngOnInit() {
+  ngOnInit() {                    
   }
 
   printBadge(value){
@@ -60,6 +61,11 @@ export class PrintActivateBadgeComponent implements OnInit {
     this.isGo = true;
     this.isPrintLabel = true;
 
+  }
+
+  onPrintBadge(){
+    this.isGo = true;
+    this.isPrintBadge = true;
   }
 
 }
