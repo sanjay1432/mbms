@@ -1,3 +1,171 @@
-<p>
-  print-assign-badge works!
-</p>
+<h5 class="watchlist text-uppercase">Assign/Activate Badge</h5>
+
+<div class="card">
+  <div class="card-header watchlist d-flex justify-content-between">
+    <span>Assign Badge &nbsp;&nbsp;&nbsp;&nbsp;{{visitor.visitor.firstName}}, {{visitor.profileData.category}}</span>
+    <span>1/10</span>
+  </div>
+  <div class="card-body" style="padding: 0;">
+    <form [formGroup]="ActiavteBadgeForm" (ngSubmit)="onSubmit()">
+      <div class="row" style="padding: 1rem">
+        <div class="col-sm-3">
+          <p style="margin-top: 1rem;">Badge ID:</p>
+        </div>
+        <div class="col-sm-5">
+          <input type="text" class="form-control form-control-lg">
+        </div>
+        <div class="col-sm-4">
+        </div>
+
+        <div class="col-sm-3">
+          <p style="margin-top: 1rem;">Activate?</p>
+        </div>
+        <div class="col-sm-5">
+          <button type="button" class="btn btn-primary" [ngClass]="yesBadge" (click)="printBadge('yes')">YES</button>
+          <button type="button" class="btn btn-primary" [ngClass]="noBadge" (click)="printBadge('no')">NO</button>
+        </div>
+        <div class="col-sm-4">
+        </div>
+
+        <!-- Valid From -->
+        <div class="col-sm-3">
+          <p style="margin-top: 1rem;">Valid From:</p>
+        </div>
+        <div class="col-sm-3" style="display: flex;">
+          <input matInput [matDatepicker]="picker31" formControlName="startDate" class="form-control form-control-lg startDate"
+            style="border-right:0;     background: white;" [disabled]= 'disabled'>
+          <mat-datepicker-toggle matSuffix [for]="picker31" class="input-field"></mat-datepicker-toggle>
+          <mat-datepicker #picker31></mat-datepicker>
+        </div>
+        <div class="col-sm-3" style="display: flex;">
+
+          <input [ngxTimepicker]="toggleIcon31" [disableClick]="true" class="form-control form-control-lg"
+            formControlName="startTime" style="border-right:0;    background: white;" [disabled]= 'disabled'>
+          <ngx-material-timepicker-toggle [for]="toggleIcon31" class="input-field">
+            <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
+              ngxMaterialTimepickerToggleIcon>
+              <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z" />
+            </svg>
+
+          </ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #toggleIcon31></ngx-material-timepicker>
+
+        </div>
+        <div class="col-sm-3">
+        </div>
+
+
+        <!-- Valid To -->
+        <div class="col-sm-3">
+          <p style="margin-top: 1rem;">Valid To:</p>
+        </div>
+        <div class="col-sm-3" style="display: flex;">
+          <input matInput [matDatepicker]="picker41" formControlName="startDate"  class="form-control form-control-lg startDate"
+            style="border-right:0;     background: white;" [disabled]= 'disabled'>
+          <mat-datepicker-toggle matSuffix [for]="picker41" class="input-field"></mat-datepicker-toggle>
+          <mat-datepicker #picker41></mat-datepicker>
+        </div>
+        <div class="col-sm-3" style="display: flex;">
+
+          <input [ngxTimepicker]="toggleIcon41" [disableClick]="true" class="form-control form-control-lg"
+            formControlName="startTime" style="border-right:0;    background: white;" [disabled]= 'disabled'>
+          <ngx-material-timepicker-toggle [for]="toggleIcon41" class="input-field">
+            <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
+              ngxMaterialTimepickerToggleIcon>
+              <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z" />
+            </svg>
+
+          </ngx-material-timepicker-toggle>
+          <ngx-material-timepicker #toggleIcon41></ngx-material-timepicker>
+
+        </div>
+        <div class="col-sm-3">
+          <div class="text-center" style="padding-top: 21px;">
+            <mat-checkbox style="padding-top:12px">No expiration date</mat-checkbox>
+          </div>
+        </div>
+
+
+        <!-- Integeration -->
+        <div class="col-sm-3">
+            <p style="margin-top: 1rem;">Integeration:</p> 
+        </div>
+        <div class="col-sm-5">
+            <mat-select class="form-control form-control-lg" style=" border-radius: 0" [(value)]="selectedIntigration">
+                <mat-option *ngFor="let integeration of integerations" [value]="integeration">
+                  {{integeration}}
+                </mat-option>
+              </mat-select>
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+
+
+
+         <!-- Security -->
+         <div class="col-sm-3">
+            <p style="margin-top: 1rem;">Security Groups:</p> 
+        </div>
+        <div class="col-sm-5">
+            <mat-select class="form-control form-control-lg" style=" border-radius: 0">
+                <mat-option *ngFor="let group of groups" [value]="group">
+                  {{group}}
+                </mat-option>
+              </mat-select>
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+      </div>
+      <div style="padding:1rem" class="d-flex justify-content-between">
+          <button type="button"  class=" btn cancel" id="host">Cancel</button>
+          <button type="submit"  class=" btn next" id="host">Go</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<button id="isSelectedIntigration" data-toggle="modal" data-target="#exampleModal" style="display:none"></button>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document" style="margin-top: 5%;">
+    <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
+      <button id="close" data-dismiss="modal" style="display:none"></button>
+      <div class="container" style="padding: 0.5rem">
+        <div class="container" style="    background-color: #B41F1F;
+          color: white; ">
+          <div class="row">
+            <div class="col-sm-2" style="padding:1rem 25px">
+              <img src="../../../assets/icons/warning.png">
+            </div>
+            <div class="col-sm-10">
+              <h4 class="title text-uppercase">
+                Access control integration required
+              </h4>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" style="padding: 2rem;font-size: 20px;">
+
+          <p style="margin:0">In order to activate a badge, you must setup/</p>
+          <p style="padding-left: 40px;">enable an Access Control Integration</p>
+
+        </div>
+        <div class="row">
+          <div class="text-center">
+            <button class=" btn btn-primary possibelWatchlistYes" (click) = "onConfirm()">Setup/Enable</button>
+          </div>
+          
+          <div class=" text-center">
+            <button class=" btn btn-primary possibelWatchlistNo" id ="close" data-dismiss="modal">Cancel</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,13 +9,24 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MannedVisitorMangementService } from '../services/manned-visitor-mangement.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule}  from '@angular/material';
+import {MatInputModule} from '@angular/material/input';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 @NgModule({
   imports: [
     CommonModule,
     PrintBadgeRoutingModule,
     MatCheckboxModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    NgxMaterialTimepickerModule.forRoot(),
+
   ],
   declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent],
   providers   : [
