@@ -102,3 +102,46 @@ ngx-material-timepicker-toggle /deep/ .ngx-material-timepicker-toggle {
   float: right;
   margin-top: 5px;
 }
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 44%;
+    max-width:1200px;
+  }
+}
+
+.modal-body-text {
+  margin:0; 
+  padding-left:6rem;
+}
+
+@media (max-width: 960px) {
+  .modal-body-text {
+    margin:0; 
+    padding-left:0rem;
+  }
+  .title{
+    line-height:2rem !important
+  }
+}
+
+
+.possibelWatchlistYes{
+  background-color: #8FC600;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 35px;
+  width: 100%;
+}
+.possibelWatchlistNo{
+  background-color: #B41F1F;
+  border: 0;
+  border-radius: 0;
+  padding: 10px 36px;
+  margin: 10px 0px;
+  width: 100%;
+}
+
+.title{
+  line-height:4rem
+}

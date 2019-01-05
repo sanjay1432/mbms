@@ -10,7 +10,7 @@
             </div>
             <div class="card-body">
               <div class="text-center" style="padding-bottom: 2rem;">
-                <img src="../../../assets/icons/snap-yellow.png" />
+                <img src="../../../assets/icons/label-printing-icon.svg" />
               </div>
               <h5>Preview?</h5>
               <div class="text-center" style="padding-bottom: 1rem;">
@@ -32,7 +32,7 @@
             </div>
             <div class="card-body">
               <div class="text-center" style="padding-bottom: 2rem;">
-                <img src="../../../assets/icons/snap-yellow.png" />
+                <img src="../../../assets/icons/badge-printing-icon.svg" />
               </div>
               <h5>Preview?</h5>
               <div class="text-center" style="padding-bottom: 1.5rem;">
@@ -59,7 +59,7 @@
             </div>
             <div class="card-body">
               <div class="text-center" style="padding-bottom: 3rem;">
-                <img src="../../../assets/icons/snap-yellow.png" />
+                <img src="../../../assets/icons/assign-activate-badge-icon.svg" />
               </div>
             </div>
             <div class="card-footer text-muted text-center" style="padding-top: 15rem;">
@@ -73,7 +73,7 @@
     </div>
     <app-print-label *ngIf='isPrintLabel'></app-print-label>
     <app-print-badge *ngIf='isPrintBadge'></app-print-badge>
-    <app-print-assign-badge *ngIf='isPrintAssignBadge'></app-print-assign-badge>
+    <app-print-assign-badge *ngIf='isPrintAssignBadge' (cancel)="onCancel($event)"></app-print-assign-badge>
     <button type="submit" [routerLink]="['/printbadge']" class=" btn next" id="host">Finish</button>
   </div>
  

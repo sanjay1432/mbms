@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,EventEmitter, Input, Output} from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { FormBuilder } from '@angular/forms';
 @Component({
@@ -21,6 +21,7 @@ export class PrintAssignBadgeComponent implements OnInit {
   groups = ['ACI Security Groups Populated Dynamically']
   disabled: boolean;
   selectedIntigration:string;
+  @Output() cancel = new EventEmitter<boolean>();
   constructor(private mannedVisitorMangementService:MannedVisitorMangementService,private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -47,9 +48,19 @@ export class PrintAssignBadgeComponent implements OnInit {
   }
 
   onSubmit(){
-    if(!this.selectedIntigration){
+    if(!this.selectedIntigration && this.yesBadge == 'yes'){
       let element:HTMLElement = document.getElementById('isSelectedIntigration') as HTMLElement;
       element.click();
     }
+  }
+
+  onEnable(){
+    this.selectedIntigration = this.integerations[0]
+    let element:HTMLElement = document.getElementById('close') as HTMLElement;
+      element.click();
+  }
+
+  onCancel(){
+    this.cancel.emit(true);
   }
 }

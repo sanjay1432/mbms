@@ -74,4 +74,10 @@ export class PrintActivateBadgeComponent implements OnInit {
     this.isPrintAssignBadge = true;
   }
 
+  onCancel(e){
+    if(e){
+      this.isGo = false;
+      this.isPrintAssignBadge = false;
+    }
+  }
 }

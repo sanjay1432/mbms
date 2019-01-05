@@ -14,6 +14,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule}  from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { BatchPrintComponent } from './batch-print/batch-print.component';
+import {MatTableModule} from '@angular/material/table';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from '../in-memory-data.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,9 +30,16 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
     MatNativeDateModule,
     MatInputModule,
     NgxMaterialTimepickerModule.forRoot(),
+    MatTableModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, {
+      dataEncapsulation: false,
+      passThruUnknownUrl: true,
+      put204: false // return entity after PUT/update
+      })
 
   ],
-  declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent],
+  declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent, BatchPrintComponent],
   providers   : [
     MannedVisitorMangementService
   ]
