@@ -56,11 +56,19 @@ input[type=date]::-webkit-inner-spin-button {
   display: none;
 }
 
->>>.mat-datepicker-toggle {
+/* >>>.mat-datepicker-toggle {
+  background: url("../../../assets/icons/date.png") no-repeat !important;
+} */
+
+matInput /deep/ mat-datepicker-toggle {
   background: url("../../../assets/icons/date.png") no-repeat !important;
 }
 
->>>.mat-datepicker-toggle-default-icon {
+/* >>>.mat-datepicker-toggle-default-icon {
+  display: none;
+} */
+
+matInput /deep/ mat-datepicker-toggle-default-icone {
   display: none;
 }
 

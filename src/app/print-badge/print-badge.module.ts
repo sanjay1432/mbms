@@ -18,6 +18,7 @@ import { BatchPrintComponent } from './batch-print/batch-print.component';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from '../in-memory-data.service';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
@@ -31,6 +32,7 @@ import { InMemoryDataService }  from '../in-memory-data.service';
     MatInputModule,
     NgxMaterialTimepickerModule.forRoot(),
     MatTableModule,
+    MatIconModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {
       dataEncapsulation: false,

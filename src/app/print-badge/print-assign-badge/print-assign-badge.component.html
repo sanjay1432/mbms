@@ -34,7 +34,9 @@
         <div class="col-sm-3" style="display: flex;">
           <input matInput [matDatepicker]="picker31" formControlName="startDate" class="form-control form-control-lg startDate"
             style="border-right:0;     background: white;" [disabled]='disabled'>
-          <mat-datepicker-toggle matSuffix [for]="picker31" class="input-field"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker31" class="input-field">
+            <!-- <mat-icon matDatepickerToggleIcon svgIcon="thumbs-up"></mat-icon> -->
+          </mat-datepicker-toggle>
           <mat-datepicker #picker31></mat-datepicker>
         </div>
         <div class="col-sm-3" style="display: flex;">

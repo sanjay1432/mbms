@@ -1,6 +1,8 @@
 import { Component, OnInit ,EventEmitter, Input, Output} from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { FormBuilder } from '@angular/forms';
+import {DomSanitizer} from '@angular/platform-browser';
+import {MatIconRegistry} from '@angular/material';
 @Component({
   selector: 'app-print-assign-badge',
   templateUrl: './print-assign-badge.component.html',
@@ -22,7 +24,13 @@ export class PrintAssignBadgeComponent implements OnInit {
   disabled: boolean;
   selectedIntigration:string;
   @Output() cancel = new EventEmitter<boolean>();
-  constructor(private mannedVisitorMangementService:MannedVisitorMangementService,private fb: FormBuilder) { }
+  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private mannedVisitorMangementService:MannedVisitorMangementService,private fb: FormBuilder) {
+
+    iconRegistry.addSvgIcon(
+      'thumbs-up',
+      sanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/assign-activate-badge-icon.svg'));
+
+  }
 
   ngOnInit() {
     this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
