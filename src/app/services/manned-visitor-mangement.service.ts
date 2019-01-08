@@ -33,6 +33,15 @@ export class MannedVisitorMangementService {
   setFinalVisitor(visitor: Object) { 
     localStorage.setItem('visitor', JSON.stringify(visitor));
   }
+    //Set Badge value Active/Not
+  getPrintBadgeState() { 
+    var retrievedObject = localStorage.getItem('active');
+      return retrievedObject; 
+  }
+  setPrintBadgeState(active: string) { 
+    localStorage.setItem('active', active);
+  }
+
 
   getHosts (): Observable<Host[]> {
     return this.http.get<Host[]>(this.hostsUrl)

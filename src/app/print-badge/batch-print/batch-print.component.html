@@ -28,7 +28,7 @@
       <div class="col-lg-5">
         <div class="card">
           <div class="card-header watchlist">
-            Preview | {{visitor.visitor.firstName}}, {{visitor.profileData.category}}
+            Preview | {{visitor?.visitor.firstName}}, {{visitor?.profileData.category}}
           </div>
           <div class="card-body text-center" style="padding: 2.9rem;">
             <img src="../../../assets/icons/template_graphics.png" class="img-fluid">
@@ -57,7 +57,7 @@
             
               <!-- Position Column -->
               <ng-container matColumnDef="firstName">
-                <th mat-header-cell *matHeaderCellDef> People </th>
+                <th mat-header-cell *matHeaderCellDef> Select All </th>
                 <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
               </ng-container>
             

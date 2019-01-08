@@ -14,10 +14,19 @@ export class PrintBadgeComponent implements OnInit {
 
   yesBadge = 'yes';
   noBadge  = 'no';
+ 
   constructor(private mannedVisitorMangementService:MannedVisitorMangementService) { }
 
   ngOnInit() {
    this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
+  let isActive = this.mannedVisitorMangementService.getPrintBadgeState()
+    if(isActive == 'yes'){
+      this.yesBadge = 'yes'
+      this.noBadge  = 'no';
+    }else{
+      this.yesBadge = 'no'
+      this.noBadge  = 'yes';
+    }
   }
 
   printBadge(value){

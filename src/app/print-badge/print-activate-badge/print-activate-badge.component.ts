@@ -20,7 +20,8 @@ export class PrintActivateBadgeComponent implements OnInit {
   isPrintAssignBadge: boolean = false;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService) { }
 
-  ngOnInit() {                    
+  ngOnInit() {  
+    this.mannedVisitorMangementService.setPrintBadgeState('yes')                  
   }
 
   printBadge(value){
@@ -47,6 +48,7 @@ export class PrintActivateBadgeComponent implements OnInit {
     }
   }
   printBadgeAssign(value){
+    this.mannedVisitorMangementService.setPrintBadgeState(value)
     if(value  === 'yes'){
       this.yesBadgeAssign = value
       this.noBadgeAssign = 'no'

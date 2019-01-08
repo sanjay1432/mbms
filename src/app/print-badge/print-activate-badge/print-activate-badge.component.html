@@ -74,7 +74,7 @@
     <app-print-label *ngIf='isPrintLabel'></app-print-label>
     <app-print-badge *ngIf='isPrintBadge'></app-print-badge>
     <app-print-assign-badge *ngIf='isPrintAssignBadge' (cancel)="onCancel($event)"></app-print-assign-badge>
-    <button type="submit" [routerLink]="['/printbadge']" class=" btn next" id="host">Finish</button>
+    <button type="submit" [routerLink]="['/printbadge']" class=" btn next" id="host" *ngIf='!isPrintAssignBadge'>Cancel</button>
   </div>
  
 </div>
