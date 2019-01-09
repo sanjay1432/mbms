@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MannedVisitorMangementService } from '../services/manned-visitor-mangement.service';
+import { PrinterService } from '../services/printer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule}  from '@angular/material';
@@ -43,7 +44,7 @@ import {MatIconModule} from '@angular/material/icon';
   ],
   declarations: [PrintActivateBadgeComponent, PrintLabelComponent, PrintBadgeComponent, PrintAssignBadgeComponent, BatchPrintComponent],
   providers   : [
-    MannedVisitorMangementService
+    MannedVisitorMangementService,PrinterService
   ]
 })
 export class PrintBadgeModule { }

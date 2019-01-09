@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
+import { PrinterService } from '../../services/printer.service';
 @Component({
   selector: 'app-print-badge',
   templateUrl: './print-badge.component.html',
@@ -15,9 +16,11 @@ export class PrintBadgeComponent implements OnInit {
   yesBadge = 'yes';
   noBadge  = 'no';
  
-  constructor(private mannedVisitorMangementService:MannedVisitorMangementService) { }
+  constructor(private mannedVisitorMangementService:MannedVisitorMangementService, private printService: PrinterService) { }
 
   ngOnInit() {
+    console.log('Printer List!!!!!!!!!!')
+    console.log(this.printService.getPrinters());
    this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
   let isActive = this.mannedVisitorMangementService.getPrintBadgeState()
     if(isActive == 'yes'){
