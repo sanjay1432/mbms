@@ -27,9 +27,8 @@ export class PrintAssignBadgeComponent implements OnInit {
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private mannedVisitorMangementService:MannedVisitorMangementService,private fb: FormBuilder) {
 
     iconRegistry.addSvgIcon(
-      'thumbs-up',
-      sanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/assign-activate-badge-icon.svg'));
-
+      'calendar',
+      sanitizer.bypassSecurityTrustResourceUrl('../../../assets/icons/calendar-icon.svg'));
   }
 
   ngOnInit() {

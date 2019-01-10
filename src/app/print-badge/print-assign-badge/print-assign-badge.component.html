@@ -35,7 +35,7 @@
           <input matInput [matDatepicker]="picker31" formControlName="startDate" class="form-control form-control-lg startDate"
             style="border-right:0;     background: white;" [disabled]='disabled'>
           <mat-datepicker-toggle matSuffix [for]="picker31" class="input-field">
-            <!-- <mat-icon matDatepickerToggleIcon svgIcon="thumbs-up"></mat-icon> -->
+            <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
           </mat-datepicker-toggle>
           <mat-datepicker #picker31></mat-datepicker>
         </div>
@@ -44,11 +44,10 @@
           <input [ngxTimepicker]="toggleIcon31" [disableClick]="true" class="form-control form-control-lg"
             formControlName="startTime" style="border-right:0;    background: white;" [disabled]='disabled'>
           <ngx-material-timepicker-toggle [for]="toggleIcon31" class="input-field">
-            <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
+            <svg xmlns="../../../assets/icons/time-icon.svg" viewBox="0 0 30 30" width="50px" height="50px"
               ngxMaterialTimepickerToggleIcon>
               <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z" />
             </svg>
-
           </ngx-material-timepicker-toggle>
           <ngx-material-timepicker #toggleIcon31></ngx-material-timepicker>
 
@@ -64,7 +63,9 @@
         <div class="col-sm-3" style="display: flex;">
           <input matInput [matDatepicker]="picker41" formControlName="startDate" class="form-control form-control-lg startDate"
             style="border-right:0;     background: white;" [disabled]='disabled'>
-          <mat-datepicker-toggle matSuffix [for]="picker41" class="input-field"></mat-datepicker-toggle>
+          <mat-datepicker-toggle matSuffix [for]="picker41" class="input-field">
+            <mat-icon matDatepickerToggleIcon svgIcon="calendar"></mat-icon>
+          </mat-datepicker-toggle>
           <mat-datepicker #picker41></mat-datepicker>
         </div>
         <div class="col-sm-3" style="display: flex;">
