@@ -4,12 +4,15 @@ import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import * as qz from 'qz-tray';
+import { sha256 } from 'js-sha256';
+import { catchError } from 'rxjs/operators';
 // declare var qz: any;
+qz.api.setSha256Type(function(data) { return sha256(data); });
 
 
 @Injectable()
 export class PrinterService {
-  constructor() {}
+  constructor() { }
 
   errorHandler(error: any): Observable<any> {
     return throwError(error);
@@ -18,7 +21,7 @@ export class PrinterService {
   // Get list of printers connected
   getPrinters(): Observable<string[]> {
     return from(qz.websocket.connect().then(() => qz.printers.find())).pipe(
-      map((printers: string[]) => printers));
+      map((printers: string[]) => printers))
   }
     
   // Get the SPECIFIC connected printer

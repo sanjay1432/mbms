@@ -8,7 +8,7 @@ import { PrinterService } from '../../services/printer.service';
 })
 export class PrintBadgeComponent implements OnInit {
 
-  printers = ['printer1','printer2','printer3']
+  printers;
   groups = ['Contractor 1','Contractor 2','Day Visitor','Delivery Person','Long Term Visitor']
   selectedItem: any = this.groups[0];
   visitor: any;
@@ -19,8 +19,8 @@ export class PrintBadgeComponent implements OnInit {
   constructor(private mannedVisitorMangementService:MannedVisitorMangementService, private printService: PrinterService) { }
 
   ngOnInit() {
-    console.log('Printer List!!!!!!!!!!')
-    console.log(this.printService.getPrinters());
+    this.printService.getPrinters().subscribe(
+      printers => this.printers = printers)
    this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
   let isActive = this.mannedVisitorMangementService.getPrintBadgeState()
     if(isActive == 'yes'){
