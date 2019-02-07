@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  OrganizationSys:805702,
+  token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyNTE2Njg6ODA1NzAyOkVCIENoZWNrIEluL091dCBSZXNvdXJjZXMiLCJleHAiOiIxNTQ5NDczMjM0IiwiYXVkIjoiYTg2NTQ1MjYtOWM1MC00MzI3LTlhZjUtZmI3M2ZiZDY1NzI3In0.8EAtpH7OGKJ1UCfPCmEP5V52vA1VqbS6TLw-NlYUxxM',
+  APIPublicID:'a8654526-9c50-4327-9af5-fb73fbd65727',
+  SecurityType:'JWT',
+  URL: 'https://v10test.eioboard.com/eioboard/api/',
+  // relativePath: 'test/eioboard/api/'
 };
 
 /*

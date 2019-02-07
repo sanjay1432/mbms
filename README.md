@@ -25,3 +25,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+#Swagger Doc
+http://v10test.eioboard.com/eioboard/api/swagger/ui/index#
+
+ https://v10test.eioboard.com/eioboard/api/authorize
+ usrname: skumar
+ pwd: 12345
+
+ SecurityType: JWT
+ Content-Type:application/json
+ APIPublicID:a8654526-9c50-4327-9af5-fb73fbd65727

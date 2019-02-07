@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from '../users';
 import { HttpHeaders } from '@angular/common/http';
-
-
+import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs';
+import { tap, map } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Authorization': 'Bearer '+environment.token,
+    'SecurityType': environment.SecurityType,
+    'APIPublicID': environment.APIPublicID
   })
 };
 @Injectable({
@@ -17,6 +19,7 @@ const httpOptions = {
 export class WatchlistService {
   usersUrl = 'api/users';  // URL to web api
   sUser = [];
+  
   constructor(private http: HttpClient) { }
   getsimilarUser(): any {
       return this.sUser;
@@ -26,8 +29,16 @@ export class WatchlistService {
       this.sUser = user;
   }
  
+  // getUsers (): Observable<User[]> {
+  //   return this.http.get<User[]>(this.usersUrl)
+  // }
   getUsers (): Observable<User[]> {
-    return this.http.get<User[]>(this.usersUrl)
+    return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys, httpOptions).pipe(
+      tap( // Log the result or error
+        data => data,
+                error =>  error)
+      )
+    // );
   }
 
   saveUsers (user: User): Observable<User> {

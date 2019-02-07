@@ -105,6 +105,7 @@ export class WatchlistpageComponent implements OnInit {
 
   getUsersList(){
     this.watchlistService.getUsers().subscribe(user =>{
+      console.log(user)
       this.users = user
       this.dataSource = new MatTableDataSource<User>(user)
       this.dataSource.paginator = this.paginator;

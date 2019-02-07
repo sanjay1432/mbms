@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://v10test.eioboard.com/eioboard/api/",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
