@@ -8,10 +8,22 @@ import { tap, map } from 'rxjs/operators';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Bearer '+environment.token,
+    'Authorization': 'Bearer '+localStorage.getItem('token'),
     'SecurityType': environment.SecurityType,
     'APIPublicID': environment.APIPublicID
   })
+};
+var headers_object = new HttpHeaders(
+  {
+    'Content-Type':  'application/json',
+    'Authorization': 'Basic ' + btoa("skumar:12345"),
+    'SecurityType': environment.SecurityType,
+    'APIPublicID': environment.APIPublicID
+  }
+);
+
+const authhttpOptions = {
+  headers: headers_object
 };
 @Injectable({
   providedIn: 'root'
@@ -41,13 +53,17 @@ export class WatchlistService {
     // );
   }
 
+  getToken() {
+    return this.http.get('/api/authorize', authhttpOptions)
+  }
+
   saveUsers (user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, httpOptions)
+    return this.http.post<User>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys, user, httpOptions)
   }
 
   deleteUser (id: number): Observable<{}> {
     const url = `${this.usersUrl}/${id}`; 
-    return this.http.delete(url, httpOptions)
+    return this.http.delete(`/api/UserWatchList/${id}?OrganizationSys=`+environment.OrganizationSys, httpOptions)
   }
 
   updateUser (user: User): Observable<User> {

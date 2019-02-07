@@ -25,18 +25,18 @@ export class AddtowatchlistComponent implements OnInit {
     console.log(this.upload)
     this.userForm = new FormGroup({
       'id': new FormControl(''),
-      'firstName': new FormControl('', [
+      'FirstName': new FormControl('', [
         Validators.required]),
-      'lastName': new FormControl('', [
+      'LastName': new FormControl('', [
         Validators.required]),
       'image': new FormControl(''),
-      'company': new FormControl(''),
-      'comment': new FormControl(''),
+      'Company': new FormControl(''),
+      'Comment': new FormControl(''),
     });
   }
 
-  get fname() { return this.userForm.get('firstName'); }
-  get lname() { return this.userForm.get('lastName'); }
+  get fname() { return this.userForm.get('FirstName'); }
+  get lname() { return this.userForm.get('LastName'); }
   onSubmit(){
     let user  = this.userForm.value;
      if(user.image == '' && this.imageurl == ''){
@@ -81,13 +81,16 @@ export class AddtowatchlistComponent implements OnInit {
 
   checkExistUsers(user, callback){
    
-    this.watchlistService.getUsers().subscribe(users =>  { 
-    let similaruser =   users.filter(obj =>{ 
-        if(obj.firstName == user.firstName){
+    this.watchlistService.getUsers().subscribe(data =>  { 
+    let users = JSON.parse(JSON.stringify(data))
+
+    let similaruser =   users.Data.filter(obj =>{ 
+        if(obj.FirstName == user.FirstName){
            return obj;
         }
       });
       callback(similaruser);
+    
     })
   }
   onexistuser(e){

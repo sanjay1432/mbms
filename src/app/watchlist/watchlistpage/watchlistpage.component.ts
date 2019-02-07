@@ -104,8 +104,11 @@ export class WatchlistpageComponent implements OnInit {
   }
 
   getUsersList(){
-    this.watchlistService.getUsers().subscribe(user =>{
-      console.log(user)
+    this.watchlistService.getUsers().subscribe(data =>{
+      
+      let user = JSON.parse(JSON.stringify(data))
+          user = user.Data;
+          console.log(user)
       this.users = user
       this.dataSource = new MatTableDataSource<User>(user)
       this.dataSource.paginator = this.paginator;
@@ -124,7 +127,7 @@ export class WatchlistpageComponent implements OnInit {
         element.click();
   }
   onRemove(id){
-    var removeIndex = this.users.map(function(user) { return user.id; })
+    var removeIndex = this.users.map(function(user) { return user.UserWatchListSys; })
                        .indexOf(id);
                       this.users.splice(removeIndex, 1)
     let element:HTMLElement = document.getElementById('closeDel') as HTMLElement;
