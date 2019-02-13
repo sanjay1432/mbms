@@ -4,19 +4,19 @@
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
   <div class="row">
     <div class="col-sm -6">
-      <input class="form-control form-control-lg disbale" type="text" placeholder="First Name" formControlName="firstName" required>
+      <input class="form-control form-control-lg disbale" type="text" placeholder="First Name" formControlName="FirstName" required>
     </div>
     <div class="col-sm-6">
-      <input class="form-control form-control-lg disbale" type="text" placeholder="Last Name" formControlName="lastName" required>
+      <input class="form-control form-control-lg disbale" type="text" placeholder="Last Name" formControlName="LastName" required>
     </div>
 
 
     <div class="col-sm-12">
-      <input class="form-control form-control-lg disbale" type="text" placeholder="Company (Optional)" formControlName="company">
+      <input class="form-control form-control-lg disbale" type="text" placeholder="Company (Optional)" formControlName="Company">
       
     </div>
     <div class="col-sm-12">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="comment"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"  placeholder="Comment (Optional)" formControlName="Comment"></textarea>
     </div>
     <div class="col-sm-12">
         <button type="button" class="btn btn-primary upload" (click) = "onUpload()">Upload Photo</button>

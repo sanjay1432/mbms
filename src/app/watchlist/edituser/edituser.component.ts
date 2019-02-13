@@ -12,11 +12,11 @@ export class EdituserComponent implements OnInit {
   @Output() closeModal : EventEmitter<boolean> = new EventEmitter<boolean>();
   userForm = new FormGroup({
       id: new FormControl(''),
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
+      FirstName: new FormControl(''),
+      LastName: new FormControl(''),
       image: new FormControl(''),
-      company: new FormControl(''),
-      comment: new FormControl(''),
+      Company: new FormControl(''),
+      Comment: new FormControl(''),
     });
   isloaded: boolean = false;
   upload:boolean = false;
@@ -29,12 +29,12 @@ export class EdituserComponent implements OnInit {
   ngDoCheck(){
     if(this.user && !this.isloaded){
       this.isloaded = true;
-      this.userForm.controls['id'].setValue(this.user.id);
-      this.userForm.controls['firstName'].setValue(this.user.firstName);
-      this.userForm.controls['lastName'].setValue(this.user.lastName);
+      this.userForm.controls['id'].setValue(this.user.UserWatchListSys);
+      this.userForm.controls['FirstName'].setValue(this.user.FirstName);
+      this.userForm.controls['LastName'].setValue(this.user.LastName);
       this.userForm.controls['image'].setValue(this.user.image);
-      this.userForm.controls['company'].setValue(this.user.company);
-      this.userForm.controls['comment'].setValue(this.user.comment);
+      this.userForm.controls['Company'].setValue(this.user.Company);
+      this.userForm.controls['Comment'].setValue(this.user.Comment);
     }
   }
 

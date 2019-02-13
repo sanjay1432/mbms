@@ -45,7 +45,7 @@ export class WatchlistService {
   //   return this.http.get<User[]>(this.usersUrl)
   // }
   getUsers (): Observable<User[]> {
-    return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys, httpOptions).pipe(
+    return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)
@@ -67,8 +67,9 @@ export class WatchlistService {
   }
 
   updateUser (user: User): Observable<User> {
-    httpOptions.headers =
-      httpOptions.headers.set('Authorization', 'my-new-auth-token');
-    return this.http.put<User>(this.usersUrl, user, httpOptions)
+    console.log(user)
+    // httpOptions.headers =
+    //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
+    return this.http.put<User>(`/api/UserWatchList/${user.id}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
 }
