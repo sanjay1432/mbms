@@ -8,9 +8,9 @@ import { WatchlistService } from './services/watchlist.service';
 export class AppComponent {
   title = 'app';
   constructor(private watchlistService:WatchlistService) {
-    watchlistService.getToken().subscribe(data=>{
-       let token  =  JSON.parse(JSON.stringify(data));
-      localStorage.setItem ('token', token.JWT);
-    })
+    // watchlistService.getToken().subscribe(data=>{
+    //    let token  =  JSON.parse(JSON.stringify(data));
+    //   localStorage.setItem ('token', token.JWT);
+    // })
   }
 }

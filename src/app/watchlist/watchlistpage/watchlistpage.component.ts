@@ -27,7 +27,10 @@ export class WatchlistpageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   modalImage: any;
   constructor(private watchlistService:WatchlistService,private router: Router) {
-    
+    watchlistService.getToken().subscribe(data=>{
+      let token  =  JSON.parse(JSON.stringify(data));
+     localStorage.setItem ('token', token.JWT);
+   })
    }
 
   ngOnInit() {

@@ -49,17 +49,20 @@ export class EdituserComponent implements OnInit {
     if(user.image == '' && this.imageurl == ''){
       user['image'] = 'no-image.jpg'
     }
-
+    console.log(this.imageurl)
     user['imageurl'] = this.imageurl
+    this.watchlistService.upload(this.imageurl).subscribe((data)=>{
+       console.log(data)
+    })
     let element:HTMLElement = document.getElementById('close1') as HTMLElement;
     
-    this.watchlistService.updateUser(user).subscribe((user)=>{
-      element.click();     
-      this.closeModal.emit(true)
-      this.isloaded = false;  
-      this.userForm.reset();
-     }
-    )
+    // this.watchlistService.updateUser(user).subscribe((user)=>{
+    //   element.click();     
+    //   this.closeModal.emit(true)
+    //   this.isloaded = false;  
+    //   this.userForm.reset();
+    //  }
+    // )
   }
   public files: UploadFile[] = [];
  

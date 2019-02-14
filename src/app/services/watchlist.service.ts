@@ -72,4 +72,14 @@ export class WatchlistService {
     //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
     return this.http.put<User>(`/api/UserWatchList/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
+
+  upload(file): Observable<Object> {
+    // const formData: FormData = new FormData();
+    // formData.append('avatar', file, file.name);
+    var strImage = file.replace(/^data:image\/[a-z]+;base64,/, "");
+      let d = {
+        "ImageData": strImage
+      }
+    return this.http.post(`/api/VisitorImage`, d, httpOptions);
+  }
 }
