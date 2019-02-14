@@ -1,5 +1,6 @@
 export interface User {
-    id:number;
+    UserWatchListSys:number;
+    ContactSys:number;
     image: string;
     imageurl:string,
     firstName: string;

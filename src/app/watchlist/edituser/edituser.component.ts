@@ -11,7 +11,8 @@ export class EdituserComponent implements OnInit {
   @Input() user;
   @Output() closeModal : EventEmitter<boolean> = new EventEmitter<boolean>();
   userForm = new FormGroup({
-      id: new FormControl(''),
+      ContactSys: new FormControl(''),
+      UserWatchListSys: new FormControl(''),
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
       image: new FormControl(''),
@@ -29,7 +30,8 @@ export class EdituserComponent implements OnInit {
   ngDoCheck(){
     if(this.user && !this.isloaded){
       this.isloaded = true;
-      this.userForm.controls['id'].setValue(this.user.UserWatchListSys);
+      this.userForm.controls['ContactSys'].setValue(this.user.ContactSys);
+      this.userForm.controls['UserWatchListSys'].setValue(this.user.UserWatchListSys);
       this.userForm.controls['FirstName'].setValue(this.user.FirstName);
       this.userForm.controls['LastName'].setValue(this.user.LastName);
       this.userForm.controls['image'].setValue(this.user.image);

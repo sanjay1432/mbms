@@ -288,7 +288,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   genId(users: User[]): number {
-    return users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 1;
+    return users.length > 0 ? Math.max(...users.map(user => user.ContactSys)) + 1 : 1;
   }
   genId1(visitors: Visitor[]): number {
     return visitors.length > 0 ? Math.max(...visitors.map(visitor => visitor.id)) + 1 : 1;

@@ -70,6 +70,6 @@ export class WatchlistService {
     console.log(user)
     // httpOptions.headers =
     //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
-    return this.http.put<User>(`/api/UserWatchList/${user.id}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
+    return this.http.put<User>(`/api/UserWatchList/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
 }
