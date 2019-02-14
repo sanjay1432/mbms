@@ -29,6 +29,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #Swagger Doc
 http://v10test.eioboard.com/eioboard/api/swagger/ui/index#
 
+https://docs.google.com/spreadsheets/d/1wctLMDJnix-qTv_GOKcBjHsn85StWor83B1ZUvA1qg0/edit#gid=0
+https://docs.google.com/spreadsheets/d/1gsW7hpNDFxaVqEakpowh6P7mAezIJlYUkZFffXVZ9mw/edit#gid=0
+
+https://www.lucidchart.com/documents/view/d7d14836-77ec-48e3-8a24-60d0d29d2715
  https://v10test.eioboard.com/eioboard/api/authorize
  usrname: skumar
  pwd: 12345
