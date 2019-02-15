@@ -78,8 +78,16 @@ export class WatchlistService {
     // formData.append('avatar', file, file.name);
     var strImage = file.replace(/^data:image\/[a-z]+;base64,/, "");
       let d = {
-        "ImageData": strImage
+        "ImageData": strImage,
+        "ImageName": 'test'
       }
-    return this.http.post(`/api/VisitorImage`, d, httpOptions);
+    return this.http.post(`/api/VisitorImage?OrganizationSys=`+environment.OrganizationSys, d, httpOptions);
   }
+  // public upload(image: File): Observable<Object> {
+  //   const formData = new FormData();
+
+  //   formData.append('ImageData', image);
+
+  //   return this.http.post(`/api/VisitorImage?OrganizationSys=`+environment.OrganizationSys, formData, httpOptions);
+  // }
 }
