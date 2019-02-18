@@ -48,19 +48,23 @@ export class AddtowatchlistComponent implements OnInit {
      
      let that = this;
      this.checkExistUsers(user, function(data){
-        console.log(data)
-
         if(data.length == 0){
-          that.watchlistService.saveUsers(user).subscribe(
-            user => {
-              // console.log(user)
-              let element:HTMLElement = document.getElementById('close') as HTMLElement;
-              element.click();
-              that.watchlistpageComponent.closeModalDialog()
-              
-              that.userForm.reset();
-              
-            })
+          that.watchlistService.upload(that.imageurl).subscribe((data)=>{
+            let image = JSON.parse(JSON.stringify(data))
+                user['ImageSys'] = image.Data.ImageSys
+                user['PhotoLocation'] = image.Data.PhotoLocation
+                user['SmallPhotoLocation'] =  image.Data.SmallPhotoLocation
+                  that.watchlistService.saveUsers(user).subscribe(
+                    user => {
+                      // console.log(user)
+                      let element:HTMLElement = document.getElementById('close') as HTMLElement;
+                      element.click();
+                      that.watchlistpageComponent.closeModalDialog()
+                      
+                      that.userForm.reset();
+                      
+                    })
+          })
         }else{
           // that.simlarUsers = data;
 

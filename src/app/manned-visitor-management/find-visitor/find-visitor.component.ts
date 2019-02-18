@@ -70,7 +70,10 @@ export class FindVisitorComponent implements OnInit {
     this.watchlistService.getUsers().subscribe(user =>  this.watchlistusers = user)
   }
   getVisitors(){
-    this.mannedVisitorMangementService.getVisitors().subscribe(user =>  this.visitors = user)
+    this.mannedVisitorMangementService.getVisitors().subscribe(data => { 
+      let user = JSON.parse(JSON.stringify(data))
+      console.log(user)
+      this.visitors = user.Data})
   }
 
   onSubmit() {

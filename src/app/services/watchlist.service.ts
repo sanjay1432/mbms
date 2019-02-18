@@ -79,7 +79,7 @@ export class WatchlistService {
     var strImage = file.replace(/^data:image\/[a-z]+;base64,/, "");
       let d = {
         "ImageData": strImage,
-        "ImageName": 'test'
+        "ImageName": 'test.png'
       }
     return this.http.post(`/api/VisitorImage?OrganizationSys=`+environment.OrganizationSys, d, httpOptions);
   }

@@ -57,16 +57,21 @@ export class EdituserComponent implements OnInit {
     user['imageurl'] = this.imageurl
     this.watchlistService.upload(this.imageurl).subscribe((data)=>{
        console.log(data)
+        let image = JSON.parse(JSON.stringify(data))
+        user['ImageSys'] = image.Data.ImageSys
+        user['PhotoLocation'] = image.Data.PhotoLocation
+        user['SmallPhotoLocation'] =  image.Data.SmallPhotoLocation
+        this.watchlistService.updateUser(user).subscribe((user)=>{
+        element.click();     
+        this.closeModal.emit(true)
+        this.isloaded = false;  
+        this.userForm.reset();
+      }
+      )
     })
     let element:HTMLElement = document.getElementById('close1') as HTMLElement;
     
-    // this.watchlistService.updateUser(user).subscribe((user)=>{
-    //   element.click();     
-    //   this.closeModal.emit(true)
-    //   this.isloaded = false;  
-    //   this.userForm.reset();
-    //  }
-    // )
+   
   }
   public files: UploadFile[] = [];
  

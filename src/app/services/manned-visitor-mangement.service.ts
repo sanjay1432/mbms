@@ -6,10 +6,19 @@ import { User } from '../users';
 import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment'
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     'Content-Type':  'application/json',
+//     'Authorization': 'my-auth-token'
+//   })
+// };
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'my-auth-token'
+    'Authorization': 'Bearer '+localStorage.getItem('token'),
+    'SecurityType': environment.SecurityType,
+    'APIPublicID': environment.APIPublicID
   })
 };
 @Injectable({
@@ -24,7 +33,7 @@ export class MannedVisitorMangementService {
   constructor(private http: HttpClient) { }
 
   getVisitors (): Observable<Visitor[]> {
-    return this.http.get<Visitor[]>(this.visitorsUrl)
+    return this.http.get<Visitor[]>('/api/Visitor?OrganizationSys='+environment.OrganizationSys, httpOptions)
   }
   getFinalVisitor(): Observable<any> { 
     var retrievedObject = localStorage.getItem('visitor');
