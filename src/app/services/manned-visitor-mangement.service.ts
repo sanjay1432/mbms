@@ -32,8 +32,8 @@ export class MannedVisitorMangementService {
   hostsUrl = 'api/hosts';  // URL to web api
   constructor(private http: HttpClient) { }
 
-  getVisitors (): Observable<Visitor[]> {
-    return this.http.get<Visitor[]>('/api/Visitor?OrganizationSys='+environment.OrganizationSys, httpOptions)
+  getVisitors (firstName, lastName, company): Observable<Visitor[]> {
+    return this.http.get<Visitor[]>('/api/Visitor?firstName='+firstName+'&lastName='+lastName+'&company='+company, httpOptions)
   }
   getFinalVisitor(): Observable<any> { 
     var retrievedObject = localStorage.getItem('visitor');

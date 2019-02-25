@@ -45,7 +45,7 @@ export class FindVisitorComponent implements OnInit {
 
   ngOnInit() {
     this.getWatchListUsers()
-    this.getVisitors()
+    // this.getVisitors()
   }
   
   selectTop(){
@@ -67,19 +67,22 @@ export class FindVisitorComponent implements OnInit {
   }
 
   getWatchListUsers(){
-    this.watchlistService.getUsers().subscribe(user =>  this.watchlistusers = user)
+    this.watchlistService.getUsers().subscribe(user =>  {
+      let watchlistusers = JSON.parse(JSON.stringify(user))
+      this.watchlistusers = watchlistusers.Data})
   }
-  getVisitors(){
-    this.mannedVisitorMangementService.getVisitors().subscribe(data => { 
+   getVisitors(firstName, lastName, company){
+    return this.mannedVisitorMangementService.getVisitors(firstName, lastName, company).subscribe(data => { 
       let user = JSON.parse(JSON.stringify(data))
       console.log(user)
-      this.visitors = user.Data})
+      this.visitors = user.Data.TopResults})
   }
 
-  onSubmit() {
+  async onSubmit() {
     let user = this.profileForm.value;
     let watchlist = this.watchlistusers;
-    let visitors = this.visitors;
+   
+    
     this.possibleMatchUsers = []
     this.exactMatch = false;
     if(user.firstName != '' && user.lastName === '' && user.company ===''){
@@ -104,41 +107,52 @@ export class FindVisitorComponent implements OnInit {
       this.possibleMatch = true;
       this.topResult = true;
     }
-    visitors.filter((e)=>{
-      if(e.firstName === user.firstName && e.lastName === user.lastName && e.company === user.company){
-      this.exactMatch = true;
-      this.exactMatchUser = e;
-      this.results ="Top Result(s)"
-      }
-      if(e.firstName === user.firstName || e.lastName === user.lastName || e.company === user.company){
-      this.possibleMatchFound = true;
-      console.log(e)
-      this.possibleMatchUsers.push(e);
-      }
-    })
-
-    this.possibleMatchUsers.filter((possible)=>{
-      watchlist.forEach(watchlistuser => {
-
-        if(possible.firstName === watchlistuser.firstName || possible.lastName === watchlistuser.lastName || possible.company === watchlistuser.company){
-          possible['isInWatchlist'] = true;
-          this.hasWatchlistUser = true;
-          // this.possibleUsersList.push(possible);
-          // console.log(this.possibleUsersList)
+    this.mannedVisitorMangementService.getVisitors(user.firstName, user.lastName, user.company).subscribe(data => { 
+      let VisitorUsers = JSON.parse(JSON.stringify(data))
+      this.visitors = VisitorUsers.Data.TopResults
+    
+      let visitors = this.visitors;
+      visitors.filter((e)=>{
+        if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
+        this.exactMatch = true;
+        this.exactMatchUser = e;
+        this.results ="Top Result(s)"
         }
-      });
-    })
-
-    if(!this.exactMatch && !this.possibleMatchFound){
-      this.router.navigate(['/mannedvisitormanagement/visitor'])
-
-      let visitor = {
-        profile: this.profileForm.value,
-        isPreRegistered: this.isPreRegistered
+        if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
+        this.possibleMatchFound = true;
+        console.log(e)
+        this.possibleMatchUsers.push(e);
+        }
+      })
+  
+      this.possibleMatchUsers.filter((possible)=>{
+        console.log(watchlist)
+        watchlist.forEach(watchlistuser => {
+  
+          if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
+            possible['isInWatchlist'] = true;
+            this.hasWatchlistUser = true;
+            // this.possibleUsersList.push(possible);
+            // console.log(this.possibleUsersList)
+          }
+        });
+      })
+  
+      if(!this.exactMatch && !this.possibleMatchFound){
+        this.router.navigate(['/mannedvisitormanagement/visitor'])
+  
+        let visitor = {
+          profile: this.profileForm.value,
+          isPreRegistered: this.isPreRegistered
+        }
+        this.mannedVisitorMangementService.setVisitor(visitor)
       }
-      this.mannedVisitorMangementService.setVisitor(visitor)
-    }
-    console.log(this.possibleMatchUsers)
+      console.log(this.possibleMatchUsers)
+    })
+  
+
+    // await this.getVisitors(user.firstName, user.lastName, user.company)
+   
   }
 
   onGrid(){
