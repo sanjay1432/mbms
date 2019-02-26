@@ -7,6 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
+import { tap, map } from 'rxjs/operators';
 // const httpOptions = {
 //   headers: new HttpHeaders({
 //     'Content-Type':  'application/json',
@@ -73,5 +74,22 @@ export class MannedVisitorMangementService {
   } 
   getVisitorProfile(): Observable<any> { 
       return this.visitorProfile.asObservable(); 
+  }
+
+  getQuestionProfile () {
+    return this.http.get<User[]>('/api/QuestionProfiles?OrganizationSys='+environment.OrganizationSys, httpOptions).pipe(
+      tap( // Log the result or error
+        data => data,
+                error =>  error)
+      )
+    // );
+  }
+  getQuestions (questionProfileSys, ContactSys) {
+    return this.http.get<User[]>('/api/Questions?questionProfileSys='+questionProfileSys+'&contactSys='+ContactSys, httpOptions).pipe(
+      tap( // Log the result or error
+        data => data,
+                error =>  error)
+      )
+    // );
   }
 }

@@ -71,12 +71,12 @@ export class FindVisitorComponent implements OnInit {
       let watchlistusers = JSON.parse(JSON.stringify(user))
       this.watchlistusers = watchlistusers.Data})
   }
-   getVisitors(firstName, lastName, company){
-    return this.mannedVisitorMangementService.getVisitors(firstName, lastName, company).subscribe(data => { 
-      let user = JSON.parse(JSON.stringify(data))
-      console.log(user)
-      this.visitors = user.Data.TopResults})
-  }
+  //  getVisitors(firstName, lastName, company){
+  //   return this.mannedVisitorMangementService.getVisitors(firstName, lastName, company).subscribe(data => { 
+  //     let user = JSON.parse(JSON.stringify(data))
+  //     console.log(user)
+  //     this.visitors = user.Data.TopResults})
+  // }
 
   async onSubmit() {
     let user = this.profileForm.value;
@@ -110,8 +110,7 @@ export class FindVisitorComponent implements OnInit {
     this.mannedVisitorMangementService.getVisitors(user.firstName, user.lastName, user.company).subscribe(data => { 
       let VisitorUsers = JSON.parse(JSON.stringify(data))
       this.visitors = VisitorUsers.Data.TopResults
-    
-      let visitors = this.visitors;
+      let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
       visitors.filter((e)=>{
         if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
         this.exactMatch = true;
@@ -120,20 +119,16 @@ export class FindVisitorComponent implements OnInit {
         }
         if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
         this.possibleMatchFound = true;
-        console.log(e)
         this.possibleMatchUsers.push(e);
         }
       })
   
       this.possibleMatchUsers.filter((possible)=>{
-        console.log(watchlist)
         watchlist.forEach(watchlistuser => {
   
           if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
             possible['isInWatchlist'] = true;
             this.hasWatchlistUser = true;
-            // this.possibleUsersList.push(possible);
-            // console.log(this.possibleUsersList)
           }
         });
       })
@@ -148,11 +143,7 @@ export class FindVisitorComponent implements OnInit {
         this.mannedVisitorMangementService.setVisitor(visitor)
       }
       console.log(this.possibleMatchUsers)
-    })
-  
-
-    // await this.getVisitors(user.firstName, user.lastName, user.company)
-   
+    }) 
   }
 
   onGrid(){
@@ -176,6 +167,7 @@ export class FindVisitorComponent implements OnInit {
         profile: this.profileForm.value,
         isPreRegistered: this.isPreRegistered
       }
+      console.log(visitor)
       this.mannedVisitorMangementService.setVisitor(visitor)
       }
     

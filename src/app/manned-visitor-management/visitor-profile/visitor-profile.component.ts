@@ -50,8 +50,27 @@ export class VisitorProfileComponent implements OnInit {
   ngOnInit() {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
     this.isPreRegisters = v.isPreRegistered;
+    if(v.isPreRegistered){
+      console.log(v.profile)
+      this.preRegForm.controls['email'].setValue(v.profile.EmailAddress);
+      this.preRegForm.controls['phone'].setValue(v.profile.Phone);
+      this.preRegForm.controls['startDate'].setValue(v.profile.PreRegistrationStartDate);
+      // this.preRegForm.controls['startTime'].setValue(v.profile.EmailAddress);
+      this.preRegForm.controls['endDate'].setValue(v.profile.PreRegistrationEndDate);
+      // this.preRegForm.controls['endTime'].setValue(v.profile.EmailAddress);
+    }
     this.visitor = v.profile;
     })
+  this.mannedVisitorMangementService.getQuestionProfile().subscribe(v=>{
+    console.log(v)
+    let profiles = JSON.parse(JSON.stringify(v));
+    profiles.Data.forEach(element => {
+      this.mannedVisitorMangementService.getQuestions(element.QuestionProfileSys, this.visitor.ContactSys).subscribe(f=>{
+        console.log(f)
+      })
+    });
+    
+  })
   }
 
 
