@@ -55,9 +55,9 @@ export class VisitorProfileComponent implements OnInit {
       this.preRegForm.controls['email'].setValue(v.profile.EmailAddress);
       this.preRegForm.controls['phone'].setValue(v.profile.Phone);
       this.preRegForm.controls['startDate'].setValue(v.profile.PreRegistrationStartDate);
-      // this.preRegForm.controls['startTime'].setValue(v.profile.EmailAddress);
+      this.preRegForm.controls['startTime'].setValue(this.getTime(v.profile.PreRegistrationStartDate));
       this.preRegForm.controls['endDate'].setValue(v.profile.PreRegistrationEndDate);
-      // this.preRegForm.controls['endTime'].setValue(v.profile.EmailAddress);
+      this.preRegForm.controls['endTime'].setValue(this.getTime(v.profile.PreRegistrationEndDate));
     }
     this.visitor = v.profile;
     })
@@ -73,7 +73,10 @@ export class VisitorProfileComponent implements OnInit {
   })
   }
 
-
+  getTime(newdate){
+    var date = new Date(newdate);
+    return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  }
   openImageModal(imageurl){
     console.log(imageurl)
     this.modalImage = imageurl;
