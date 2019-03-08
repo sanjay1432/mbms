@@ -35,7 +35,7 @@ https://docs.google.com/spreadsheets/d/1gsW7hpNDFxaVqEakpowh6P7mAezIJlYUkZFffXVZ
 https://www.lucidchart.com/documents/view/d7d14836-77ec-48e3-8a24-60d0d29d2715
  https://v10test.eioboard.com/eioboard/api/authorize
  usrname: skumar
- pwd: 12345
+ pwd: 12345Test
 
  SecurityType: JWT
  Content-Type:application/json

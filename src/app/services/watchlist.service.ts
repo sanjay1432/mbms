@@ -16,7 +16,7 @@ const httpOptions = {
 var headers_object = new HttpHeaders(
   {
     'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa("skumar:12345"),
+    'Authorization': 'Basic ' + btoa("skumar:12345Test"),
     'SecurityType': environment.SecurityType,
     'APIPublicID': environment.APIPublicID
   }
