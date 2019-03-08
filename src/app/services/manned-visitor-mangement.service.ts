@@ -84,8 +84,17 @@ export class MannedVisitorMangementService {
       )
     // );
   }
-  getQuestions (questionProfileSys, ContactSys) {
-    return this.http.get<User[]>('/api/Questions?questionProfileSys='+questionProfileSys+'&contactSys='+ContactSys, httpOptions).pipe(
+  getQuestions (questionProfileSys) {
+    return this.http.get<User[]>('/api/Questions/'+questionProfileSys, httpOptions).pipe(
+      tap( // Log the result or error
+        data => data,
+                error =>  error)
+      )
+    // );
+  }
+
+  getQuestionAnswers (questionProfileSys, ContactSys) {
+    return this.http.get<User[]>('/api/Questions/'+questionProfileSys+'/'+ContactSys, httpOptions).pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)

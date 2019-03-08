@@ -42,6 +42,8 @@ export class VisitorProfileComponent implements OnInit {
   // latest snapshot
   public webcamImage;
   modalImage: any;
+  questionProfiles: any;
+  selectedQP:any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -63,9 +65,14 @@ export class VisitorProfileComponent implements OnInit {
     })
   this.mannedVisitorMangementService.getQuestionProfile().subscribe(v=>{
     console.log(v)
-    let profiles = JSON.parse(JSON.stringify(v));
-    profiles.Data.forEach(element => {
-      this.mannedVisitorMangementService.getQuestions(element.QuestionProfileSys, this.visitor.ContactSys).subscribe(f=>{
+    this.questionProfiles = JSON.parse(JSON.stringify(v)).Data;
+    this.selectedQP = this.questionProfiles[0].ProfileName
+    console.log(this.questionProfiles)
+    if(this.visitor){
+    this.getProfileQuestionAnswer(this.questionProfiles[0].QuestionProfileSys, this.visitor.ContactSys)
+    }
+    this.questionProfiles.forEach(element => {
+      this.mannedVisitorMangementService.getQuestions(element.QuestionProfileSys).subscribe(f=>{
         console.log(f)
       })
     });
@@ -73,6 +80,29 @@ export class VisitorProfileComponent implements OnInit {
   })
   }
 
+  onselectProfile(e){
+    console.log(e.value)
+    let qp = this.questionProfiles.find((q)=>q.ProfileName===e.value)
+    console.log(qp)
+    console.log(this.visitor)
+    this.getProfileQuestionAnswer(qp.QuestionProfileSys, this.visitor.ContactSys)
+  }
+
+  getProfileQuestionAnswer(QuestionProfileSys, ContactSys){
+    this.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, ContactSys).subscribe(f=>{
+          let qaResponse =  JSON.parse(JSON.stringify(f)).Data
+          console.log(qaResponse)
+             if(qaResponse.length<1){
+              this.getProfileQuestions(QuestionProfileSys)
+             }
+    }) 
+  }
+  getProfileQuestions(QuestionProfileSys){
+    this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
+          let qResponse =  JSON.parse(JSON.stringify(f)).Data
+          console.log(qResponse)
+    }) 
+  }
   getTime(newdate){
     var date = new Date(newdate);
     return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();

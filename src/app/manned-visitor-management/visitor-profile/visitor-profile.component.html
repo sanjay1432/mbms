@@ -90,6 +90,12 @@
       </div>
       <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
         <h5 class="watchlist" style="padding: 1rem">Questions</h5>
+        <!-- <h5 class="watchlist" style="padding: 1rem">Profiles</h5> -->
+        <mat-select class="form-control form-control-lg" (selectionChange)="onselectProfile($event)" [(ngModel)]="selectedQP" [ngModelOptions]="{standalone: true}" style="width: 25%;">
+          <mat-option *ngFor="let profile of questionProfiles"  [value]="profile.ProfileName" >
+            {{profile.ProfileName}}
+          </mat-option>
+        </mat-select>
       </nav>
       <div class="row newBar">
         <div class="col-sm-6">
