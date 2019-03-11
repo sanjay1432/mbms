@@ -22,7 +22,7 @@ import {MatInputModule} from '@angular/material/input';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { VisitorConfirmationComponent } from './visitor-confirmation/visitor-confirmation.component';
-
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +37,7 @@ import { VisitorConfirmationComponent } from './visitor-confirmation/visitor-con
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatRadioModule,
     MatSlideToggleModule,
     NgxMaterialTimepickerModule.forRoot(),
     HttpClientInMemoryWebApiModule.forFeature(

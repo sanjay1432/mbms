@@ -86,6 +86,9 @@ input[type=date]::-webkit-inner-spin-button {
     border-radius: 0;
     padding: 10px 35px;
 }
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
 @media (min-width: 768px) {
     .modal-xl {
       width: 90%;

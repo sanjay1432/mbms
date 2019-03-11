@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { Location } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import {WebcamImage} from 'ngx-webcam';
 import { NavigationEnd } from '@angular/router';
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./visitor-profile.component.css']
 })
 export class VisitorProfileComponent implements OnInit {
+  date = new FormControl(new Date());
   isPreRegisters: boolean;
   isVegetarion:boolean;
   visitor: any;
@@ -44,6 +46,7 @@ export class VisitorProfileComponent implements OnInit {
   modalImage: any;
   questionProfiles: any;
   selectedQP:any;
+  profileQuestions: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -53,7 +56,7 @@ export class VisitorProfileComponent implements OnInit {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
     this.isPreRegisters = v.isPreRegistered;
     if(v.isPreRegistered){
-      console.log(v.profile)
+      // console.log(v.profile)
       this.preRegForm.controls['email'].setValue(v.profile.EmailAddress);
       this.preRegForm.controls['phone'].setValue(v.profile.Phone);
       this.preRegForm.controls['startDate'].setValue(v.profile.PreRegistrationStartDate);
@@ -63,44 +66,40 @@ export class VisitorProfileComponent implements OnInit {
     }
     this.visitor = v.profile;
     })
-  this.mannedVisitorMangementService.getQuestionProfile().subscribe(v=>{
-    console.log(v)
+  this.mannedVisitorMangementService.getQuestionProfile().subscribe( async v=>{
     this.questionProfiles = JSON.parse(JSON.stringify(v)).Data;
     this.selectedQP = this.questionProfiles[0].ProfileName
-    console.log(this.questionProfiles)
     if(this.visitor){
-    this.getProfileQuestionAnswer(this.questionProfiles[0].QuestionProfileSys, this.visitor.ContactSys)
+    this.getProfileQuestions(this.questionProfiles[0].QuestionProfileSys)
     }
-    this.questionProfiles.forEach(element => {
-      this.mannedVisitorMangementService.getQuestions(element.QuestionProfileSys).subscribe(f=>{
-        console.log(f)
-      })
-    });
-    
   })
   }
 
   onselectProfile(e){
-    console.log(e.value)
     let qp = this.questionProfiles.find((q)=>q.ProfileName===e.value)
-    console.log(qp)
-    console.log(this.visitor)
-    this.getProfileQuestionAnswer(qp.QuestionProfileSys, this.visitor.ContactSys)
+    this.getProfileQuestions(qp.QuestionProfileSys)
   }
 
-  getProfileQuestionAnswer(QuestionProfileSys, ContactSys){
-    this.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, ContactSys).subscribe(f=>{
-          let qaResponse =  JSON.parse(JSON.stringify(f)).Data
-          console.log(qaResponse)
-             if(qaResponse.length<1){
-              this.getProfileQuestions(QuestionProfileSys)
-             }
-    }) 
-  }
   getProfileQuestions(QuestionProfileSys){
+    let that = this
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
-          console.log(qResponse)
+           
+          that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
+            .subscribe(answers=>{
+               let qanswers = JSON.parse(JSON.stringify(answers)).Data
+               console.log(qanswers)
+               qResponse.forEach(question => {
+
+                  qanswers.filter((ans)=> {
+                    if(ans.QuestionSys === question.QuestionSys){
+                      question.Answer = ans.Answer
+                    }})
+               });
+               console.log(qResponse)
+            })
+            
+          this.profileQuestions  = qResponse
     }) 
   }
   getTime(newdate){

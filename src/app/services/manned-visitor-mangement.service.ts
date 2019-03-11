@@ -94,7 +94,8 @@ export class MannedVisitorMangementService {
   }
 
   getQuestionAnswers (questionProfileSys, ContactSys) {
-    return this.http.get<User[]>('/api/Questions/'+questionProfileSys+'/'+ContactSys, httpOptions).pipe(
+    return this.http.get('/api/Questions/'+questionProfileSys+'/'+ContactSys, httpOptions)
+    .pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)

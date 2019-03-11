@@ -97,87 +97,64 @@
           </mat-option>
         </mat-select>
       </nav>
-      <div class="row newBar">
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What visitor category does person belongs to?</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="input-group">
-            <mat-select class="form-control form-control-lg" [(ngModel)]="value" [ngModelOptions]="{standalone: true}">
-              <mat-option *ngFor="let cat of visitorCategory" [value]="cat">
-                {{cat}}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
+      <div class="row newBar"  *ngFor = "let question of profileQuestions">
+            <div class="col-sm-6" >
+                <p style="margin-top: 1rem;">{{question.QuestionText}}</p>
+              </div>
+              <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'String' || question.SettingValueTypeName === 'GuestContactToSee'">
+                  <input type="text" class="form-control form-control-lg" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
+              </div>
+              <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'ColumnCustomOptions'">
+                  <mat-select class="form-control form-control-lg" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
+                      <mat-option *ngFor="let decision of question.Decisions" [value]="decision.OptionName">
+                        {{decision.OptionName}}
+                      </mat-option>
+                    </mat-select>
+              </div>
 
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What is the purpose of visit?</p>
-        </div>
-        <div class="col-sm-6">
-          <input type="text" class="form-control form-control-lg" [(ngModel)]="purpose" [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What is visitor's favourite food?</p>
-        </div>
-        <div class="col-sm-6">
-          <input type="text" class="form-control form-control-lg" [(ngModel)]="food" [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What is visitor's email address?</p>
-        </div>
-        <div class="col-sm-6">
-          <input type="text" class="form-control form-control-lg" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
-        </div>
-
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">Is visitor non-vegetarian?</p>
-        </div>
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-primary" [ngClass]="yesClass" (click)="isVeg('yes')">YES</button>
-         
-          <button type="button" class="btn btn-primary" [ngClass]="noClass" (click)="isVeg('no')">NO</button>
-        </div>
-
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What is visitor Date of Birth?</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="input-group flex">
-            <input matInput [matDatepicker]="picker"  class="form-control form-control-lg startDate" style="border-right:0;     background: white;">
-            <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-          <p style="margin-top: 1rem;">What is visitor visiting time?</p>
-        </div>
-        <div class="col-sm-6">
-          <div class="input-group" style="display: flex">
-            <input [ngxTimepicker]="toggleIcon" [disableClick]="true"  class="form-control form-control-lg"
-              style="border-right:0;    background: white;">
-            <ngx-material-timepicker-toggle [for]="toggleIcon" class="input-field">
-              <svg xmlns="../../../assets/icons/image2vector.svg" viewBox="0 0 30 30" width="50px" height="50px"
-                ngxMaterialTimepickerToggleIcon>
-                <path d="M15,3C8.373,3,3,8.373,3,15c0,6.627,5.373,12,12,12s12-5.373,12-12C27,8.373,21.627,3,15,3z M16,16H7.995 C7.445,16,7,15.555,7,15.005v-0.011C7,14.445,7.445,14,7.995,14H14V5.995C14,5.445,14.445,5,14.995,5h0.011 C15.555,5,16,5.445,16,5.995V16z" />
-              </svg>
-              <!-- <img src="../../../assets/icons/time.png"> -->
-            </ngx-material-timepicker-toggle>
-            <ngx-material-timepicker #toggleIcon></ngx-material-timepicker>
-          </div>
-        </div>
-
-        <div class="col-sm-6">
-            <p style="margin-top: 1rem;">Make vistor profile public.</p>
-          </div>
-          <div class="col-sm-6">
-              <div class="input-group flex">
-              <mat-slide-toggle [checked]="checked" (change)="onChange($event)"  >{{profile}}</mat-slide-toggle>
-                </div>
-            </div>
+              <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'Bool'">
+                  <mat-radio-group>
+                      <mat-radio-button value="1" *ngFor="let decision of question.Decisions" [value]="decision.OptionName"> {{decision.OptionName}}</mat-radio-button>
+                      
+                    </mat-radio-group>
+              </div>
+              <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'Date'">
+                  <div class="input-group flex">
+                      <input matInput [matDatepicker]="picker" [value]="date.value" class="form-control form-control-lg startDate" style="border-right:0;     background: white;">
+                   
+                      <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </div>
+              </div>
+              <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'Picture'">
+                <div class="row">
+                  <div class="col-sm-2">
+                      <span *ngIf="visitor?.imageurl === '' && !isFile">
+                          <a href="javascript:void(0)" (click) = "openImageModal('../../../assets/icons/'+visitor?.image)"> <img src="../../../assets/icons/{{visitor?.image}}" class="rounded">
+                            </a>
+                      </span>
+            
+                      <span *ngIf="visitor?.imageurl !='' && !isFile">
+                          <a href="javascript:void(0)" (click) = "openImageModal(visitor?.imageurl)">
+                            <img src="{{visitor?.imageurl}}" class="rounded">
+                            </a>
+                      </span>
+                      <span style="margin: 0px 50px;" *ngIf='isFile'>
+                          <a href="javascript:void(0)" (click) = "openImageModal(imageurl)">
+                            <img [src]="imageurl" class="rounded">
+                            </a>
+                      </span>
+                    </div>
+                    <div class="col-sm-5">
+                      <button type="button" class="btn btn-primary upload" data-toggle="modal" data-target="#exampleModal">Upload
+                        Photo</button>
+                    </div>
+                    <div class="col-sm-5">
+                      <button type="button" class="btn btn-primary takeNew" data-toggle="modal" data-target="#takePhoto">Take New
+                        Photo</button>
+                    </div>
+                  </div>
+              </div>
       </div>
 
       <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
