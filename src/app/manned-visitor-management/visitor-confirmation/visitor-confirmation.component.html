@@ -3,32 +3,32 @@
     <h5 class="watchlist text-uppercase">Visitor Confirmation</h5>
     <div class="row" style="background-color: white; margin:0; padding:2rem; border-bottom: 2px solid rgba(236, 236, 236, 0.952);">
       <div class="col-sm-3" >
-        <img src="{{profileData?.uploadedImage}}" style="height: 11.5rem;
-             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "profileData?.uploadedImage != ''">
+        <img src="{{imageurl}}" style="height: 11.5rem;
+             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "imageurl != ''">
              <img src="../../../assets/icons/{{profileData?.image}}" style="height: 11.5rem;
-             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "profileData?.uploadedImage == ''">
+             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "imageurl == ''">
       </div>
       <!-- <div class="col-sm-3" >
          
         </div> -->
       <div class="col-sm-9">
         <div class="watchlist text-uppercase" style="display: flex">
-          <h2 style="font-weight: bold"> {{visitor?.firstName}} {{visitor?.lastName}}</h2> &nbsp;<p style="color: springgreen;margin-top: 10px;">(new
+          <h2 style="font-weight: bold"> {{visitor?.FirstName}} {{visitor?.LastName}}</h2> &nbsp;<p style="color: springgreen;margin-top: 10px;">(new
             visitor)</p>
         </div>
         <div class="watchlist " style="display: flex;font-style: italic;font-weight: bold">
-          <h5 class="text-uppercase"> {{visitor?.company}}</h5> &nbsp;<h5> Company</h5>
+          <h5 class="text-uppercase"> {{visitor?.Company}}</h5> &nbsp;<h5> Company</h5>
         </div>
         <br />
-        <div class="row">
+        <div class="row" *ngFor = "let profileQuestion of profileData">
           <div class="col-sm-6">
-            <p>Visitor Category</p>
+            <p>{{profileQuestion.QuestionText}}</p>
           </div>
           <div class="col-sm-6">
-            <p>{{profileData?.category}}</p>
+            <p>{{profileQuestion.Answer}}</p>
           </div>
 
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <p>Purpose of Visit</p>
           </div>
           <div class="col-sm-6">
@@ -62,7 +62,7 @@
           </div>
           <div class="col-sm-6">
             <p>6</p>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -77,7 +77,7 @@
         <p>Company host for this visit</p>
       </div>
       <div class="col-sm">
-        <p>{{host?.firstName}} {{host?.lastName}}</p>
+        <p>{{host?.ContactName}}</p>
       </div>
     </div>
 

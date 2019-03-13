@@ -22,19 +22,19 @@
         margin-bottom: 20px;
         cursor: pointer;
     "
-        [ngStyle]="{'border-right': '6px solid'+host.status}"
+        [ngStyle]="{'border-right': '6px solid #'+host.ColorCode}"
         (click) = "onSelectHost(host)"
         >
         <div class="col-sm-3">
-          <img src="../../../assets/icons/{{host.image}}" class="rounded"  [ngStyle]="{'border': 'thin solid'+host.status}">
+          <img src="https://v10test.eioboard.com/eioboard/{{host.PhotoLocation}}" class="rounded"  [ngStyle]="{'border': 'thin solid #'+host.ColorCode}">
         </div>
         <div class="col-sm-7">
-          <p class="title">{{host.firstName}} {{host.lastName}}</p>
+          <p class="title">{{host.ContactName}}</p>
         </div>
-        <div class="col-sm-1" style="margin-top: 21px;">
+        <!-- <div class="col-sm-1" style="margin-top: 21px;">
             <ng-template #tipContent> <p style="font-size: 12px">Email: {{host.email}} </p><br/> Gender:  {{host.gender}}</ng-template>
             <a href = "javascript:void(0)" [ngbTooltip]="tipContent" tooltipClass="my-custom-class">&#9432;</a>  
-        </div>
+        </div> -->
       </div>
       <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
    

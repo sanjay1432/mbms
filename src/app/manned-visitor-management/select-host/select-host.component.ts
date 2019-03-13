@@ -1,4 +1,4 @@
-import { Component, OnInit  , Output, EventEmitter} from '@angular/core';
+import { Component, OnInit  ,Input, Output, EventEmitter} from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 @Component({
   selector: 'app-select-host',
@@ -8,14 +8,23 @@ import { MannedVisitorMangementService } from '../../services/manned-visitor-man
 export class SelectHostComponent implements OnInit {
   hosts: any;
   @Output() host : EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() defaultValue;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService) { }
 
   ngOnInit() {
     this.getHosts()
+    console.log(this.defaultValue)
+    this.getAPiHosts(this.defaultValue)
   }
 
   getHosts(){
     this.mannedVisitorMangementService.getHosts().subscribe((hosts)=> this.hosts = hosts)
+  }
+
+  getAPiHosts(id){
+    this.mannedVisitorMangementService.getAPIHosts(id).subscribe((hosts)=> {
+      this.hosts = JSON.parse(JSON.stringify(hosts)).Data. ContactOption
+      console.log(this.hosts)})
   }
   onSelectHost(host){
    this.host.emit(host);
@@ -26,15 +35,14 @@ export class SelectHostComponent implements OnInit {
       let values = event.target.value.toString() ;
       let found =[]
       this.hosts.filter((e)=>{
-          var firstname = e.firstName.toLowerCase()
-          var lastname = e.lastName.toLowerCase()
+          var ContactName = e.ContactName.toLowerCase()
            values = values.toLowerCase()
-        if(firstname.includes(values) || lastname.includes(values)){
+        if(ContactName.includes(values)){
           found.push(e)
         }
       })
       if(!values){
-        this.getHosts()
+        this.getAPiHosts(this.defaultValue)
       }
 
       this.hosts = found; 

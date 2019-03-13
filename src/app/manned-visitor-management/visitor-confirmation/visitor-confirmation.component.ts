@@ -15,6 +15,7 @@ export class VisitorConfirmationComponent implements OnInit {
   yesClass = 'yes';
   noClass  = 'no';
   visitorProfile: any;
+  imageurl: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location:Location,
               private router: Router) { }
@@ -29,6 +30,12 @@ export class VisitorConfirmationComponent implements OnInit {
                                        {
                                          this.visitorProfile = profile
                                          this.preRegData = profile.preRegisterData,
+                                         profile.profileData.filter((q)=>{
+                                          if(q.SettingValueTypeName === "Picture"){
+                                            this.imageurl = q.Answer  
+                                          }
+                                          return q.SettingValueTypeName !== 'Picture';
+                                         })
                                          this.profileData = profile.profileData
                                          this.host = profile.host
                                          this.visitor = profile.visitor

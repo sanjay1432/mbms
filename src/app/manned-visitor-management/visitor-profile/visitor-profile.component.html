@@ -85,7 +85,7 @@
         <div class="col-sm">
           <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="!hostSelected">Select
             Host</button>
-          <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.firstName}} {{host.lastName}}</button>
+          <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.ContactName}}</button>
         </div>
       </div>
       <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
@@ -113,8 +113,8 @@
               </div>
 
               <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'Bool'">
-                  <mat-radio-group>
-                      <mat-radio-button value="1" *ngFor="let decision of question.Decisions" [value]="decision.OptionName"> {{decision.OptionName}}</mat-radio-button>
+                  <mat-radio-group class="form-control form-control-lg" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
+                      <mat-radio-button  *ngFor="let decision of question.Decisions" [value]="decision.OptionName" > {{decision.OptionName}}</mat-radio-button>
                       
                     </mat-radio-group>
               </div>
@@ -128,7 +128,7 @@
               </div>
               <div class="col-sm-6" *ngIf = "question.SettingValueTypeName === 'Picture'">
                 <div class="row">
-                  <div class="col-sm-2">
+                  <div class="col-sm-4">
                       <span *ngIf="visitor?.imageurl === '' && !isFile">
                           <a href="javascript:void(0)" (click) = "openImageModal('../../../assets/icons/'+visitor?.image)"> <img src="../../../assets/icons/{{visitor?.image}}" class="rounded">
                             </a>
@@ -145,11 +145,11 @@
                             </a>
                       </span>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                       <button type="button" class="btn btn-primary upload" data-toggle="modal" data-target="#exampleModal">Upload
                         Photo</button>
                     </div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                       <button type="button" class="btn btn-primary takeNew" data-toggle="modal" data-target="#takePhoto">Take New
                         Photo</button>
                     </div>
@@ -241,7 +241,7 @@
   <div class="modal-dialog modal-xl" role="document" style="    margin-top: 5%;">
     <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
       <div style="padding:2rem">
-        <app-select-host (host)="onSelectHost($event)"></app-select-host>
+        <app-select-host (host)="onSelectHost($event)" [defaultValue]="defaultValue" *ngIf = "defaultValue"></app-select-host>
       </div>
       <button id="closeed" data-dismiss="modal" style="display:none"></button>
     </div>

@@ -47,6 +47,7 @@ export class VisitorProfileComponent implements OnInit {
   questionProfiles: any;
   selectedQP:any;
   profileQuestions: any;
+  defaultValue: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -84,7 +85,8 @@ export class VisitorProfileComponent implements OnInit {
     let that = this
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
-           
+          console.log(qResponse[0].DefaultValue)
+          that.defaultValue = qResponse[0].DefaultValue
           that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
             .subscribe(answers=>{
                let qanswers = JSON.parse(JSON.stringify(answers)).Data
@@ -129,8 +131,9 @@ export class VisitorProfileComponent implements OnInit {
     }
   }
   onSelectHost(host){
+    console.log(host)
     this.host = host;
-    if(host.hasOwnProperty('id')){
+    if(host.hasOwnProperty('ContactName')){
       this.hostSelected = true;
       let element:HTMLElement = document.getElementById('closeed') as HTMLElement;
       element.click();
@@ -252,21 +255,19 @@ export class VisitorProfileComponent implements OnInit {
 
 
   onSubmit(){
+    this.profileQuestions.filter((q)=>{
+      if(q.SettingValueTypeName === "Picture"){
+        q.Answer =  this.imageurl
+      }
+    })
+
     let visitorProfile = {
       preRegisterData:this.preRegForm.value,
-      profileData:{
-        category: this.value,
-        food: this.food,
-        purpose:this.purpose,
-        email: this.email,
-        veg:this.isVegetarion,
-        image: this.visitor?this.visitor.image:'',
-        uploadedImage: this.imageurl?this.imageurl:this.webcamImage
-      },
+      profileData:this.profileQuestions,
       host: this.host,
       visitor: this.visitor
     }
-
+    console.log(visitorProfile)
     this.mannedVisitorMangementService.setVisitorProfile(visitorProfile)
     this.route.navigate(['/mannedvisitormanagement/visitor-confirmation'])
   }

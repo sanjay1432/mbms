@@ -57,6 +57,9 @@ export class MannedVisitorMangementService {
     return this.http.get<Host[]>(this.hostsUrl)
   }
 
+  getAPIHosts (id){
+    return this.http.get('/api/Host/'+id, httpOptions)
+  }
   saveVisitors (visitor: Visitor): Observable<Visitor> {
     return this.http.post<Visitor>(this.visitorsUrl, visitor, httpOptions)
   }
