@@ -157,7 +157,7 @@ export class FindVisitorComponent implements OnInit {
 
 
   onNext(){
-    if(this.hasWatchlistUser){
+    if(this.visitorToSave.isInWatchlist){
       let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
       element.click();
     }else{

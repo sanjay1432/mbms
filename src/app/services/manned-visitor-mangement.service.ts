@@ -8,12 +8,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
 import { tap, map } from 'rxjs/operators';
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type':  'application/json',
-//     'Authorization': 'my-auth-token'
-//   })
-// };
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -63,7 +57,12 @@ export class MannedVisitorMangementService {
   saveVisitors (visitor: Visitor): Observable<Visitor> {
     return this.http.post<Visitor>(this.visitorsUrl, visitor, httpOptions)
   }
-
+  saveAPIVisitors (visitor){
+    return this.http.post('/api/VisitorSignIn', visitor, httpOptions)
+  }
+  updateAPIVisitors (visitor, ContactSys){
+    return this.http.put('/api/VisitorSignIn/'+ContactSys, visitor, httpOptions)
+  }
   setVisitor(visitor: Object) { 
     this.visitor.next(visitor); 
   } 
@@ -93,7 +92,6 @@ export class MannedVisitorMangementService {
         data => data,
                 error =>  error)
       )
-    // );
   }
 
   getQuestionAnswers (questionProfileSys, ContactSys) {
@@ -103,6 +101,5 @@ export class MannedVisitorMangementService {
         data => data,
                 error =>  error)
       )
-    // );
   }
 }

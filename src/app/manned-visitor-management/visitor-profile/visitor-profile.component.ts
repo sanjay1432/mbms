@@ -100,7 +100,7 @@ export class VisitorProfileComponent implements OnInit {
                });
                console.log(qResponse)
             })
-            
+            qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
           this.profileQuestions  = qResponse
     }) 
   }
@@ -265,7 +265,8 @@ export class VisitorProfileComponent implements OnInit {
       preRegisterData:this.preRegForm.value,
       profileData:this.profileQuestions,
       host: this.host,
-      visitor: this.visitor
+      visitor: this.visitor,
+      isPreRegisters:this.isPreRegisters
     }
     console.log(visitorProfile)
     this.mannedVisitorMangementService.setVisitorProfile(visitorProfile)

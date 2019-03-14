@@ -41,20 +41,20 @@ export class WatchlistService {
       this.sUser = user;
   }
  
-  // getUsers (): Observable<User[]> {
-  //   return this.http.get<User[]>(this.usersUrl)
-  // }
   getUsers (): Observable<User[]> {
     return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)
       )
-    // );
   }
 
   getToken() {
-    return this.http.get('/api/authorize', authhttpOptions)
+    return this.http.get('/api/authorize', authhttpOptions).subscribe((data)=>{
+      var tokens = JSON.parse(JSON.stringify(data))
+      localStorage.setItem ('token', tokens.JWT);
+      localStorage.setItem ('refresh-token', tokens.Refresh);
+    })
   }
 
   saveUsers (user: User): Observable<User> {
@@ -67,15 +67,11 @@ export class WatchlistService {
   }
 
   updateUser (user: User): Observable<User> {
-    console.log(user)
-    // httpOptions.headers =
-    //   httpOptions.headers.set('Authorization', 'my-new-auth-token');
     return this.http.put<User>(`/api/UserWatchList/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
 
   upload(file): Observable<Object> {
-    // const formData: FormData = new FormData();
-    // formData.append('avatar', file, file.name);
+  
     var strImage = file.replace(/^data:image\/[a-z]+;base64,/, "");
       let d = {
         "ImageData": strImage,
@@ -83,11 +79,4 @@ export class WatchlistService {
       }
     return this.http.post(`/api/VisitorImage?OrganizationSys=`+environment.OrganizationSys, d, httpOptions);
   }
-  // public upload(image: File): Observable<Object> {
-  //   const formData = new FormData();
-
-  //   formData.append('ImageData', image);
-
-  //   return this.http.post(`/api/VisitorImage?OrganizationSys=`+environment.OrganizationSys, formData, httpOptions);
-  // }
 }
