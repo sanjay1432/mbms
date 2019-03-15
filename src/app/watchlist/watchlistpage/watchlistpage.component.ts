@@ -19,7 +19,7 @@ export class WatchlistpageComponent implements OnInit {
   user: any;
   deletedID: any;
   values: string;
-  
+  loading = false;
   displayedColumns: string[] = ['image','firstName', 'lastName', 'company', 'comment','edit','remove'];
   dataSource = new MatTableDataSource();
 
@@ -27,13 +27,16 @@ export class WatchlistpageComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   modalImage: any;
   constructor(private watchlistService:WatchlistService,private router: Router) {
-  //   watchlistService.getToken().subscribe(data=>{
+    
+  //.subscribe(data=>{
   //     let token  =  JSON.parse(JSON.stringify(data));
   //    localStorage.setItem ('token', token.JWT);
   //  })
    }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loading = true;
+    await this.watchlistService.getToken()
     this.getUsersList()
     
   }
@@ -116,6 +119,7 @@ export class WatchlistpageComponent implements OnInit {
       this.dataSource = new MatTableDataSource<User>(user)
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loading = false;
     }
     )
   }

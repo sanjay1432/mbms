@@ -13,7 +13,7 @@ import { WatchlistService } from '../services/watchlist.service';
 import { PossibleMatchComponent } from './possible-match/possible-match.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import {MatTableModule} from '@angular/material/table';
-import { MatPaginatorModule, MatSortModule} from '@angular/material';
+import { MatPaginatorModule, MatSortModule, MatProgressSpinnerModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -25,7 +25,7 @@ import { MatPaginatorModule, MatSortModule} from '@angular/material';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-   
+    MatProgressSpinnerModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {
       dataEncapsulation: false,
