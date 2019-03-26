@@ -36,8 +36,10 @@ export class WatchlistpageComponent implements OnInit {
 
   async ngOnInit() {
     this.loading = true;
-    await this.watchlistService.getToken()
-    this.getUsersList()
+    setTimeout(() => {
+        this.getUsersList()
+    }, 1000);
+    
     
   }
   openImageModal(imageurl){

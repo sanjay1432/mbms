@@ -5,7 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment'
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
-const httpOptions = {
+let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
     'Authorization': 'Bearer '+localStorage.getItem('token'),
@@ -42,6 +42,14 @@ export class WatchlistService {
   }
  
   getUsers (): Observable<User[]> {
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token'),
+        'SecurityType': environment.SecurityType,
+        'APIPublicID': environment.APIPublicID
+      })
+    };
     return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
       tap( // Log the result or error
         data => data,
