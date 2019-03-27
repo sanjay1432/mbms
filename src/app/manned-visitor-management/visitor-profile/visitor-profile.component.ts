@@ -98,9 +98,10 @@ export class VisitorProfileComponent implements OnInit {
                       question.Answer = ans.Answer
                     }})
                });
-               console.log(qResponse)
+               
             })
             qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
+            console.log(qResponse)
           this.profileQuestions  = qResponse
     }) 
   }
