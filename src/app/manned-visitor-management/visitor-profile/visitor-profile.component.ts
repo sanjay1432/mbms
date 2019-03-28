@@ -48,6 +48,8 @@ export class VisitorProfileComponent implements OnInit {
   selectedQP:any;
   profileQuestions: any;
   defaultValue: any;
+  selectedQuestion: any;
+  choosedQuestionsArray: any = [];
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -273,5 +275,21 @@ export class VisitorProfileComponent implements OnInit {
     this.mannedVisitorMangementService.setVisitorProfile(visitorProfile)
     this.route.navigate(['/mannedvisitormanagement/visitor-confirmation'])
   }
+
+  onSelect(e, q){
+     let option= this.profileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
+     this.selectedQuestion = {
+       option:option,
+       questionsys:q
+     }
+      let hasAlreadyExist = this.choosedQuestionsArray.find((xxu)=>xxu.questionsys === q)
+       if(!hasAlreadyExist){
+        this.choosedQuestionsArray.push(this.selectedQuestion)
+       }else{
+        this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)
+        this.choosedQuestionsArray.push(this.selectedQuestion)
+      }
+     
+    }
 
 }
