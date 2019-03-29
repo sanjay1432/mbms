@@ -50,6 +50,8 @@ export class VisitorProfileComponent implements OnInit {
   defaultValue: any;
   selectedQuestion: any;
   choosedQuestionsArray: any = [];
+  mainDecisionQuestions: any = [];
+  allProfileQuestions: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -87,12 +89,11 @@ export class VisitorProfileComponent implements OnInit {
     let that = this
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
-          console.log(qResponse[0].DefaultValue)
           that.defaultValue = qResponse[0].DefaultValue
           that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
             .subscribe(answers=>{
                let qanswers = JSON.parse(JSON.stringify(answers)).Data
-               console.log(qanswers)
+
                qResponse.forEach(question => {
 
                   qanswers.filter((ans)=> {
@@ -100,12 +101,40 @@ export class VisitorProfileComponent implements OnInit {
                       question.Answer = ans.Answer
                     }})
                });
+               qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
+       
+
+               // this.profileQuestions  = qResponse
+               this.allProfileQuestions = qResponse
+               this.profileQuestions = qResponse.filter((question)=>question.Decisions.length<1)
+               
+               //select questions with decisions & no depency over others questions
+               qResponse.forEach(q => {
+              
+                  let exist = qResponse.find((myq)=> this.questionExists(q.QuestionSys, myq.Decisions))
+                   if(!exist && q.Decisions.length>0){   
+                     return this.mainDecisionQuestions.push(q)
+                   }
+               });
+                
+               //Check if main decision question already answered
+               this.mainDecisionQuestions.forEach(el => {
+                 console.log(el.Answer)
+                  if(el.Answer){
+                      let givenAnswer = el.Decisions.find((d)=>d.OptionName === el.Answer)
+                    this.onSelect(givenAnswer,el.QuestionSys, true)
+                  }
+               });
+               console.log(this.mainDecisionQuestions)
                
             })
-            qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
-            console.log(qResponse)
-          this.profileQuestions  = qResponse
+          
     }) 
+  }
+  questionExists(questionsys, arr) {
+    return arr.some(function(el) {
+      return el.NextQuestionSys === questionsys;
+    }); 
   }
   getTime(newdate){
     var date = new Date(newdate);
@@ -266,18 +295,21 @@ export class VisitorProfileComponent implements OnInit {
 
     let visitorProfile = {
       preRegisterData:this.preRegForm.value,
-      profileData:this.profileQuestions,
+      profileData:this.allProfileQuestions,
       host: this.host,
       visitor: this.visitor,
       isPreRegisters:this.isPreRegisters
     }
-    console.log(visitorProfile)
+   
     this.mannedVisitorMangementService.setVisitorProfile(visitorProfile)
     this.route.navigate(['/mannedvisitormanagement/visitor-confirmation'])
   }
 
-  onSelect(e, q){
-     let option= this.profileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
+  onSelect(e, q, fromMain){
+    if(fromMain){
+      this.choosedQuestionsArray = []
+    }
+     let option= this.allProfileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
      this.selectedQuestion = {
        option:option,
        questionsys:q
@@ -289,7 +321,6 @@ export class VisitorProfileComponent implements OnInit {
         this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)
         this.choosedQuestionsArray.push(this.selectedQuestion)
       }
-     
     }
 
 }

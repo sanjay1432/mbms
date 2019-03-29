@@ -97,7 +97,7 @@
           </mat-option>
         </mat-select>
       </nav>
-      <div class="row newBar"  *ngFor = "let question of profileQuestions" > 
+      <div class="row newBar"  *ngFor = "let question of profileQuestions ; let i = index" > 
               <div class="col-sm-6"  *ngIf = "question.Decisions.length<1">
                 <p style="margin-top: 1rem;">{{question.QuestionText}}</p>
               </div>
@@ -157,76 +157,49 @@
               </div>
 
               <!-- Question With Decisions -->
+              <div *ngIf = "i<1"  style="    width: 100%;
+              margin: 0px;">
+              <div  class="row "  *ngFor = "let main of mainDecisionQuestions" style=" width: 100%; margin: 0px;">
+                <div class="col-sm-6" >
+                  <p style="margin-top: 1rem;">{{main.QuestionText}}</p>
+                </div>
+                <div class="col-sm-6" *ngIf = " main.SettingValueTypeName === 'String' || main.SettingValueTypeName === 'GuestContactToSee'">
+                    <input type="text" class="form-control form-control-lg" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
+                </div>
+                <div class="col-sm-6" *ngIf = " main.SettingValueTypeName === 'ColumnCustomOptions'">
+                    <mat-select class="form-control form-control-lg"  (selectionChange) = "onSelect($event.value, main.QuestionSys, true)"[(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let decision of main.Decisions" [value]="decision">
+                          {{decision.OptionName}}
+                        </mat-option>
+                      </mat-select>
+                </div>
 
-              <div class="col-sm-6"  *ngIf = "question.Decisions.length>1 && question.SettingValueTypeSys == 122">
-                <p style="margin-top: 1rem;">{{question.QuestionText}}</p>
-              </div>
-              <div class="col-sm-6" *ngIf = "question.Decisions.length>1 && question.SettingValueTypeName === 'String' || question.SettingValueTypeName === 'GuestContactToSee' && question.SettingValueTypeSys == 122">
-                  <input type="text" class="form-control form-control-lg" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
-              </div>
-              <div class="col-sm-6" *ngIf = "question.Decisions.length>1 && question.SettingValueTypeName === 'ColumnCustomOptions' && question.SettingValueTypeSys == 122">
-                  <mat-select class="form-control form-control-lg"  (selectionChange) = "onSelect($event.value, question.QuestionSys)"[(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
-                      <mat-option *ngFor="let decision of question.Decisions" [value]="decision">
-                        {{decision.OptionName}}
-                      </mat-option>
-                    </mat-select>
-              </div>
-
-              <div class="col-sm-6" *ngIf = " question.Decisions.length>1 && question.SettingValueTypeName === 'Bool' && question.SettingValueTypeSys == 122">
-                  <mat-radio-group class="form-control form-control-lg" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}">
-                      <mat-radio-button  *ngFor="let decision of question.Decisions" [value]="decision.OptionName" > {{decision.OptionName}}</mat-radio-button>
-                      
-                    </mat-radio-group>
-              </div>
-              <div class="col-sm-6" *ngIf = " question.Decisions.length>1 && question.SettingValueTypeName === 'Date' && question.SettingValueTypeSys == 122">
-                  <div class="input-group flex">
-                      <input matInput [matDatepicker]="picker" [value]="date.value" [(ngModel)]="question.Answer" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg startDate" style="border-right:0;     background: white;">
-                   
-                      <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
-                    </div>
-              </div>
-              <div class="col-sm-6" *ngIf = " question.Decisions.length>1 && question.SettingValueTypeName === 'Picture' && question.SettingValueTypeSys == 122">
-                <div class="row">
-                  <div class="col-sm-4">
-                      <span *ngIf="visitor?.PhotoLocation === '' && !isFile">
-                          <a href="javascript:void(0)" (click) = "openImageModal('../../../assets/icons/'+visitor?.image)"> <img src="../../../assets/icons/{{visitor?.image}}" class="rounded">
-                            </a>
-                      </span>
-            
-                      <span *ngIf="visitor?.PhotoLocation !='' && !isFile">
-                          <a href="javascript:void(0)" (click) = "openImageModal('https://v10test.eioboard.com/eioboard/'+visitor.PhotoLocation)">
-                            <img src="https://v10test.eioboard.com/eioboard/{{visitor.PhotoLocation}}" class="rounded">
-                            </a>
-                      </span>
-                      <span style="margin: 0px 50px;" *ngIf='isFile'>
-                          <a href="javascript:void(0)" (click) = "openImageModal(imageurl)">
-                            <img [src]="imageurl" class="rounded">
-                            </a>
-                      </span>
-                    </div>
-                    <div class="col-sm-4">
-                      <button type="button" class="btn btn-primary upload" data-toggle="modal" data-target="#exampleModal">Upload
-                        Photo</button>
-                    </div>
-                    <div class="col-sm-4">
-                      <button type="button" class="btn btn-primary takeNew" data-toggle="modal" data-target="#takePhoto">Take New
-                        Photo</button>
-                    </div>
-                  </div>
-              </div>
-
-              <!-- Question selected -->
+                <div class="col-sm-6" *ngIf = "  main.SettingValueTypeName === 'Bool'">
+                    <mat-radio-group class="form-control form-control-lg" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
+                        <mat-radio-button  *ngFor="let decision of main.Decisions" [value]="decision.OptionName" > {{decision.OptionName}}</mat-radio-button>
+                        
+                      </mat-radio-group>
+                </div>
+                <div class="col-sm-6" *ngIf = "  main.SettingValueTypeName === 'Date'">
+                    <div class="input-group flex">
+                        <input matInput [matDatepicker]="picker" [value]="date.value" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg startDate" style="border-right:0;     background: white;">
+                    
+                        <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </div>
+                </div>
+               
+                <!-- Question selected -->
               <div  class="row "  *ngFor = "let choosedQuestion of choosedQuestionsArray" style="    width: 100%;
               margin: 0px;">
-
-                <div class="col-sm-6"  *ngIf = "choosedQuestion?.option && question.QuestionSys === choosedQuestion?.questionsys">
+   
+                <div class="col-sm-6"  *ngIf = "choosedQuestion?.option ">
                   <p style="margin-top: 1rem;">{{choosedQuestion.option.QuestionText}}</p>
                 </div>
-                <div class="col-sm-6" *ngIf = "choosedQuestion?.option && question.QuestionSys === choosedQuestion?.questionsys && choosedQuestion?.option.SettingValueTypeName === 'String' || choosedQuestion?.option.SettingValueTypeName === 'GuestContactToSee'">
+                <div class="col-sm-6" *ngIf = "choosedQuestion?.option  && choosedQuestion?.option.SettingValueTypeName === 'String' || choosedQuestion?.option.SettingValueTypeName === 'GuestContactToSee'">
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
                 </div>
-                <div class="col-sm-6" *ngIf = "choosedQuestion?.option && question.QuestionSys === choosedQuestion?.questionsys && choosedQuestion?.option.SettingValueTypeName === 'ColumnCustomOptions'">
+                <div class="col-sm-6" *ngIf = "choosedQuestion?.option  && choosedQuestion?.option.SettingValueTypeName === 'ColumnCustomOptions'">
                     <mat-select class="form-control form-control-lg" (selectionChange) = "onSelect($event.value, choosedQuestion?.option.QuestionSys)" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
                         <mat-option *ngFor="let decision of choosedQuestion?.option.Decisions" [value]="decision">
                           {{decision.OptionName}}
@@ -234,13 +207,13 @@
                       </mat-select>
                 </div>
   
-                <div class="col-sm-6" *ngIf = " choosedQuestion?.option && question.QuestionSys === choosedQuestion?.questionsys  && choosedQuestion?.option.SettingValueTypeName === 'Bool'">
-                    <mat-radio-group class="form-control form-control-lg" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
-                        <mat-radio-button  *ngFor="let decision of choosedQuestion?.option.Decisions" [value]="decision.OptionName" > {{decision.OptionName}}</mat-radio-button>
+                <div class="col-sm-6" *ngIf = " choosedQuestion?.option   && choosedQuestion?.option.SettingValueTypeName === 'Bool'">
+                    <mat-radio-group class="form-control form-control-lg"  (change) = "onSelect($event.value, choosedQuestion?.option.QuestionSys)" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
+                        <mat-radio-button  *ngFor="let decision of choosedQuestion?.option.Decisions" [value]="decision" > {{decision.OptionName}}</mat-radio-button>
                         
                       </mat-radio-group>
                 </div>
-                <div class="col-sm-6" *ngIf = " choosedQuestion?.option && question.QuestionSys === choosedQuestion?.questionsys  && choosedQuestion?.option.SettingValueTypeName === 'Date'">
+                <div class="col-sm-6" *ngIf = " choosedQuestion?.option   && choosedQuestion?.option.SettingValueTypeName === 'Date'">
                     <div class="input-group flex">
                         <input matInput [matDatepicker]="picker" [value]="date.value" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}" class="form-control form-control-lg startDate" style="border-right:0;     background: white;">
                      
@@ -250,6 +223,10 @@
                 </div>
 
               </div>
+              </div>
+            </div>
+            
+              
 
 
               <!-- <div class="col-sm-6"  *ngIf = "selectedQuestion?.option && question.QuestionSys === selectedQuestion?.questionsys">
