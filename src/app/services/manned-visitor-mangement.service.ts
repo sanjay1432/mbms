@@ -13,7 +13,8 @@ const httpOptions = {
     'Content-Type':  'application/json',
     'Authorization': 'Bearer '+localStorage.getItem('token'),
     'SecurityType': environment.SecurityType,
-    'APIPublicID': environment.APIPublicID
+    'APIPublicID': environment.APIPublicID,
+    'RefreshToken': localStorage.getItem('refresh-token')
   })
 };
 @Injectable({

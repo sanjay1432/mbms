@@ -61,7 +61,7 @@ export class VisitorProfileComponent implements OnInit {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
     this.isPreRegisters = v.isPreRegistered;
     if(v.isPreRegistered){
-      // console.log(v.profile)
+  
       this.preRegForm.controls['email'].setValue(v.profile.EmailAddress);
       this.preRegForm.controls['phone'].setValue(v.profile.Phone);
       this.preRegForm.controls['startDate'].setValue(v.profile.PreRegistrationStartDate);
@@ -87,6 +87,8 @@ export class VisitorProfileComponent implements OnInit {
 
   getProfileQuestions(QuestionProfileSys){
     let that = this
+    this.mainDecisionQuestions = []
+    this.allProfileQuestions =[]
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
           that.defaultValue = qResponse[0].DefaultValue
@@ -119,13 +121,13 @@ export class VisitorProfileComponent implements OnInit {
                 
                //Check if main decision question already answered
                this.mainDecisionQuestions.forEach(el => {
-                 console.log(el.Answer)
+   
                   if(el.Answer){
                       let givenAnswer = el.Decisions.find((d)=>d.OptionName === el.Answer)
                     this.onSelect(givenAnswer,el.QuestionSys, true)
                   }
                });
-               console.log(this.mainDecisionQuestions)
+
                
             })
           
@@ -141,7 +143,7 @@ export class VisitorProfileComponent implements OnInit {
     return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   }
   openImageModal(imageurl){
-    console.log(imageurl)
+ 
     this.modalImage = imageurl;
     let element:HTMLElement = document.getElementById('image') as HTMLElement;
         element.click();
@@ -152,7 +154,7 @@ export class VisitorProfileComponent implements OnInit {
     this.isFile = true;
   }
   onKeep(e){
-    console.log(e)
+
     if(e){
       let element:HTMLElement = document.getElementById('closeCamera') as HTMLElement;
             element.click();
@@ -163,7 +165,7 @@ export class VisitorProfileComponent implements OnInit {
     }
   }
   onSelectHost(host){
-    console.log(host)
+
     this.host = host;
     if(host.hasOwnProperty('ContactName')){
       this.hostSelected = true;
@@ -204,7 +206,7 @@ export class VisitorProfileComponent implements OnInit {
   }
 
   onSelectCategory(c){
-    console.log(c)
+   
       this.category = c
   }
   public files: UploadFile[] = [];
@@ -220,14 +222,14 @@ export class VisitorProfileComponent implements OnInit {
         fileEntry.file((file: File) => {
  
           // Here you can access the real file
-          console.log(droppedFile.relativePath, file);
+          
           var reader = new FileReader();
 
           reader.readAsDataURL(file); // read file as data url
     
           reader.onload = (event:any) => { // called once readAsDataURL is completed
     
-            console.log(event)
+     
             this.imageurl = event.target.result;
             this.upload = false;
             this.isFile = true;
@@ -255,7 +257,7 @@ export class VisitorProfileComponent implements OnInit {
       } else {
         // // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-       console.log(droppedFile.relativePath, fileEntry);
+ 
       }
     }
   }else{
@@ -266,7 +268,6 @@ export class VisitorProfileComponent implements OnInit {
 
       reader.onload = (event:any) => { // called once readAsDataURL is completed
 
-        console.log(event)
         this.imageurl = event.target.result;
         this.upload = false;
         this.isFile = true;
@@ -278,11 +279,11 @@ export class VisitorProfileComponent implements OnInit {
   }
  
   public fileOver(event){
-    console.log(event);
+
   }
  
   public fileLeave(event){
-    console.log(event);
+
   }
 
 

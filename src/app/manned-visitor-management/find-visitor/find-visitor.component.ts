@@ -71,12 +71,7 @@ export class FindVisitorComponent implements OnInit {
       let watchlistusers = JSON.parse(JSON.stringify(user))
       this.watchlistusers = watchlistusers.Data})
   }
-  //  getVisitors(firstName, lastName, company){
-  //   return this.mannedVisitorMangementService.getVisitors(firstName, lastName, company).subscribe(data => { 
-  //     let user = JSON.parse(JSON.stringify(data))
-  //     console.log(user)
-  //     this.visitors = user.Data.TopResults})
-  // }
+ 
 
   async onSubmit() {
     let user = this.profileForm.value;
@@ -142,7 +137,6 @@ export class FindVisitorComponent implements OnInit {
         }
         this.mannedVisitorMangementService.setVisitor(visitor)
       }
-      console.log(this.possibleMatchUsers)
     }) 
   }
 
@@ -167,7 +161,7 @@ export class FindVisitorComponent implements OnInit {
         profile: this.profileForm.value,
         isPreRegistered: this.isPreRegistered
       }
-      console.log(visitor)
+  
       this.mannedVisitorMangementService.setVisitor(visitor)
       }
     
@@ -225,7 +219,7 @@ export class FindVisitorComponent implements OnInit {
 
 
   onAddToVisitors(newVis){
-    console.log(newVis.value)
+
     let element1:HTMLElement = document.getElementById('closeNewVis') as HTMLElement;
     element1.click();
     this.router.navigate(['/mannedvisitormanagement/visitor'])

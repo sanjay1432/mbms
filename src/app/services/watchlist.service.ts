@@ -10,13 +10,14 @@ let httpOptions = {
     'Content-Type':  'application/json',
     'Authorization': 'Bearer '+localStorage.getItem('token'),
     'SecurityType': environment.SecurityType,
-    'APIPublicID': environment.APIPublicID
+    'APIPublicID': environment.APIPublicID,
+    'RefreshToken': localStorage.getItem('refresh-token')
   })
 };
 var headers_object = new HttpHeaders(
   {
     'Content-Type':  'application/json',
-    'Authorization': 'Basic ' + btoa("skumar:12345Test"),
+    'Authorization': 'Basic ' + btoa(environment.username+':'+environment.password),
     'SecurityType': environment.SecurityType,
     'APIPublicID': environment.APIPublicID
   }
@@ -58,6 +59,8 @@ export class WatchlistService {
   }
 
   getToken() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('refresh-token');
     return this.http.get('/api/authorize', authhttpOptions).subscribe((data)=>{
       var tokens = JSON.parse(JSON.stringify(data))
       localStorage.setItem ('token', tokens.JWT);
