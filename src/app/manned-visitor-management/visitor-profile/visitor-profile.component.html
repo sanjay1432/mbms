@@ -167,7 +167,7 @@
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="col-sm-6" *ngIf = " main.SettingValueTypeName === 'ColumnCustomOptions'">
-                    <mat-select class="form-control form-control-lg"  (selectionChange) = "onSelect($event.value, main.QuestionSys, true)"[(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
+                  <mat-select class="form-control form-control-lg"  (selectionChange) = "onSelect($event.value, main.QuestionSys, true)" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
                         <mat-option *ngFor="let decision of main.Decisions" [value]="decision">
                           {{decision.OptionName}}
                         </mat-option>
@@ -197,7 +197,7 @@
                   <p style="margin-top: 1rem;">{{choosedQuestion.option.QuestionText}}</p>
                 </div>
                 <div class="col-sm-6" *ngIf = "choosedQuestion?.option  && choosedQuestion?.option.SettingValueTypeName === 'String' || choosedQuestion?.option.SettingValueTypeName === 'GuestContactToSee'">
-                    <input type="text" class="form-control form-control-lg" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
+                    <input type="text" class="form-control form-control-lg" (keyup)="onSelect(choosedQuestion?.option.Decisions[0], choosedQuestion?.option.QuestionSys)" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="col-sm-6" *ngIf = "choosedQuestion?.option  && choosedQuestion?.option.SettingValueTypeName === 'ColumnCustomOptions'">
                     <mat-select class="form-control form-control-lg" (selectionChange) = "onSelect($event.value, choosedQuestion?.option.QuestionSys)" [(ngModel)]="choosedQuestion?.option.Answer" [ngModelOptions]="{standalone: true}">
