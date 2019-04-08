@@ -51,7 +51,7 @@ export class WatchlistService {
         'APIPublicID': environment.APIPublicID
       })
     };
-    return this.http.get<User[]>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
+    return this.http.get<User[]>('/api/Watchlists?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)
@@ -69,16 +69,16 @@ export class WatchlistService {
   }
 
   saveUsers (user: User): Observable<User> {
-    return this.http.post<User>('/api/UserWatchList?OrganizationSys='+environment.OrganizationSys, user, httpOptions)
+    return this.http.post<User>('/api/Watchlists?OrganizationSys='+environment.OrganizationSys, user, httpOptions)
   }
 
   deleteUser (id: number): Observable<{}> {
     const url = `${this.usersUrl}/${id}`; 
-    return this.http.delete(`/api/UserWatchList/${id}?OrganizationSys=`+environment.OrganizationSys, httpOptions)
+    return this.http.delete(`/api/Watchlists/${id}?OrganizationSys=`+environment.OrganizationSys, httpOptions)
   }
 
   updateUser (user: User): Observable<User> {
-    return this.http.put<User>(`/api/UserWatchList/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
+    return this.http.put<User>(`/api/Watchlists/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
 
   upload(file): Observable<Object> {
