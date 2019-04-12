@@ -40,7 +40,7 @@ export class WatchlistpageComponent implements OnInit {
     setTimeout(()=>{ 
       this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-    }, 5000);
+    }, 8000);
     
   }
   openImageModal(imageurl){
@@ -119,8 +119,6 @@ export class WatchlistpageComponent implements OnInit {
 
       this.loading = false;
       this.tableUserLoaded = true
-
-      console.log('********************')
     }
     )
   }
