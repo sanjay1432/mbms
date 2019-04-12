@@ -42,11 +42,11 @@ export class WatchlistService {
       this.sUser = user;
   }
  
-  getUsers (): Observable<User[]> {
+  getUsers (token): Observable<User[]> {
     httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
-        'Authorization': 'Bearer '+localStorage.getItem('token'),
+        'Authorization': 'Bearer '+token,
         'SecurityType': environment.SecurityType,
         'APIPublicID': environment.APIPublicID
       })
@@ -61,11 +61,7 @@ export class WatchlistService {
   getToken() {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
-    return this.http.get('/api/authorize', authhttpOptions).subscribe((data)=>{
-      var tokens = JSON.parse(JSON.stringify(data))
-      localStorage.setItem ('token', tokens.JWT);
-      localStorage.setItem ('refresh-token', tokens.Refresh);
-    })
+    return this.http.get('/api/authorize', authhttpOptions)
   }
 
   saveUsers (user: User): Observable<User> {

@@ -67,7 +67,7 @@ export class FindVisitorComponent implements OnInit {
   }
 
   getWatchListUsers(){
-    this.watchlistService.getUsers().subscribe(user =>  {
+    this.watchlistService.getUsers(localStorage.getItem('token')).subscribe(user =>  {
       let watchlistusers = JSON.parse(JSON.stringify(user))
       this.watchlistusers = watchlistusers.Data})
   }

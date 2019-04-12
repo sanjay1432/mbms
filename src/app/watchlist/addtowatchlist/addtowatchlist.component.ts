@@ -85,7 +85,7 @@ export class AddtowatchlistComponent implements OnInit {
 
   checkExistUsers(user, callback){
    
-    this.watchlistService.getUsers().subscribe(data =>  { 
+    this.watchlistService.getUsers(localStorage.getItem('token')).subscribe(data =>  { 
     let users = JSON.parse(JSON.stringify(data))
 
     let similaruser =   users.Data.filter(obj =>{ 

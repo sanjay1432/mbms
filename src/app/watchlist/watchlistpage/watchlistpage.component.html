@@ -12,12 +12,24 @@
 
     </div>
   </div>
-  <div class="row>">
+  <div class="row">
+    <div class="col">
+
+    </div>
+    <div class="col">
+      <mat-spinner *ngIf = 'loading'></mat-spinner>
+     
+    </div>
+    <div class="col">
+      
+    </div>
+  </div>
+  <div class="row>" *ngIf ='tableUserLoaded'>
     <!-- <div class="container"> -->
       <button (click) = "getUsersList()" id = 'reload' style="display:none"></button>
       <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
-    <div class="mat-elevation-z8" *ngIf = '!loading'>
-        <!-- <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter"> -->
+    <div class="mat-elevation-z8">
+
         <div class="input-group mb-3 input-group-lg" style="width: 50%;">
           <input type="text" #search class="form-control"  (keyup)="applyFilter($event.target.value)"  placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
           <div class="input-group-append">
@@ -84,17 +96,7 @@
       
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div>
-      <div class="row">
-        <div class="col">
-
-        </div>
-        <div class="col">
-          <mat-spinner *ngIf = 'loading'></mat-spinner>
-        </div>
-        <div class="col">
-          
-        </div>
-      </div>
+      
       
     <!-- </div> -->
   </div>

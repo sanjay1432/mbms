@@ -14,36 +14,36 @@ import {merge, Observable, of as observableOf} from 'rxjs';
 })
 export class WatchlistpageComponent implements OnInit {
   users:any = [];
-  private focused : boolean;
+  tableUserLoaded : boolean = false;
   modalClassName;
   user: any;
   deletedID: any;
   values: string;
   loading = false;
   displayedColumns: string[] = ['image','firstName', 'lastName', 'company', 'comment','edit','remove'];
-  dataSource = new MatTableDataSource();
+  dataSource;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   modalImage: any;
   constructor(private watchlistService:WatchlistService,private router: Router) {
-    
-  //.subscribe(data=>{
-  //     let token  =  JSON.parse(JSON.stringify(data));
-  //    localStorage.setItem ('token', token.JWT);
-  //  })
+  
    }
 
-  async ngOnInit() {
-    this.loading = true;
-    setTimeout(() => {
-        this.getUsersList()
-    }, 1000);
-    
+   ngOnInit() {
+    this.watchlistService.getToken().subscribe((data)=>{
+      var tokens = JSON.parse(JSON.stringify(data))
+      localStorage.setItem ('token', tokens.JWT);
+      localStorage.setItem ('refresh-token', tokens.Refresh);
+      this.getUsersList()
+    })
+    setTimeout(()=>{ 
+      this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }, 5000);
     
   }
   openImageModal(imageurl){
-    console.log(imageurl)
     this.modalImage = imageurl;
     let element:HTMLElement = document.getElementById('image') as HTMLElement;
         element.click();
@@ -98,12 +98,10 @@ export class WatchlistpageComponent implements OnInit {
     this.modalClassName = "";
   }
   onEdit(user){
-    console.log(user)
     this.user = user;
     
     let element:HTMLElement = document.getElementById('openedit') as HTMLElement;
         element.click();
-        // this.dataSource = user;
   }
 
   getDummy(){
@@ -112,16 +110,17 @@ export class WatchlistpageComponent implements OnInit {
   }
 
   getUsersList(){
-    this.watchlistService.getUsers().subscribe(data =>{
+    this.loading = true
+    this.watchlistService.getUsers(localStorage.getItem('token')).subscribe(data =>{
       
       let user = JSON.parse(JSON.stringify(data))
-          user = user.Data;
-          console.log(user)
-      this.users = user
-      this.dataSource = new MatTableDataSource<User>(user)
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.users = user.Data
+      this.dataSource = new MatTableDataSource(user.Data)
+
       this.loading = false;
+      this.tableUserLoaded = true
+
+      console.log('********************')
     }
     )
   }

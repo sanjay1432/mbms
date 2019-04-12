@@ -48,7 +48,7 @@ export class BatchPrintComponent implements OnInit {
     this.printService.getPrinters().subscribe(
       printers => this.printers = printers)
    this.visitor =  this.mannedVisitorMangementService.getFinalVisitor()
-   this.watchlistService.getUsers().subscribe(user =>{
+   this.watchlistService.getUsers(localStorage.getItem('token')).subscribe(user =>{
      console.log(user)
      this.dataSource = new MatTableDataSource<User>(user)
    })
