@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment'
 import { tap, map } from 'rxjs/operators';
-const httpOptions = {
+let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
     'Authorization': 'Bearer '+localStorage.getItem('token'),
@@ -29,6 +29,14 @@ export class MannedVisitorMangementService {
   constructor(private http: HttpClient) { }
 
   getVisitors (firstName, lastName, company): Observable<Visitor[]> {
+    httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer '+localStorage.getItem('token'),
+        'SecurityType': environment.SecurityType,
+        'APIPublicID': environment.APIPublicID
+      })
+    };
     return this.http.get<Visitor[]>('/api/Visitor?firstName='+firstName+'&lastName='+lastName+'&company='+company, httpOptions)
   }
   getFinalVisitor(): Observable<any> { 
