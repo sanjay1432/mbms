@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   OrganizationSys:805702,
-  APIPublicID:'a8654526-9c50-4327-9af5-fb73fbd65727',
+  APIPublicID:'A5D49013-48C5-4AF0-B87B-A1C44AD7C8A0',
   SecurityType:'JWT',
   URL: 'https://v10test.eioboard.com/eioboard/api/',
   username:'skumar',
-  password:'12345Test'
+  password:'12345'
 };
 
 /*
