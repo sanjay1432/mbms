@@ -59,6 +59,7 @@ export class VisitorProfileComponent implements OnInit {
 
   ngOnInit() {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
+     console.log(v)
     this.isPreRegisters = v.isPreRegistered;
     if(v.isPreRegistered){
   
@@ -91,7 +92,9 @@ export class VisitorProfileComponent implements OnInit {
     this.allProfileQuestions =[]
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
+          console.log(qResponse)
           that.defaultValue = qResponse[0].DefaultValue
+          if(that.visitor.ContactSys){
           that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
             .subscribe(answers=>{
                let qanswers = JSON.parse(JSON.stringify(answers)).Data
@@ -130,6 +133,34 @@ export class VisitorProfileComponent implements OnInit {
 
                
             })
+
+          }else{
+              qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
+       
+
+              // this.profileQuestions  = qResponse
+              this.allProfileQuestions = qResponse
+              this.profileQuestions = qResponse.filter((question)=>question.Decisions.length<1)
+              
+              //select questions with decisions & no depency over others questions
+              qResponse.forEach(q => {
+             
+                 let exist = qResponse.find((myq)=> this.questionExists(q.QuestionSys, myq.Decisions))
+                  if(!exist && q.Decisions.length>0){   
+                    return this.mainDecisionQuestions.push(q)
+                  }
+              });
+               
+              //Check if main decision question already answered
+              this.mainDecisionQuestions.forEach(el => {
+  
+                 if(el.Answer){
+                     let givenAnswer = el.Decisions.find((d)=>d.OptionName === el.Answer)
+                   this.onSelect(givenAnswer,el.QuestionSys, true)
+                 }
+              });
+
+            }
           
     }) 
   }

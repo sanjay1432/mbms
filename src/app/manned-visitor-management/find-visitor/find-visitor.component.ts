@@ -135,6 +135,7 @@ export class FindVisitorComponent implements OnInit {
           profile: this.profileForm.value,
           isPreRegistered: this.isPreRegistered
         }
+        console.log(visitor)
         this.mannedVisitorMangementService.setVisitor(visitor)
       }
     }) 
