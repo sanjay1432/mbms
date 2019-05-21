@@ -42,7 +42,7 @@ export class WatchlistService {
       this.sUser = user;
   }
  
-  getUsers (token): Observable<User[]> {
+  getUsers (token , page): Observable<User[]> {
     httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -51,7 +51,7 @@ export class WatchlistService {
         'APIPublicID': environment.APIPublicID
       })
     };
-    return this.http.get<User[]>('/api/Watchlists?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true', httpOptions).pipe(
+    return this.http.get<User[]>('/api/Watchlists?OrganizationSys='+environment.OrganizationSys+'&FilterInfo.watchList=true&page='+page, httpOptions).pipe(
       tap( // Log the result or error
         data => data,
                 error =>  error)

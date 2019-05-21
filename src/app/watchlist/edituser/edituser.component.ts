@@ -50,6 +50,7 @@ export class EdituserComponent implements OnInit {
 
   onSubmit(){
     let user  = this.userForm.value;
+    console.log(user)
     if(user.image == '' && this.imageurl == ''){
       user['image'] = 'no-image.jpg'
     }

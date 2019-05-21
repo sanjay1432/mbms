@@ -5,6 +5,7 @@ import {MatPaginator, MatSort} from '@angular/material';
 import {MatTableDataSource} from '@angular/material';
 import { User } from '../../users';
 import {merge, Observable, of as observableOf} from 'rxjs';
+import {PageEvent} from '@angular/material';
 // import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
@@ -26,6 +27,9 @@ export class WatchlistpageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   modalImage: any;
+   // MatPaginator Output
+   pageEvent: PageEvent;
+  totalRecords: any;
   constructor(private watchlistService:WatchlistService,private router: Router) {
   
    }
@@ -35,12 +39,12 @@ export class WatchlistpageComponent implements OnInit {
       var tokens = JSON.parse(JSON.stringify(data))
       localStorage.setItem ('token', tokens.JWT);
       localStorage.setItem ('refresh-token', tokens.Refresh);
-      this.getUsersList()
+      this.getUsersList(0)
     })
-    setTimeout(()=>{ 
-      this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-    }, 8000);
+    // setTimeout(()=>{ 
+    //   this.dataSource.paginator = this.paginator;
+    //     this.dataSource.sort = this.sort;
+    // }, 8000);
     
   }
   openImageModal(imageurl){
@@ -63,7 +67,7 @@ export class WatchlistpageComponent implements OnInit {
       }
     })
     if(!this.values){
-      this.getUsersList()
+      this.getUsersList(0)
     }
     this.users = found; 
 
@@ -79,7 +83,7 @@ export class WatchlistpageComponent implements OnInit {
       }
     })
     if(!this.values){
-      this.getUsersList()
+      this.getUsersList(0)
     }
     this.users = found; 
 
@@ -91,7 +95,7 @@ export class WatchlistpageComponent implements OnInit {
     this.modalClassName = "modal-xl";
   }
   onclose(e){
-    this.getUsersList()
+    this.getUsersList(0)
     let element:HTMLElement = document.getElementById('close') as HTMLElement;
     element.click();
     this.user = null;
@@ -108,15 +112,20 @@ export class WatchlistpageComponent implements OnInit {
     let element:HTMLElement = document.getElementById('dummy') as HTMLElement;
         element.click();
   }
-
-  getUsersList(){
+  onPageChange(e){
+       console.log(e.pageIndex)
+       this.getUsersList(e.pageIndex+1)
+  }
+  getUsersList(page){
     this.loading = true
-    this.watchlistService.getUsers(localStorage.getItem('token')).subscribe(data =>{
+    this.watchlistService.getUsers(localStorage.getItem('token'), page).subscribe(data =>{
       
       let user = JSON.parse(JSON.stringify(data))
       this.users = user.Data
+      this.totalRecords = user.Metadata.Total
       this.dataSource = new MatTableDataSource(user.Data)
-
+      this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort
       this.loading = false;
       this.tableUserLoaded = true
     }
@@ -138,9 +147,10 @@ export class WatchlistpageComponent implements OnInit {
                       this.users.splice(removeIndex, 1)
     let element:HTMLElement = document.getElementById('closeDel') as HTMLElement;
     element.click();
+    console.log(id)
     this.watchlistService.deleteUser(id).subscribe(
       user => 
-      this.getUsersList()   
+      this.getUsersList(0)   
      );
   }
 
