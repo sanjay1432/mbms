@@ -1,5 +1,5 @@
 export interface User {
-    UserWatchListSys:number;
+    WatchListSys:number;
     ContactSys:number;
     image: string;
     imageurl:string,

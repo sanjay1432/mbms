@@ -13,8 +13,8 @@ import { WatchlistService } from '../services/watchlist.service';
 import { PossibleMatchComponent } from './possible-match/possible-match.component';
 import { EdituserComponent } from './edituser/edituser.component';
 import {MatTableModule} from '@angular/material/table';
-import { MatPaginatorModule, MatSortModule, MatProgressSpinnerModule} from '@angular/material';
-
+import { MatPaginatorModule, MatSortModule, MatProgressSpinnerModule, MatProgressBarModule} from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,8 +24,10 @@ import { MatPaginatorModule, MatSortModule, MatProgressSpinnerModule} from '@ang
     FileDropModule,
     MatTableModule,
     MatSortModule,
+    NgbModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {
       dataEncapsulation: false,

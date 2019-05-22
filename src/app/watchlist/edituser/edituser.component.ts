@@ -15,7 +15,7 @@ export class EdituserComponent implements OnInit {
   @Output() closeModal : EventEmitter<boolean> = new EventEmitter<boolean>();
   userForm = new FormGroup({
       ContactSys: new FormControl(''),
-      UserWatchListSys: new FormControl(''),
+      WatchListSys: new FormControl(''),
       FirstName: new FormControl(''),
       LastName: new FormControl(''),
       image: new FormControl(''),
@@ -24,7 +24,7 @@ export class EdituserComponent implements OnInit {
     });
   isloaded: boolean = false;
   upload:boolean = false;
-  imageurl: any;
+  imageurl = null;
   isFile: boolean;
   selectedupFile: any;
   constructor( private watchlistService: WatchlistService) { 
@@ -35,10 +35,10 @@ export class EdituserComponent implements OnInit {
     if(this.user && !this.isloaded){
       this.isloaded = true;
       this.userForm.controls['ContactSys'].setValue(this.user.ContactSys);
-      this.userForm.controls['UserWatchListSys'].setValue(this.user.UserWatchListSys);
+      this.userForm.controls['WatchListSys'].setValue(this.user.WatchListSys);
       this.userForm.controls['FirstName'].setValue(this.user.FirstName);
       this.userForm.controls['LastName'].setValue(this.user.LastName);
-      this.userForm.controls['image'].setValue(this.user.image);
+      this.userForm.controls['image'].setValue(this.user.PhotoLocation);
       this.userForm.controls['Company'].setValue(this.user.Company);
       this.userForm.controls['Comment'].setValue(this.user.Comment);
     }
@@ -55,21 +55,29 @@ export class EdituserComponent implements OnInit {
       user['image'] = 'no-image.jpg'
     }
     console.log(this.imageurl)
-    user['imageurl'] = this.imageurl
-    this.watchlistService.upload(this.imageurl).subscribe((data)=>{
-       console.log(data)
-        let image = JSON.parse(JSON.stringify(data))
-        user['ImageSys'] = image.Data.ImageSys
-        user['PhotoLocation'] = image.Data.PhotoLocation
-        user['SmallPhotoLocation'] =  image.Data.SmallPhotoLocation
-        this.watchlistService.updateUser(user).subscribe((user)=>{
+    if(this.imageurl){
+      user['imageurl'] = this.imageurl
+      this.watchlistService.upload(this.imageurl).subscribe((data)=>{
+        console.log(data)
+          let image = JSON.parse(JSON.stringify(data))
+          user['ImageSys'] = image.Data.ImageSys
+          user['PhotoLocation'] = image.Data.PhotoLocation
+          user['SmallPhotoLocation'] =  image.Data.SmallPhotoLocation
+          this.watchlistService.updateUser(user).subscribe((user)=>{
+          element.click();     
+          this.closeModal.emit(true)
+          this.isloaded = false;  
+          this.userForm.reset();
+        })
+      })
+    }else{
+      this.watchlistService.updateUser(user).subscribe((user)=>{
         element.click();     
         this.closeModal.emit(true)
         this.isloaded = false;  
         this.userForm.reset();
-      }
-      )
-    })
+      })
+    }
     let element:HTMLElement = document.getElementById('close1') as HTMLElement;
     
    

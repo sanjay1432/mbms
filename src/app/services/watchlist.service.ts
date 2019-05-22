@@ -74,7 +74,7 @@ export class WatchlistService {
   }
 
   updateUser (user: User): Observable<User> {
-    return this.http.put<User>(`/api/Watchlists/${user.UserWatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
+    return this.http.put<User>(`/api/Watchlists/${user.WatchListSys}?OrganizationSys=`+environment.OrganizationSys, user, httpOptions)
   }
 
   upload(file): Observable<Object> {

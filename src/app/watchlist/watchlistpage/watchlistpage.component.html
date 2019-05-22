@@ -12,30 +12,22 @@
 
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-
+  <div class="input-group mb-3 input-group-lg" style="width: 50%;">
+      <input type="text" #search class="form-control"  (keyup)="applyFilter($event.target.value)"  placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+      <div class="input-group-append">
+        <span ><button style="padding: 0;border: 0;" (click) = "onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
+      </div>
     </div>
-    <div class="col">
-      <mat-spinner *ngIf = 'loading'></mat-spinner>
-     
-    </div>
-    <div class="col">
-      
-    </div>
-  </div>
   <div class="row>" *ngIf ='tableUserLoaded'>
     <!-- <div class="container"> -->
       <button (click) = "getUsersList()" id = 'reload' style="display:none"></button>
       <button (click) = "getDummy()" id = 'dummy' style="display:none"></button>
-    <div class="mat-elevation-z8">
+    <div class="example-container mat-elevation-z8" >
 
-        <div class="input-group mb-3 input-group-lg" style="width: 50%;">
-          <input type="text" #search class="form-control"  (keyup)="applyFilter($event.target.value)"  placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <span ><button style="padding: 0;border: 0;" (click) = "onSearch(search.value)"><img src="../../../assets/icons/seach.png"></button></span>
-          </div>
-        </div>
+       
+        
+        <mat-progress-bar mode="indeterminate" *ngIf = 'loading'></mat-progress-bar>
+
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <!-- Position Column -->
             <ng-container matColumnDef="image">
@@ -72,7 +64,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="comment">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Comment </th>
-            <td mat-cell *matCellDef="let element"> {{element.Comment}} </td>
+            <td mat-cell *matCellDef="let element" style="width:20%"> {{element.Comment}} </td>
            
           </ng-container>
     
@@ -90,15 +82,26 @@
              
             </ng-container>
       
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       
-        <mat-paginator [length]=totalRecords [pageSizeOptions]="[10]" (page)="pageEvent = onPageChange($event)" showFirstLastButtons></mat-paginator>
+        <!-- <mat-paginator [length]=totalRecords [pageSizeOptions]="[10]" (page)="pageEvent = onPageChange($event)" showFirstLastButtons></mat-paginator> -->
+        
+    </div>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="totalRecords" (pageChange)="onPageChange($event)"  [(page)]="page">
+        </ngb-pagination>
+         <span>Showing {{users.length}}/10  </span> 
+         <span>  Total users: {{totalRecords}}</span>
       </div>
       
-      
     <!-- </div> -->
+  </div>
+  <div class="container6" *ngIf ='!tableUserLoaded'>
+      <p>
+          <mat-spinner color = "warn"></mat-spinner>
+      </p>
   </div>
 </div>
 

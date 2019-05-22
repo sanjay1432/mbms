@@ -23,14 +23,14 @@ export class WatchlistpageComponent implements OnInit {
   loading = false;
   displayedColumns: string[] = ['image','firstName', 'lastName', 'company', 'comment','edit','remove'];
   dataSource;
-
+  page = 1;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   modalImage: any;
    // MatPaginator Output
    pageEvent: PageEvent;
   totalRecords: any;
-  pageIndex = 0;
+  pageIndex = 1;
   constructor(private watchlistService:WatchlistService,private router: Router) {
   
    }
@@ -40,13 +40,9 @@ export class WatchlistpageComponent implements OnInit {
       var tokens = JSON.parse(JSON.stringify(data))
       localStorage.setItem ('token', tokens.JWT);
       localStorage.setItem ('refresh-token', tokens.Refresh);
-      this.getUsersList(0)
+      this.getUsersList(this.pageIndex)
     })
-    // setTimeout(()=>{ 
-    //   this.dataSource.paginator = this.paginator;
-    //     this.dataSource.sort = this.sort;
-    // }, 8000);
-    
+
   }
   openImageModal(imageurl){
     this.modalImage = imageurl;
@@ -68,7 +64,7 @@ export class WatchlistpageComponent implements OnInit {
       }
     })
     if(!this.values){
-      this.getUsersList(0)
+      this.getUsersList(this.pageIndex)
     }
     this.users = found; 
 
@@ -84,7 +80,7 @@ export class WatchlistpageComponent implements OnInit {
       }
     })
     if(!this.values){
-      this.getUsersList(0)
+      this.getUsersList(this.pageIndex)
     }
     this.users = found; 
 
@@ -96,7 +92,7 @@ export class WatchlistpageComponent implements OnInit {
     this.modalClassName = "modal-xl";
   }
   onclose(e){
-    this.getUsersList(0)
+    this.getUsersList(this.pageIndex)
     let element:HTMLElement = document.getElementById('close') as HTMLElement;
     element.click();
     this.user = null;
@@ -114,10 +110,8 @@ export class WatchlistpageComponent implements OnInit {
         element.click();
   }
   onPageChange(e){
-       if(e.pageIndex+1>this.pageIndex){
-        this.pageIndex = e.pageIndex+1;
-        this.getUsersList(e.pageIndex+1)
-       }
+      this.pageIndex = e
+      this.getUsersList(e)
   }
   getUsersList(page){
     this.loading = true
@@ -125,9 +119,10 @@ export class WatchlistpageComponent implements OnInit {
       
       let user = JSON.parse(JSON.stringify(data))
       console.log(user.Data)
-      user.Data.forEach(element => {
-        this.users.push(element)
-      });
+      this.users = user.Data
+      // user.Data.forEach(element => {
+      //   this.users.push(element)
+      // });
       
       this.totalRecords = user.Metadata.Total
       this.dataSource = new MatTableDataSource(this.users)
@@ -156,7 +151,7 @@ export class WatchlistpageComponent implements OnInit {
     element.click();
     this.watchlistService.deleteUser(id).subscribe(
       user => 
-      this.getUsersList(0)   
+      this.getUsersList(this.pageIndex)   
      );
   }
 

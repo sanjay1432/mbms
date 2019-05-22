@@ -65,3 +65,16 @@ td{
   th.mat-sort-header-sorted {
     color: black;
   }
+
+  div.container6 {
+    height: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center }
+  div.container6 p {
+    margin: 0 }
+
+    .example-container {
+        height: 35em;
+        overflow: auto;
+      }
