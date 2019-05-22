@@ -30,6 +30,7 @@ export class WatchlistpageComponent implements OnInit {
    // MatPaginator Output
    pageEvent: PageEvent;
   totalRecords: any;
+  pageIndex = 0;
   constructor(private watchlistService:WatchlistService,private router: Router) {
   
    }
@@ -113,19 +114,25 @@ export class WatchlistpageComponent implements OnInit {
         element.click();
   }
   onPageChange(e){
-       console.log(e.pageIndex)
-       this.getUsersList(e.pageIndex+1)
+       if(e.pageIndex+1>this.pageIndex){
+        this.pageIndex = e.pageIndex+1;
+        this.getUsersList(e.pageIndex+1)
+       }
   }
   getUsersList(page){
     this.loading = true
     this.watchlistService.getUsers(localStorage.getItem('token'), page).subscribe(data =>{
       
       let user = JSON.parse(JSON.stringify(data))
-      this.users = user.Data
+      console.log(user.Data)
+      user.Data.forEach(element => {
+        this.users.push(element)
+      });
+      
       this.totalRecords = user.Metadata.Total
-      this.dataSource = new MatTableDataSource(user.Data)
+      this.dataSource = new MatTableDataSource(this.users)
       this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort
+      this.dataSource.sort = this.sort
       this.loading = false;
       this.tableUserLoaded = true
     }
@@ -147,7 +154,6 @@ export class WatchlistpageComponent implements OnInit {
                       this.users.splice(removeIndex, 1)
     let element:HTMLElement = document.getElementById('closeDel') as HTMLElement;
     element.click();
-    console.log(id)
     this.watchlistService.deleteUser(id).subscribe(
       user => 
       this.getUsersList(0)   
