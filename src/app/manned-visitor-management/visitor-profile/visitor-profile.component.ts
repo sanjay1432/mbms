@@ -59,7 +59,7 @@ export class VisitorProfileComponent implements OnInit {
 
   ngOnInit() {
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
-     console.log(v)
+     console.log('Visitor &&&&',v)
     this.isPreRegisters = v.isPreRegistered;
     if(v.isPreRegistered){
   

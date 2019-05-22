@@ -2,7 +2,7 @@
 
   <form [formGroup]="preRegForm" (ngSubmit)="onSubmit()">
     <div class="container">
-      <h3 class="watchlist text-uppercase"> {{visitor?.lastName}}, {{visitor?.firstName}} | {{visitor?.company}}</h3>
+      <h3 class="watchlist text-uppercase"> {{visitor?.LastName}}, {{visitor?.FirstName}} | {{visitor?.Company}}</h3>
       <nav *ngIf="isPreRegisters" class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
         <h5 class="watchlist" style="padding: 1rem">Pre-Registeration Detail</h5>
       </nav>

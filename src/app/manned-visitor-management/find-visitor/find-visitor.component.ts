@@ -20,7 +20,7 @@ export class FindVisitorComponent implements OnInit {
   watchlistusers;
   visitors;
   exactMatch: boolean = false;
-  exactMatchUser: any;
+  exactMatchUsers: any;
   possibleMatch: boolean = false;
   possibleMatchUsers: any = [];
   exactWatchListMatch: boolean;
@@ -48,10 +48,13 @@ export class FindVisitorComponent implements OnInit {
     // this.getVisitors()
   }
   
-  selectTop(){
+  selectTop(i, user){
+    console.log(user)
+    this.hasSelecteduser = true;
+    this.visitorToSave = user
     this.topClass = "#122d51"
     this.topClasstext = "white"
-    this.selectedIndex = null
+    // this.selectedIndex = i;
   }
   preRegister(value){
     if(value  === 'yes'){
@@ -105,28 +108,42 @@ export class FindVisitorComponent implements OnInit {
     this.mannedVisitorMangementService.getVisitors(user.firstName, user.lastName, user.company).subscribe(data => { 
       let VisitorUsers = JSON.parse(JSON.stringify(data))
       this.visitors = VisitorUsers.Data.TopResults
-      let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
-      visitors.filter((e)=>{
-        if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
+      let possibleVisitor = VisitorUsers.Data.PossibleMatches
+        console.log('isPreRegistered',this.isPreRegistered)
+      let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
+          console.log('possiblePreRegVisitor',possibleVisitor)
+      // let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
+      // visitors.filter((e)=>{
+      //   if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
+      //   this.exactMatch = true;
+      //   this.exactMatchUser = e;
+      //   this.results ="Top Result(s)"
+      //   }
+      //   if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
+      //   this.possibleMatchFound = true;
+      //   this.possibleMatchUsers.push(e);
+      //   }
+      // })
+  
+      // this.possibleMatchUsers.filter((possible)=>{
+      //   watchlist.forEach(watchlistuser => {
+  
+      //     if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
+      //       possible['isInWatchlist'] = true;
+      //       this.hasWatchlistUser = true;
+      //     }
+      //   });
+      // })
+      if(this.visitors.length>0){
         this.exactMatch = true;
-        this.exactMatchUser = e;
+        this.visitorToSave = this.visitors[0]
+        this.exactMatchUsers = this.visitors;
         this.results ="Top Result(s)"
-        }
-        if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
+      }
+      if(pvisitors.length>0){
         this.possibleMatchFound = true;
-        this.possibleMatchUsers.push(e);
-        }
-      })
-  
-      this.possibleMatchUsers.filter((possible)=>{
-        watchlist.forEach(watchlistuser => {
-  
-          if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
-            possible['isInWatchlist'] = true;
-            this.hasWatchlistUser = true;
-          }
-        });
-      })
+        this.possibleMatchUsers = pvisitors;
+      }
   
       if(!this.exactMatch && !this.possibleMatchFound){
         this.router.navigate(['/mannedvisitormanagement/visitor'])
@@ -152,7 +169,7 @@ export class FindVisitorComponent implements OnInit {
 
 
   onNext(){
-    if(this.visitorToSave.isInWatchlist){
+    if(this.visitorToSave.WatchList){
       let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
       element.click();
     }else{
@@ -177,7 +194,7 @@ export class FindVisitorComponent implements OnInit {
         }
   }
   onConfirm(){
-    if(this.hasWatchlistUser){
+    if(this.visitorToSave.WatchList){
       let element:HTMLElement = document.getElementById('close') as HTMLElement;
           element.click();
           let element1:HTMLElement = document.getElementById('secondCheck') as HTMLElement;
