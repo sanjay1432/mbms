@@ -13,9 +13,9 @@ export class FindVisitorComponent implements OnInit {
   yesClass = 'yes';
   noClass  = 'no';
   profileForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    company: [''],
+    FirstName: [''],
+    LastName: [''],
+    Company: [''],
   });
   watchlistusers;
   visitors;
@@ -26,7 +26,7 @@ export class FindVisitorComponent implements OnInit {
   exactWatchListMatch: boolean;
   topResult: boolean;
   possibleUsersList: any = [];
-  possibleMatchFound: boolean;
+  possibleMatchFound: boolean = false;
   results = "Search Results";
   gridList = 'col-sm-6'
   selectedColor = 'white';
@@ -80,32 +80,32 @@ export class FindVisitorComponent implements OnInit {
     let user = this.profileForm.value;
     let watchlist = this.watchlistusers;
    
-    
+    console.log('Selected Visitor', user)
     this.possibleMatchUsers = []
     this.exactMatch = false;
-    if(user.firstName != '' && user.lastName === '' && user.company ===''){
-      this.possibleMatch = false;
-    }
-    if(user.firstName ==='' && user.company !='' && user.lastName ===''  ){
-      this.possibleMatch = false;
-    }
-    if(user.company ==='' && user.firstName ==='' && user.lastName !='' ){
-      this.possibleMatch = false;
-    }
-    if(user.firstName ==='' && user.lastName !='' && user.company !=''){
-      this.possibleMatch = true;
-    }
-    if(user.firstName !='' && user.lastName ==='' && user.company !=''){
-      this.possibleMatch = true;
-    }
-    if(user.firstName !='' && user.lastName !='' && user.company ===''){
-      this.possibleMatch = true;
-    }
-    if(user.firstName !='' && user.lastName !='' && user.company !=''){
-      this.possibleMatch = true;
-      this.topResult = true;
-    }
-    this.mannedVisitorMangementService.getVisitors(user.firstName, user.lastName, user.company).subscribe(data => { 
+    // if(user.firstName != '' && user.lastName === '' && user.company ===''){
+    //   this.possibleMatch = false;
+    // }
+    // if(user.firstName ==='' && user.company !='' && user.lastName ===''  ){
+    //   this.possibleMatch = false;
+    // }
+    // if(user.company ==='' && user.firstName ==='' && user.lastName !='' ){
+    //   this.possibleMatch = false;
+    // }
+    // if(user.firstName ==='' && user.lastName !='' && user.company !=''){
+    //   this.possibleMatch = true;
+    // }
+    // if(user.firstName !='' && user.lastName ==='' && user.company !=''){
+    //   this.possibleMatch = true;
+    // }
+    // if(user.firstName !='' && user.lastName !='' && user.company ===''){
+    //   this.possibleMatch = true;
+    // }
+    // if(user.firstName !='' && user.lastName !='' && user.company !=''){
+    //   this.possibleMatch = true;
+    //   this.topResult = true;
+    // }
+    this.mannedVisitorMangementService.getVisitors(user.FirstName, user.LastName, user.Company).subscribe(data => { 
       let VisitorUsers = JSON.parse(JSON.stringify(data))
       this.visitors = VisitorUsers.Data.TopResults
       let possibleVisitor = VisitorUsers.Data.PossibleMatches

@@ -10,14 +10,14 @@
               <label>
                 First Name:
               </label>
-              <input type="text" class="form-control form-control-lg" formControlName="firstName" >
+              <input type="text" class="form-control form-control-lg" formControlName="FirstName" >
 
             </div>
             <div class="col-sm">
               <label>
                 Last Name:
               </label>
-              <input type="text" class="form-control form-control-lg" formControlName="lastName">
+              <input type="text" class="form-control form-control-lg" formControlName="LastName">
 
             </div>
           </div>
@@ -26,7 +26,7 @@
               <label>
                 Company:
               </label>
-              <input type="text" class="form-control form-control-lg" formControlName="company">
+              <input type="text" class="form-control form-control-lg" formControlName="Company">
 
             </div>
             <div class="col-sm"></div>
@@ -121,7 +121,7 @@
             Possible Matches
           </p>
         </nav>
-        <div class="container" style="background-color: #f8f9fa75">
+        <div class="container" style="background-color: #f8f9fa75" *ngIf='possibleMatch'>
           <div class="scrollbar" id="style-13">
             <div class="row" style="margin: 0; ">
               <div [ngClass]="gridList" *ngFor="let possibleUser of possibleMatchUsers; let i= index" style="padding: 5px; background-color: white">
