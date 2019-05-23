@@ -93,19 +93,21 @@ export class VisitorProfileComponent implements OnInit {
     this.mannedVisitorMangementService.getQuestions(QuestionProfileSys).subscribe(f=>{
           let qResponse =  JSON.parse(JSON.stringify(f)).Data
           console.log(qResponse)
+          console.log(that.visitor.ContactSys)
           that.defaultValue = qResponse[0].DefaultValue
           if(that.visitor.ContactSys){
           that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
             .subscribe(answers=>{
                let qanswers = JSON.parse(JSON.stringify(answers)).Data
+               if(qanswers.length>1){
+                    qResponse.forEach(question => {
 
-               qResponse.forEach(question => {
-
-                  qanswers.filter((ans)=> {
-                    if(ans.QuestionSys === question.QuestionSys){
-                      question.Answer = ans.Answer
-                    }})
-               });
+                        qanswers.filter((ans)=> {
+                          if(ans.QuestionSys === question.QuestionSys){
+                            question.Answer = ans.Answer
+                          }})
+                    });
+              }
                qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
        
 

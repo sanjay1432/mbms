@@ -79,6 +79,16 @@
         <h5 class="watchlist" style="padding: 1rem">Visitor Host</h5>
       </nav>
       <div class="row newBar">
+          <div class="col-sm">
+            <p>Company host for this visit:</p>
+          </div>
+          <div class="col-sm">
+            <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="!hostSelected">Select
+              Host</button>
+            <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.ContactName}}</button>
+          </div>
+      </div>
+      <!-- <div class="row newBar">
         <div class="col-sm">
           <p>Company host for this visit:</p>
         </div>
@@ -87,7 +97,7 @@
             Host</button>
           <button type="button" class=" btn btn-primary host" data-toggle="modal" data-target="#selectHost" id="host" *ngIf="hostSelected">{{host.ContactName}}</button>
         </div>
-      </div>
+      </div> -->
       <nav class="navbar navbar-light bg-light" style="border-bottom: 2px solid rgba(236, 236, 236, 0.952);padding:0">
         <h5 class="watchlist" style="padding: 1rem">Questions</h5>
         <!-- <h5 class="watchlist" style="padding: 1rem">Profiles</h5> -->
@@ -98,6 +108,7 @@
         </mat-select>
       </nav>
       <div class="row newBar"  *ngFor = "let question of profileQuestions ; let i = index" > 
+          
               <div class="col-sm-6"  *ngIf = "question.Decisions.length<1">
                 <p style="margin-top: 1rem;">{{question.QuestionText}}</p>
               </div>
