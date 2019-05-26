@@ -40,6 +40,7 @@ export class VisitorConfirmationComponent implements OnInit {
                                           return q.SettingValueTypeName !== 'Picture';
                                          })
                                          this.profileData = profile.profileData
+                                         console.log(this.profileData)
                                          this.host = profile.host
                                          this.visitor = profile.visitor
                                          this.isPreRegisters = profile.isPreRegisters

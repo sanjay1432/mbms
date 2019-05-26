@@ -23,12 +23,13 @@ border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys == 0">
           <h5 class="text-uppercase"> {{visitor?.Company}}</h5> &nbsp;<h5> Company</h5>
         </div>
         <br />
-        <div class="row" *ngFor = "let profileQuestion of profileData">
-          <div class="col-sm-6" *ngIf = "profileQuestion.SettingValueTypeName != 'Picture'">
+        <div class="row" *ngFor = "let profileQuestion of profileData" >
+         <div class="col-sm-6" *ngIf = "profileQuestion.SettingValueTypeName != 'Picture' && profileQuestion.MappedColumnName != 'ToSeeContactName'">
             <p>{{profileQuestion.QuestionText}}</p>
           </div>
-          <div class="col-sm-6" *ngIf = "profileQuestion.SettingValueTypeName != 'Picture'">
-            <p>{{profileQuestion.Answer}}</p>
+          <div class="col-sm-6" *ngIf = "profileQuestion.SettingValueTypeName != 'Picture' && profileQuestion.MappedColumnName != 'ToSeeContactName'">
+           <p *ngIf ="profileQuestion.Answer.OptionName; else elseBlock">{{profileQuestion.Answer.OptionName}}</p> 
+           <ng-template #elseBlock>{{profileQuestion.Answer}}</ng-template>
           </div>
         </div>
       </div>

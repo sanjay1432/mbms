@@ -52,6 +52,8 @@ export class VisitorProfileComponent implements OnInit {
   choosedQuestionsArray: any = [];
   mainDecisionQuestions: any = [];
   allProfileQuestions: any;
+  visitorHostQuestion: any = null;
+  visitorPictureQuestion: any = null;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
@@ -71,6 +73,7 @@ export class VisitorProfileComponent implements OnInit {
       this.preRegForm.controls['endTime'].setValue(this.getTime(v.profile.PreRegistrationEndDate));
     }
     this.visitor = v.profile;
+    console.log('At visioto screen',this.visitor)
     })
   this.mannedVisitorMangementService.getQuestionProfile().subscribe( async v=>{
     this.questionProfiles = JSON.parse(JSON.stringify(v)).Data;
@@ -110,10 +113,12 @@ export class VisitorProfileComponent implements OnInit {
               }
                qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
        
-
+               this.visitorHostQuestion = qResponse.find((question)=>question.MappedColumnName === "ToSeeContactName")
+               this.visitorPictureQuestion = qResponse.find((question)=>question.MappedColumnName === "ImageSys")
+                console.log('visitorHostQuestion',this.visitorHostQuestion)
                // this.profileQuestions  = qResponse
                this.allProfileQuestions = qResponse
-               this.profileQuestions = qResponse.filter((question)=>question.Decisions.length<1)
+               this.profileQuestions = qResponse.filter((question)=> question.MappedColumnName != "ToSeeContactName" && question.MappedColumnName != "ImageSys")
                
                //select questions with decisions & no depency over others questions
                qResponse.forEach(q => {
@@ -123,7 +128,7 @@ export class VisitorProfileComponent implements OnInit {
                      return this.mainDecisionQuestions.push(q)
                    }
                });
-                
+               console.log(this.mainDecisionQuestions)
                //Check if main decision question already answered
                this.mainDecisionQuestions.forEach(el => {
    
@@ -132,6 +137,8 @@ export class VisitorProfileComponent implements OnInit {
                     this.onSelect(givenAnswer,el.QuestionSys, true)
                   }
                });
+
+               console.log(this.mainDecisionQuestions)
 
                
             })
@@ -142,7 +149,10 @@ export class VisitorProfileComponent implements OnInit {
 
               // this.profileQuestions  = qResponse
               this.allProfileQuestions = qResponse
-              this.profileQuestions = qResponse.filter((question)=>question.Decisions.length<1)
+              this.visitorHostQuestion = qResponse.find((question)=>question.MappedColumnName === "ToSeeContactName")
+               this.visitorPictureQuestion = qResponse.find((question)=>question.MappedColumnName === "ImageSys")
+                console.log('visitorHostQuestion',this.visitorHostQuestion)
+               this.profileQuestions = qResponse.filter((question)=> question.MappedColumnName != "ToSeeContactName" && question.MappedColumnName != "ImageSys")
               
               //select questions with decisions & no depency over others questions
               qResponse.forEach(q => {
@@ -340,9 +350,11 @@ export class VisitorProfileComponent implements OnInit {
   }
 
   onSelect(e, q, fromMain){
+
     if(fromMain){
       this.choosedQuestionsArray = []
     }
+    
      let option= this.allProfileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
      this.selectedQuestion = {
        option:option,

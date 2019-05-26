@@ -36,7 +36,7 @@ export class FindVisitorComponent implements OnInit {
   selectedIndex: any;
   topClass = "#122d51"
   topClasstext: string = "white";
-  visitorToSave: any;
+  visitorToSave: any = null;
   hasSelecteduser: boolean;
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
@@ -152,7 +152,7 @@ export class FindVisitorComponent implements OnInit {
           profile: this.profileForm.value,
           isPreRegistered: this.isPreRegistered
         }
-        console.log(visitor)
+        console.log('Selected Visitor', visitor)
         this.mannedVisitorMangementService.setVisitor(visitor)
       }
     }) 
@@ -173,14 +173,14 @@ export class FindVisitorComponent implements OnInit {
       let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
       element.click();
     }else{
-        this.router.navigate(['/mannedvisitormanagement/visitor'])
-  
+        
       let visitor = {
-        profile: this.profileForm.value,
+        profile: this.visitorToSave?this.visitorToSave:this.profileForm.value,
         isPreRegistered: this.isPreRegistered
       }
-  
       this.mannedVisitorMangementService.setVisitor(visitor)
+      this.router.navigate(['/mannedvisitormanagement/visitor'])
+
       }
     
     
