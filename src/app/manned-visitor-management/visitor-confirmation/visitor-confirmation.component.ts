@@ -85,6 +85,16 @@ export class VisitorConfirmationComponent implements OnInit {
       PhotoLocation: '',
       SmallPhotoLocation: ''
     }
+
+    this.profileData.filter((question)=>{
+      if(question.SettingValueTypeSys === 122){
+          let customColumn = question.Decisions.find((option)=> option.OptionName === question.Answer.OptionName?question.Answer.OptionName:question.Answer)
+          question.CustomColumnOptionSys = customColumn.OptionSys
+          question.Answer = question.Answer.OptionName?question.Answer.OptionName:question.Answer
+      }
+    })
+
+
     visitorSignin.ContactSys = this.visitor.ContactSys?this.visitor.ContactSys:0;
     visitorSignin.GuestName = this.visitor.FirstName + this.visitor.LastName;
     visitorSignin.CompanyName = this.visitor.Company;
@@ -117,6 +127,7 @@ export class VisitorConfirmationComponent implements OnInit {
             console.log(data)
       })
     }else{
+      visitorSignin.ContactSys = null
       this.mannedVisitorMangementService.saveAPIVisitors(visitorSignin).subscribe((data)=>{
         console.log(data)
       })

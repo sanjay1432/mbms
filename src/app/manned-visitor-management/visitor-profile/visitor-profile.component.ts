@@ -114,6 +114,14 @@ export class VisitorProfileComponent implements OnInit {
                qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
        
                this.visitorHostQuestion = qResponse.find((question)=>question.MappedColumnName === "ToSeeContactName")
+              
+               //Update the Host Answer if available
+               if(this.visitorHostQuestion.Answer){
+                  this.hostSelected = true
+                  this.host = {
+                    ContactName:this.visitorHostQuestion.Answer
+                  }
+                }
                this.visitorPictureQuestion = qResponse.find((question)=>question.MappedColumnName === "ImageSys")
                 console.log('visitorHostQuestion',this.visitorHostQuestion)
                // this.profileQuestions  = qResponse

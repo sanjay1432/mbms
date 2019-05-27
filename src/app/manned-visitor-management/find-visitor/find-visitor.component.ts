@@ -141,6 +141,7 @@ export class FindVisitorComponent implements OnInit {
         this.results ="Top Result(s)"
       }
       if(pvisitors.length>0){
+        this.possibleMatch = true;
         this.possibleMatchFound = true;
         this.possibleMatchUsers = pvisitors;
       }
