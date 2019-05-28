@@ -180,14 +180,28 @@ newVisitorList{
     background-color: #122d51;
   }
 
+  .selected-top-color{
+    background-color: #122d51;
+  }
+
+
   .nonselected-color{
     background: #f8f9fa75
   }
-
+  .nonselected-top-color{
+    background: #f8f9fa75
+  }
   .selected-text-color{
     color: white
   }
   .nonselected-text-color{
+      color: black
+  }
+
+  .selected-top-text-color{
+    color: white
+  }
+  .nonselected-top-text-color{
       color: black
   }
 

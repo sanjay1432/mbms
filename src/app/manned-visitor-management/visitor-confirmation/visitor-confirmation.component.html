@@ -4,12 +4,12 @@
     <div class="row" style="background-color: white; margin:0; padding:2rem; border-bottom: 2px solid rgba(236, 236, 236, 0.952);">
       <div class="col-sm-3" >
         <img src="https://v10test.eioboard.com/eioboard/{{visitor.PhotoLocation}}" style="height: 11.5rem;
-             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys != 0">
+             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys">
              <img src="../../../assets/icons/{{profileData?.image}}" style="height: 11.5rem;
-             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys  == 0 && !imageurl">
+             border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys && !imageurl">
 
 <img src="{{imageurl}}" style="height: 11.5rem;
-border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "visitor.ImageSys == 0">
+border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "!visitor.ImageSys">
       </div>
       <!-- <div class="col-sm-3" >
          

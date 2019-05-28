@@ -83,27 +83,29 @@
         </nav>
         <div class="container" *ngIf="exactMatch">
           <div class="row" style="margin: 0; ">
-            <div [ngClass]="gridList" *ngFor="let exactMatchUser of exactMatchUsers; let i= index" [ngStyle]="{'background-color': topClass}" (click)="selectTop(i, exactMatchUser)">
-              <div class="row" *ngIf='isGrid' style="border: 2px solid #d0c8c8;">
-                <div class="col-sm-4" style="margin: 5px 5px 5px 0px;">
-                  <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" style="height: 8rem;width: 100%;" *ngIf = "exactMatchUser.PhotoLocation">
-                  <img src="../../../assets/icons/no-image.jpg" style="height: 8rem;width: 100%;" *ngIf = "!exactMatchUser.PhotoLocation">
+            <div [ngClass]="gridList" *ngFor="let exactMatchUser of exactMatchUsers; let i= index"  (click)="selectTop(i, exactMatchUser)" style="padding: 0">
+              <div  [ngClass]="{'selected-top-color' : i==selectedTopIndex,'nonselected-top-color' : i!= selectedTopIndex}" >
+                <div class="row" *ngIf='isGrid'>
+                  <div class="col-sm-4" style="margin: 5px 5px 5px 10px;">
+                    <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" style="height: 8rem;width: 100%;" *ngIf = "exactMatchUser.PhotoLocation">
+                    <img src="../../../assets/icons/no-image.jpg" style="height: 8rem;width: 100%;" *ngIf = "!exactMatchUser.PhotoLocation">
+                  </div>
+                  <div class="col-sm-7 watchlist" style="padding-top: 1rem">
+                    <h3 [ngClass]="{'selected-top-text-color' : i==selectedTopIndex,'nonselected-top-text-color' : i!= selectedTopIndex}">{{exactMatchUser.LastName}}, {{exactMatchUser.FirstName}}</h3>
+                    <h5 [ngClass]="{'selected-top-text-color' : i==selectedTopIndex,'nonselected-top-text-color' : i!= selectedTopIndex}">{{exactMatchUser.Company}}</h5>
+                  </div>
                 </div>
-                <div class="col-sm-7 watchlist" style="padding-top: 1rem">
-                  <h3 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.LastName}}, {{exactMatchUser.FirstName}}</h3>
-                  <h5 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.Company}}</h5>
-                </div>
-              </div>
-              <div class="row" *ngIf='!isGrid'>
-                <div class="col-sm-1" style="margin: 5px 5px 5px 0px;">
-                  <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" class="rounded-list" *ngIf = "exactMatchUser.PhotoLocation">
-                  <img src="../../../assets/icons/no-image.jpg" class="rounded-list" *ngIf = "!exactMatchUser.PhotoLocation">
-                </div>
-                <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                  <h4 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.LastName}}, {{exactMatchUser.FirstName}}</h4>
-                </div>
-                <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
-                  <h5 [ngStyle]="{'color': topClasstext}">{{exactMatchUser.Company}}</h5>
+                <div class="row" *ngIf='!isGrid'>
+                  <div class="col-sm-1" style="margin: 5px 5px 5px 10px;">
+                    <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" class="rounded-list" *ngIf = "exactMatchUser.PhotoLocation">
+                    <img src="../../../assets/icons/no-image.jpg" class="rounded-list" *ngIf = "!exactMatchUser.PhotoLocation">
+                  </div>
+                  <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                    <h4 [ngClass]="{'selected-top-text-color' : i==selectedTopIndex,'nonselected-top-text-color' : i!= selectedTopIndex}">{{exactMatchUser.LastName}}, {{exactMatchUser.FirstName}}</h4>
+                  </div>
+                  <div class="col-sm-3 watchlist" style="padding-top: 1.5rem">
+                    <h5 [ngClass]="{'selected-top-text-color' : i==selectedTopIndex,'nonselected-top-text-color' : i!= selectedTopIndex}">{{exactMatchUser.Company}}</h5>
+                  </div>
                 </div>
               </div>
             </div>

@@ -34,6 +34,7 @@ export class FindVisitorComponent implements OnInit {
   hasWatchlistUser: boolean = false;
   admin: any;
   selectedIndex: any;
+  selectedTopIndex = 0;
   topClass = "#122d51"
   topClasstext: string = "white";
   visitorToSave: any = null;
@@ -49,11 +50,11 @@ export class FindVisitorComponent implements OnInit {
   }
   
   selectTop(i, user){
-    console.log(user)
     this.hasSelecteduser = true;
     this.visitorToSave = user
-    this.topClass = "#122d51"
-    this.topClasstext = "white"
+    // this.topClass = "#122d51"
+    // this.topClasstext = "white"
+    this.selectedTopIndex = i
     // this.selectedIndex = i;
   }
   preRegister(value){
@@ -80,7 +81,7 @@ export class FindVisitorComponent implements OnInit {
     let user = this.profileForm.value;
     let watchlist = this.watchlistusers;
    
-    console.log('Selected Visitor', user)
+    // console.log('Selected Visitor', user)
     this.possibleMatchUsers = []
     this.exactMatch = false;
     // if(user.firstName != '' && user.lastName === '' && user.company ===''){
@@ -109,9 +110,9 @@ export class FindVisitorComponent implements OnInit {
       let VisitorUsers = JSON.parse(JSON.stringify(data))
       this.visitors = VisitorUsers.Data.TopResults
       let possibleVisitor = VisitorUsers.Data.PossibleMatches
-        console.log('isPreRegistered',this.isPreRegistered)
+        // console.log('isPreRegistered',this.isPreRegistered)
       let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
-          console.log('possiblePreRegVisitor',possibleVisitor)
+          // console.log('possiblePreRegVisitor',possibleVisitor)
       // let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
       // visitors.filter((e)=>{
       //   if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
@@ -153,7 +154,7 @@ export class FindVisitorComponent implements OnInit {
           profile: this.profileForm.value,
           isPreRegistered: this.isPreRegistered
         }
-        console.log('Selected Visitor', visitor)
+        // console.log('Selected Visitor', visitor)
         this.mannedVisitorMangementService.setVisitor(visitor)
       }
     }) 
@@ -232,8 +233,8 @@ export class FindVisitorComponent implements OnInit {
     this.hasSelecteduser = true;
     this.visitorToSave = user
     this.selectedIndex = i;
-    this.topClass = 'white'
-    this.topClasstext = 'black'
+    // this.topClass = 'white'
+    // this.topClasstext = 'black'
   }
 
 

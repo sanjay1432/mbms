@@ -16,7 +16,7 @@ export class VisitorConfirmationComponent implements OnInit {
   yesClass = 'yes';
   noClass  = 'no';
   visitorProfile: any;
-  imageurl: any;
+  imageurl = null;
   isPreRegisters: any;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location:Location,
@@ -31,13 +31,14 @@ export class VisitorConfirmationComponent implements OnInit {
     this.mannedVisitorMangementService.getVisitorProfile()
                                       .subscribe((profile)=> 
                                        {
+                                         console.log(profile)
                                          this.visitorProfile = profile
                                          this.preRegData = profile.preRegisterData,
                                          profile.profileData.filter((q)=>{
-                                          if(q.SettingValueTypeName === "Picture"){
-                                            this.imageurl = q.Answer  
+                                          if(q.SettingValueTypeSys === 123){
+                                            this.imageurl = profile.visitorUploadedImage  
                                           }
-                                          return q.SettingValueTypeName !== 'Picture';
+                                          return q.SettingValueTypeSys !== 123;
                                          })
                                          this.profileData = profile.profileData
                                          console.log(this.profileData)
@@ -64,7 +65,7 @@ export class VisitorConfirmationComponent implements OnInit {
     this._location.back();
   }
 
-  onConfirm(){
+  async onConfirm(){
     let visitorSignin = {
       Action: "IN",
       OrganizationSys: 0,
@@ -86,13 +87,7 @@ export class VisitorConfirmationComponent implements OnInit {
       SmallPhotoLocation: ''
     }
 
-    this.profileData.filter((question)=>{
-      if(question.SettingValueTypeSys === 122){
-          let customColumn = question.Decisions.find((option)=> option.OptionName === question.Answer.OptionName?question.Answer.OptionName:question.Answer)
-          question.CustomColumnOptionSys = customColumn.OptionSys
-          question.Answer = question.Answer.OptionName?question.Answer.OptionName:question.Answer
-      }
-    })
+    
 
 
     visitorSignin.ContactSys = this.visitor.ContactSys?this.visitor.ContactSys:0;
@@ -106,10 +101,35 @@ export class VisitorConfirmationComponent implements OnInit {
     visitorSignin.IsPreRegistering = this.isPreRegisters
     visitorSignin.PhoneNo = this.visitor.Phone
     visitorSignin.Answer = this.profileData
-    if(this.visitor.ImageSys != 0){
+    if(this.visitor.ImageSys){
       visitorSignin.ImageSys = this.visitor.ImageSys
       visitorSignin.PhotoLocation = this.visitor.PhotoLocation
       visitorSignin.SmallPhotoLocation = this.visitor.SmallPhotoLocation 
+      this.profileData.filter((question)=>{
+        if(question.SettingValueTypeSys === 122){
+            let customColumn = question.Decisions.find((option)=> option.OptionName === question.Answer.OptionName?question.Answer.OptionName:question.Answer)
+            question.CustomColumnOptionSys = customColumn.OptionSys
+            question.Answer = question.Answer.OptionName?question.Answer.OptionName:question.Answer
+        }
+        if(question.SettingValueTypeSys === 144){
+          question.Answer = this.host.ContactName
+        }
+        if(question.SettingValueTypeSys === 123){
+          question.Answer = this.visitor.ImageSys
+        }
+      })
+      if(this.isPreRegisters && this.visitor.ContactSys){
+        this.mannedVisitorMangementService.updateAPIVisitors(visitorSignin, this.visitor.ContactSys).subscribe((data)=>{
+              console.log(data)
+        })
+      }else{
+        visitorSignin.ContactSys = null
+        this.mannedVisitorMangementService.saveAPIVisitors(visitorSignin).subscribe((data)=>{
+          console.log(data)
+        })
+      }
+     this.mannedVisitorMangementService.setFinalVisitor(this.visitorProfile)
+     this.router.navigate(['printbadge'])
     }else{
       if(this.imageurl){
         this.watchlistService.upload(this.imageurl).subscribe((data)=>{
@@ -117,23 +137,36 @@ export class VisitorConfirmationComponent implements OnInit {
           visitorSignin.ImageSys = image.Data.ImageSys
           visitorSignin.PhotoLocation = image.Data.PhotoLocation
           visitorSignin.SmallPhotoLocation =  image.Data.SmallPhotoLocation
+
+          this.profileData.filter((question)=>{
+            if(question.SettingValueTypeSys === 122){
+                let customColumn = question.Decisions.find((option)=> option.OptionName === question.Answer.OptionName?question.Answer.OptionName:question.Answer)
+                question.CustomColumnOptionSys = customColumn.OptionSys
+                question.Answer = question.Answer.OptionName?question.Answer.OptionName:question.Answer
+            }
+            if(question.SettingValueTypeSys === 144){
+              question.Answer = this.host.ContactName
+            }
+            if(question.SettingValueTypeSys === 123){
+              question.Answer = this.visitor.ImageSys
+            }
+          })
+          if(this.isPreRegisters && this.visitor.ContactSys){
+            this.mannedVisitorMangementService.updateAPIVisitors(visitorSignin, this.visitor.ContactSys).subscribe((data)=>{
+                  console.log(data)
+            })
+          }else{
+            visitorSignin.ContactSys = null
+            this.mannedVisitorMangementService.saveAPIVisitors(visitorSignin).subscribe((data)=>{
+              console.log(data)
+            })
+          }
+         this.mannedVisitorMangementService.setFinalVisitor(this.visitorProfile)
+         this.router.navigate(['printbadge'])
         })
       }
     }
 
-    let visitor;
-    if(this.isPreRegisters){
-      this.mannedVisitorMangementService.updateAPIVisitors(visitorSignin, this.visitor.ContactSys).subscribe((data)=>{
-            console.log(data)
-      })
-    }else{
-      visitorSignin.ContactSys = null
-      this.mannedVisitorMangementService.saveAPIVisitors(visitorSignin).subscribe((data)=>{
-        console.log(data)
-      })
-    }
-   this.mannedVisitorMangementService.setFinalVisitor(this.visitorProfile)
-   this.router.navigate(['printbadge'])
   }
 
 }

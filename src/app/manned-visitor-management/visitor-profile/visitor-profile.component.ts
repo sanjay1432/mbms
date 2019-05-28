@@ -348,6 +348,7 @@ export class VisitorProfileComponent implements OnInit {
     let visitorProfile = {
       preRegisterData:this.preRegForm.value,
       profileData:this.allProfileQuestions,
+      visitorUploadedImage:this.imageurl,
       host: this.host,
       visitor: this.visitor,
       isPreRegisters:this.isPreRegisters
