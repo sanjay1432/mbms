@@ -47,6 +47,7 @@
                 *ngIf="!exactMatch && !possibleMatchFound">
                 Sign In
               </button>
+              
               <button type="submit" class="btn btn-primary search
                 " [disabled]="!profileForm.valid"
                 *ngIf="exactMatch || possibleMatchFound">
@@ -56,6 +57,8 @@
           </div>
 
         </form>
+        <br/>
+        <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
       </div>
     </div>
   </div>
@@ -83,7 +86,7 @@
         </nav>
         <div class="container" *ngIf="exactMatch">
           <div class="row" style="margin: 0; ">
-            <div [ngClass]="gridList" *ngFor="let exactMatchUser of exactMatchUsers; let i= index"  (click)="selectTop(i, exactMatchUser)" style="padding: 0">
+            <div [ngClass]="gridList" *ngFor="let exactMatchUser of exactMatchUsers; let i= index"  (click)="selectTop(i, exactMatchUser)" style="padding: 0;border: 2px solid #373d42;">
               <div  [ngClass]="{'selected-top-color' : i==selectedTopIndex,'nonselected-top-color' : i!= selectedTopIndex}" >
                 <div class="row" *ngIf='isGrid'>
                   <div class="col-sm-4" style="margin: 5px 5px 5px 10px;">

@@ -23,6 +23,9 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { VisitorConfirmationComponent } from './visitor-confirmation/visitor-confirmation.component';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule,MatProgressBarModule} from '@angular/material';
+import { CustomeLoaderComponent } from './custome-loader/custome-loader.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -39,6 +42,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatRadioModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
     NgxMaterialTimepickerModule.forRoot(),
     HttpClientInMemoryWebApiModule.forFeature(
       InMemoryDataService,{
@@ -49,9 +55,11 @@ import {MatRadioModule} from '@angular/material/radio';
     )
 
   ],
-  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent, AppCameraComponent, VisitorConfirmationComponent],
+  entryComponents :[CustomeLoaderComponent],
+  declarations: [FindVisitorComponent, VisitorProfileComponent, SelectHostComponent, AppCameraComponent, VisitorConfirmationComponent, CustomeLoaderComponent],
   providers   : [
     WatchlistService,MannedVisitorMangementService,MatDatepickerModule
-  ]
+  ],
+  
 })
 export class MannedVisitorManagementModule { }

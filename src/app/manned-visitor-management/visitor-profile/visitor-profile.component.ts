@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { Location } from '@angular/common';
 import { FormBuilder } from '@angular/forms';
@@ -7,6 +7,9 @@ import { UploadEvent, UploadFile, FileSystemFileEntry, FileSystemDirectoryEntry 
 import {WebcamImage} from 'ngx-webcam';
 import { NavigationEnd } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { CustomeLoaderComponent } from '../custome-loader/custome-loader.component'
+  import { from } from 'rxjs';
 @Component({
   selector: 'app-visitor-profile',
   templateUrl: './visitor-profile.component.html',
@@ -54,12 +57,20 @@ export class VisitorProfileComponent implements OnInit {
   allProfileQuestions: any;
   visitorHostQuestion: any = null;
   visitorPictureQuestion: any = null;
+  loaderDialog: MatDialogRef<CustomeLoaderComponent, any>;
   constructor(private mannedVisitorMangementService: MannedVisitorMangementService,
               private _location: Location,
               private fb: FormBuilder,
-              private route: Router) { }
+              private route: Router,
+              public dialog: MatDialog,
+              ) { 
+                this.loaderDialog = this.dialog.open(CustomeLoaderComponent, {
+                  width: '600px'
+                });
+              }
 
   ngOnInit() {
+   
    this.mannedVisitorMangementService.getVisitor().subscribe(v => {
      console.log('Visitor &&&&',v)
     this.isPreRegisters = v.isPreRegistered;
@@ -75,6 +86,7 @@ export class VisitorProfileComponent implements OnInit {
     this.visitor = v.profile;
     console.log('At visioto screen',this.visitor)
     })
+   
   this.mannedVisitorMangementService.getQuestionProfile().subscribe( async v=>{
     this.questionProfiles = JSON.parse(JSON.stringify(v)).Data;
     this.selectedQP = this.questionProfiles[0].ProfileName
@@ -101,6 +113,7 @@ export class VisitorProfileComponent implements OnInit {
           if(that.visitor.ContactSys){
           that.mannedVisitorMangementService.getQuestionAnswers(QuestionProfileSys, that.visitor.ContactSys)
             .subscribe(answers=>{
+              this.loaderDialog.close();
                let qanswers = JSON.parse(JSON.stringify(answers)).Data
                if(qanswers.length>1){
                     qResponse.forEach(question => {
@@ -152,6 +165,7 @@ export class VisitorProfileComponent implements OnInit {
             })
 
           }else{
+            this.loaderDialog.close();
               qResponse.sort((a, b) => a.DisplayOrder - b.DisplayOrder);
        
 
@@ -190,7 +204,12 @@ export class VisitorProfileComponent implements OnInit {
     }); 
   }
   getTime(newdate){
-    var date = new Date(newdate);
+    var date
+    if(newdate){
+      date = new Date(newdate);
+    }else{
+      date = new Date();
+    }
     return date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   }
   openImageModal(imageurl){

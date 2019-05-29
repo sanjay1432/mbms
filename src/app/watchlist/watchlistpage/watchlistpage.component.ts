@@ -118,18 +118,13 @@ export class WatchlistpageComponent implements OnInit {
     this.watchlistService.getUsers(localStorage.getItem('token'), page).subscribe(data =>{
       
       let user = JSON.parse(JSON.stringify(data))
-      console.log(user.Data)
       this.users = user.Data
-      // user.Data.forEach(element => {
-      //   this.users.push(element)
-      // });
-      
       this.totalRecords = user.Metadata.Total
       this.dataSource = new MatTableDataSource(this.users)
       this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort
-      this.loading = false;
+      this.dataSource.sort = this.sort 
       this.tableUserLoaded = true
+      this.loading = false;
     }
     )
   }

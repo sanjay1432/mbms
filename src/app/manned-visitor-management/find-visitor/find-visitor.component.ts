@@ -1,13 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors,Validators, ValidatorFn } from '@angular/forms';
 import { MannedVisitorMangementService } from '../../services/manned-visitor-mangement.service';
 import { WatchlistService } from '../../services/watchlist.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+export const atLeastOne = (validator: ValidatorFn) => (
+  group: FormGroup,
+): ValidationErrors | null => {
+  const hasAtLeastOne =
+    group &&
+    group.controls &&
+    Object.keys(group.controls).some(k => !validator(group.controls[k]));
+
+  return hasAtLeastOne ? null : { atLeastOne: true };
+};
 @Component({
   selector: 'app-find-visitor',
   templateUrl: './find-visitor.component.html',
   styleUrls: ['./find-visitor.component.css']
 })
+
 export class FindVisitorComponent implements OnInit {
   isPreRegistered = true;
   yesClass = 'yes';
@@ -16,7 +28,7 @@ export class FindVisitorComponent implements OnInit {
     FirstName: [''],
     LastName: [''],
     Company: [''],
-  });
+  }, { validator: atLeastOne(Validators.required) });
   watchlistusers;
   visitors;
   exactMatch: boolean = false;
@@ -39,10 +51,12 @@ export class FindVisitorComponent implements OnInit {
   topClasstext: string = "white";
   visitorToSave: any = null;
   hasSelecteduser: boolean;
+  loading:boolean = false;
   constructor(private fb: FormBuilder,
               private watchlistService: WatchlistService,
               private mannedVisitorMangementService: MannedVisitorMangementService,
-              private router: Router) { }
+              private router: Router,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getWatchListUsers()
@@ -106,57 +120,66 @@ export class FindVisitorComponent implements OnInit {
     //   this.possibleMatch = true;
     //   this.topResult = true;
     // }
-    this.mannedVisitorMangementService.getVisitors(user.FirstName, user.LastName, user.Company).subscribe(data => { 
-      let VisitorUsers = JSON.parse(JSON.stringify(data))
-      this.visitors = VisitorUsers.Data.TopResults
-      let possibleVisitor = VisitorUsers.Data.PossibleMatches
-        // console.log('isPreRegistered',this.isPreRegistered)
-      let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
-          // console.log('possiblePreRegVisitor',possibleVisitor)
-      // let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
-      // visitors.filter((e)=>{
-      //   if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
-      //   this.exactMatch = true;
-      //   this.exactMatchUser = e;
-      //   this.results ="Top Result(s)"
-      //   }
-      //   if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
-      //   this.possibleMatchFound = true;
-      //   this.possibleMatchUsers.push(e);
-      //   }
-      // })
-  
-      // this.possibleMatchUsers.filter((possible)=>{
-      //   watchlist.forEach(watchlistuser => {
-  
-      //     if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
-      //       possible['isInWatchlist'] = true;
-      //       this.hasWatchlistUser = true;
-      //     }
-      //   });
-      // })
-      if(this.visitors.length>0){
-        this.exactMatch = true;
-        this.visitorToSave = this.visitors[0]
-        this.exactMatchUsers = this.visitors;
-        this.results ="Top Result(s)"
-      }
-      if(pvisitors.length>0){
-        this.possibleMatch = true;
-        this.possibleMatchFound = true;
-        this.possibleMatchUsers = pvisitors;
-      }
-  
-      if(!this.exactMatch && !this.possibleMatchFound){
-        this.router.navigate(['/mannedvisitormanagement/visitor'])
-  
-        let visitor = {
-          profile: this.profileForm.value,
-          isPreRegistered: this.isPreRegistered
-        }
-        // console.log('Selected Visitor', visitor)
-        this.mannedVisitorMangementService.setVisitor(visitor)
-      }
+    this.loading = true
+    this.mannedVisitorMangementService.getVisitors(user.FirstName, user.LastName, user.Company)
+    .subscribe(data => { 
+      this.loading = false
+          let VisitorUsers = JSON.parse(JSON.stringify(data))
+          this.visitors = VisitorUsers.Data.TopResults
+          let possibleVisitor = VisitorUsers.Data.PossibleMatches
+            // console.log('isPreRegistered',this.isPreRegistered)
+          let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
+              // console.log('possiblePreRegVisitor',possibleVisitor)
+          // let visitors = this.visitors.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
+          // visitors.filter((e)=>{
+          //   if(e.FirstName === user.firstName && e.LastName === user.lastName && e.Company === user.company){
+          //   this.exactMatch = true;
+          //   this.exactMatchUser = e;
+          //   this.results ="Top Result(s)"
+          //   }
+          //   if(e.FirstName === user.firstName || e.LastName === user.lastName || e.Company === user.company){
+          //   this.possibleMatchFound = true;
+          //   this.possibleMatchUsers.push(e);
+          //   }
+          // })
+      
+          // this.possibleMatchUsers.filter((possible)=>{
+          //   watchlist.forEach(watchlistuser => {
+      
+          //     if(possible.FirstName === watchlistuser.FirstName || possible.LastName === watchlistuser.LastName || possible.Company === watchlistuser.Company){
+          //       possible['isInWatchlist'] = true;
+          //       this.hasWatchlistUser = true;
+          //     }
+          //   });
+          // })
+          if(this.visitors.length>0){
+            this.exactMatch = true;
+            this.visitorToSave = this.visitors[0]
+            this.exactMatchUsers = this.visitors;
+            this.results ="Top Result(s)"
+          }
+          if(pvisitors.length>0){
+            this.possibleMatch = true;
+            this.possibleMatchFound = true;
+            this.possibleMatchUsers = pvisitors;
+          }
+      
+          if(!this.exactMatch && !this.possibleMatchFound){
+            this.router.navigate(['/mannedvisitormanagement/visitor'])
+      
+            let visitor = {
+              profile: this.profileForm.value,
+              isPreRegistered: this.isPreRegistered
+            }
+            // console.log('Selected Visitor', visitor)
+            this.mannedVisitorMangementService.setVisitor(visitor)
+          }
+    },
+    (error)=>{
+      console.log(error.error.Message)
+      this._snackBar.open(error.error.Message, '☹', {
+        duration: 4000,
+      })
     }) 
   }
 
