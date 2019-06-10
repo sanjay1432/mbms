@@ -90,8 +90,8 @@
               <div  [ngClass]="{'selected-top-color' : i==selectedTopIndex,'nonselected-top-color' : i!= selectedTopIndex}" >
                 <div class="row" *ngIf='isGrid'>
                   <div class="col-sm-4" style="margin: 5px 5px 5px 10px;">
-                    <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" style="height: 8rem;width: 100%;" *ngIf = "exactMatchUser.PhotoLocation">
-                    <img src="../../../assets/icons/no-image.jpg" style="height: 8rem;width: 100%;" *ngIf = "!exactMatchUser.PhotoLocation">
+                    <img src="https://v10test.eioboard.com/eioboard/{{exactMatchUser.PhotoLocation}}" style="height: 6rem;" *ngIf = "exactMatchUser.PhotoLocation">
+                    <img src="../../../assets/icons/no-image.jpg" style="height: 6rem;" *ngIf = "!exactMatchUser.PhotoLocation">
                   </div>
                   <div class="col-sm-7 watchlist" style="padding-top: 1rem">
                     <h3 [ngClass]="{'selected-top-text-color' : i==selectedTopIndex,'nonselected-top-text-color' : i!= selectedTopIndex}">{{exactMatchUser.LastName}}, {{exactMatchUser.FirstName}}</h3>
@@ -134,9 +134,9 @@
                   <div class="row" *ngIf='isGrid'>
 
                     <div class="col-sm-4" style="margin: 5px 5px 5px 0px;">
-                      <img src="https://v10test.eioboard.com/eioboard/{{possibleUser.PhotoLocation}}" style="height: 8rem;width: 100%;    border: 1px solid #d0c8c8;
+                      <img src="https://v10test.eioboard.com/eioboard/{{possibleUser.PhotoLocation}}" style="height: 6rem;    border: 1px solid #d0c8c8;
                       margin-left: 5px;" *ngIf = "possibleUser.PhotoLocation">
-                       <img src="../../../assets/icons/no-image.jpg" style="height: 8rem;width: 100%;    border: 1px solid #d0c8c8; margin-left: 5px;" *ngIf = "!possibleUser.PhotoLocation">
+                       <img src="../../../assets/icons/no-image.jpg" style="height: 6rem;    border: 1px solid #d0c8c8; margin-left: 5px;" *ngIf = "!possibleUser.PhotoLocation">
                     </div>
                     <div class="col-sm-7 watchlist" style="padding-top: 1rem;">
                       <h3 [ngClass]="{'selected-text-color' : i==selectedIndex,'nonselected-text-color' : i!= selectedIndex}" >{{possibleUser.LastName}}, {{possibleUser.FirstName}}</h3>
@@ -246,10 +246,12 @@
         </div>
 
         <div class="row" style="padding: 2rem;font-size: 20px;">
-
-          <p style="margin:0">The visitor name entered is on the Watchlist.</p>
-          <p style="padding-left: 40px;">Are you sure you want to proceed?</p>
-
+          <div style="
+          margin: auto;
+          ">
+            <p style="margin:0">The visitor name entered is on the Watchlist.</p>
+            <p style="padding-left: 40px;">Are you sure you want to proceed?</p>
+          </div>
         </div>
         <div class="row">
           <div class="col-sm-4 text-right">
@@ -332,7 +334,7 @@
               </div>
               <div class="col-sm-10">
                 <h5 class="title text-uppercase">
-                 This perosn matched on the Watchlist.
+                 This person matched on the Watchlist.
                 </h5>
                 <h5 class="title text-uppercase ">
 

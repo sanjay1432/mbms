@@ -28,8 +28,10 @@ border: 1px solid #a29d9d61;width: 11.5rem;" *ngIf = "!visitor.ImageSys">
             <p>{{profileQuestion.QuestionText}}</p>
           </div>
           <div class="col-sm-6" *ngIf = "profileQuestion.SettingValueTypeName != 'Picture' && profileQuestion.MappedColumnName != 'ToSeeContactName'">
-           <p *ngIf ="profileQuestion.Answer.OptionName; else elseBlock">{{profileQuestion.Answer.OptionName}}</p> 
-           <ng-template #elseBlock>{{profileQuestion.Answer}}</ng-template>
+           <div *ngIf = "profileQuestion.Answer">
+            <p *ngIf ="profileQuestion.Answer.OptionName; else elseBlock">{{profileQuestion.Answer.OptionName}}</p> 
+            <ng-template #elseBlock>{{profileQuestion.Answer}}</ng-template>
+          </div>
           </div>
         </div>
       </div>
