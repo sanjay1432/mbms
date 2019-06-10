@@ -378,7 +378,9 @@ export class VisitorProfileComponent implements OnInit {
   }
 
   onSelect(e, q, fromMain){
-
+    if(e.NextQuestionSys === 41538){
+      return;
+    }
     if(fromMain){
       this.choosedQuestionsArray = []
     }
@@ -389,7 +391,7 @@ export class VisitorProfileComponent implements OnInit {
        questionsys:q
      }
       let hasAlreadyExist = this.choosedQuestionsArray.find((xxu)=>xxu.questionsys === q)
-       if(!hasAlreadyExist){
+       if(!hasAlreadyExist ){
         this.choosedQuestionsArray.push(this.selectedQuestion)
        }else{
         this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)

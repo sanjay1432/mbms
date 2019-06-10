@@ -107,9 +107,10 @@
           </mat-option>
         </mat-select>
       </nav>
-      <div class="row newBar"  *ngFor = "let question of profileQuestions ; let i = index" > 
+      <div class=" newBar" >
+        <div class="row " *ngFor = "let question of profileQuestions ; let i = index"> 
           
-              <div class="col-sm-6"  *ngIf = "question.Decisions.length<1">
+              <!-- <div class="col-sm-6"  *ngIf = "question.Decisions.length<1">
                 <p style="margin-top: 1rem;">{{question.QuestionText}} </p>
               </div>
               <div class="col-sm-6" *ngIf = "question.Decisions.length<1 && question.SettingValueTypeName === 'String' || question.SettingValueTypeName === 'GuestContactToSee'">
@@ -136,7 +137,7 @@
                       <mat-datepicker-toggle matSuffix [for]="picker" class="input-field"></mat-datepicker-toggle>
                       <mat-datepicker #picker></mat-datepicker>
                     </div>
-              </div>
+              </div> -->
               <!-- <div class="col-sm-6" *ngIf = " question.Decisions.length<1 && question.SettingValueTypeName === 'Picture'">
                 <div class="row">
                   <div class="col-sm-4">
@@ -172,7 +173,7 @@
               margin: 0px;">
               <div  class="row "  *ngFor = "let main of mainDecisionQuestions" style=" width: 100%; margin: 0px;">
                 <div class="col-sm-6" >
-                  <p style="margin-top: 1rem;">{{main?.QuestionText}}</p>
+                  <p style="margin-top: 1rem;"> {{main?.QuestionText}}</p>
                 </div>
                 <div class="col-sm-6" *ngIf = " main.SettingValueTypeName === 'String' || main.SettingValueTypeName === 'GuestContactToSee'">
                     <input type="text" class="form-control form-control-lg" [(ngModel)]="main.Answer" [ngModelOptions]="{standalone: true}">
@@ -200,8 +201,10 @@
                       </div>
                 </div>
                
-                <!-- Question selected -->
-                <div *ngIf = "choosedQuestionsArray.length>0">
+                
+              </div>
+              <!-- Question selected -->
+              <div *ngIf = "choosedQuestionsArray.length>0">
                 <div  class="row "  *ngFor = "let choosedQuestion of choosedQuestionsArray" style="    width: 100%;
                 margin: 0px;">
     
@@ -236,7 +239,7 @@
 
                 </div>
               </div>
-              </div>
+            </div>
             </div>
             
               
