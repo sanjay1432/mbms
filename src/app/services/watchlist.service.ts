@@ -63,6 +63,20 @@ export class WatchlistService {
     localStorage.removeItem('refresh-token');
     return this.http.get('/api/authorize', authhttpOptions)
   }
+  getTokenFromRefreshToken(token,refreshToken){
+    var headers_refresh_token = new HttpHeaders(
+      {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+        'RefreshToken': refreshToken,
+        'SecurityType': environment.SecurityType,
+        'APIPublicID': environment.APIPublicID
+      }
+    );
+    return this.http.get('/api/authorize', {
+      headers: headers_refresh_token
+    })
+  }
 
   saveUsers (user: User): Observable<User> {
     return this.http.post<User>('/api/Watchlists?OrganizationSys='+environment.OrganizationSys, user, httpOptions)

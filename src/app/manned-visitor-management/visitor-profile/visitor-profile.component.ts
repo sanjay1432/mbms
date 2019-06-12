@@ -386,6 +386,10 @@ export class VisitorProfileComponent implements OnInit {
     }
     
      let option= this.allProfileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
+       console.log(option.Required)
+       if(!option.Required && option.SettingValueTypeName == "String"){
+           //push next question too in que
+       }
      this.selectedQuestion = {
        option:option,
        questionsys:q

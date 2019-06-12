@@ -31,6 +31,7 @@ export class WatchlistpageComponent implements OnInit {
    pageEvent: PageEvent;
   totalRecords: any;
   pageIndex = 1;
+  expiryTokenCount = 0
   constructor(private watchlistService:WatchlistService,private router: Router) {
   
    }
@@ -38,11 +39,32 @@ export class WatchlistpageComponent implements OnInit {
    ngOnInit() {
     this.watchlistService.getToken().subscribe((data)=>{
       var tokens = JSON.parse(JSON.stringify(data))
+      if(tokens){
+       this.checkTime()
+      }
       localStorage.setItem ('token', tokens.JWT);
       localStorage.setItem ('refresh-token', tokens.Refresh);
       this.getUsersList(this.pageIndex)
     })
 
+  }
+  checkTime(){
+    let that = this
+    setInterval(function(){
+      that.expiryTokenCount++
+      if(that.expiryTokenCount == 10){
+        //call the function regenerate token
+        const token =  localStorage.getItem ('token');
+        const refreshToken =  localStorage.getItem ('refresh-token');
+        that.watchlistService.getTokenFromRefreshToken(token, refreshToken).subscribe((data)=>{
+          var tokens = JSON.parse(JSON.stringify(data))
+          localStorage.setItem ('token', tokens.JWT);
+          localStorage.setItem ('refresh-token', tokens.Refresh);
+          that.expiryTokenCount = 0
+        })
+        
+      }
+    }, 60000);
   }
   openImageModal(imageurl){
     this.modalImage = imageurl;
