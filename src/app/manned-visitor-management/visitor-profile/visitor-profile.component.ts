@@ -387,9 +387,7 @@ export class VisitorProfileComponent implements OnInit {
     
      let option= this.allProfileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
        console.log(option.Required)
-       if(!option.Required && option.SettingValueTypeName == "String"){
-           //push next question too in que
-       }
+      
      this.selectedQuestion = {
        option:option,
        questionsys:q
@@ -400,6 +398,16 @@ export class VisitorProfileComponent implements OnInit {
        }else{
         this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)
         this.choosedQuestionsArray.push(this.selectedQuestion)
+      }
+      if(!option.Required && option.SettingValueTypeName == "String"){
+          //push next question too in que
+          let NextQuestionSys = option.Decisions[0].NextQuestionSys
+          let next= this.allProfileQuestions.find((question)=>question.QuestionSys === NextQuestionSys)
+          let nextQuestion = {
+            option:next,
+            questionsys:NextQuestionSys
+          }
+          this.choosedQuestionsArray.push(nextQuestion)
       }
     }
 
