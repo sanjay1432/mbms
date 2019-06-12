@@ -312,6 +312,26 @@
   </div>
 
 
+  <button id ="cancelSignin" data-toggle="modal" data-target="#cancelSign" style="display:none"></button>
+    <div class="modal fade" id="cancelSign" tabindex="-1" role="dialog" aria-labelledby="cancelSignModalLabel" aria-hidden="true" >
+      <div class="modal-dialog " role="document" style="    margin-top: 5%;">
+        <div class="modal-content" style="background-color:#f1f1f1; border-radius: 0;">
+          <div class="modal-body">
+        <p>Cancel SignIn?</p>
+      </div>
+          <div class="modal-footer">
+            <button type="button" class=" btn back"  (click) = "onSelectNoSignin()">No</button>
+            <button type="button" class=" btn back" id ="terminate"  data-dismiss="modal" style="display:none" ></button>
+            <button type="button" class=" btn next"  (click) = "cancelSignin()">Yes</button>
+            
+      </div>
+      </div>
+      </div>
+
+    </div>
+  
+
+
   
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

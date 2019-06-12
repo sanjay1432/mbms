@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CustomeLoaderComponent } from '../custome-loader/custome-loader.component'
   import { from } from 'rxjs';
+  
 @Component({
   selector: 'app-visitor-profile',
   templateUrl: './visitor-profile.component.html',
@@ -381,27 +382,35 @@ export class VisitorProfileComponent implements OnInit {
     if(e.NextQuestionSys === 41538){
       return;
     }
+    if(e.NextQuestionSys === -2){
+      let element:HTMLElement = document.getElementById('cancelSignin') as HTMLElement;
+        return element.click();
+    }
     if(fromMain){
       this.choosedQuestionsArray = []
     }
     
      let option= this.allProfileQuestions.find((question)=>question.QuestionSys === e.NextQuestionSys)
-       console.log(option.Required)
+       console.log(option)
       
      this.selectedQuestion = {
        option:option,
        questionsys:q
      }
       let hasAlreadyExist = this.choosedQuestionsArray.find((xxu)=>xxu.questionsys === q)
-       if(!hasAlreadyExist ){
+      let hasAlreadyExis1t = this.choosedQuestionsArray.find((xxu)=>xxu.questionsys === e.NextQuestionSys)
+       if( !hasAlreadyExis1t){
         this.choosedQuestionsArray.push(this.selectedQuestion)
        }else{
-        this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)
-        this.choosedQuestionsArray.push(this.selectedQuestion)
+        // this.choosedQuestionsArray = this.choosedQuestionsArray.filter((xxy)=>xxy.questionsys != q)
+        // this.choosedQuestionsArray.push(this.selectedQuestion)
       }
       if(!option.Required && option.SettingValueTypeName == "String"){
           //push next question too in que
           let NextQuestionSys = option.Decisions[0].NextQuestionSys
+          if(NextQuestionSys === 41538){
+            return
+          }
           let next= this.allProfileQuestions.find((question)=>question.QuestionSys === NextQuestionSys)
           let nextQuestion = {
             option:next,
@@ -409,6 +418,16 @@ export class VisitorProfileComponent implements OnInit {
           }
           this.choosedQuestionsArray.push(nextQuestion)
       }
-    }
+  }
+  cancelSignin(){
+    let element:HTMLElement = document.getElementById('terminate') as HTMLElement;
+     element.click();
+    this.route.navigate(['/watchlist'])
+  }
+  onSelectNoSignin(){
+    let element:HTMLElement = document.getElementById('terminate') as HTMLElement;
+     element.click();
+
+  }
 
 }
