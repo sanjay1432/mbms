@@ -95,31 +95,9 @@ export class FindVisitorComponent implements OnInit {
     let user = this.profileForm.value;
     let watchlist = this.watchlistusers;
    
-    // console.log('Selected Visitor', user)
     this.possibleMatchUsers = []
     this.exactMatch = false;
-    // if(user.firstName != '' && user.lastName === '' && user.company ===''){
-    //   this.possibleMatch = false;
-    // }
-    // if(user.firstName ==='' && user.company !='' && user.lastName ===''  ){
-    //   this.possibleMatch = false;
-    // }
-    // if(user.company ==='' && user.firstName ==='' && user.lastName !='' ){
-    //   this.possibleMatch = false;
-    // }
-    // if(user.firstName ==='' && user.lastName !='' && user.company !=''){
-    //   this.possibleMatch = true;
-    // }
-    // if(user.firstName !='' && user.lastName ==='' && user.company !=''){
-    //   this.possibleMatch = true;
-    // }
-    // if(user.firstName !='' && user.lastName !='' && user.company ===''){
-    //   this.possibleMatch = true;
-    // }
-    // if(user.firstName !='' && user.lastName !='' && user.company !=''){
-    //   this.possibleMatch = true;
-    //   this.topResult = true;
-    // }
+    
     this.loading = true
     this.mannedVisitorMangementService.getVisitors(user.FirstName, user.LastName, user.Company)
     .subscribe(data => { 
@@ -127,8 +105,8 @@ export class FindVisitorComponent implements OnInit {
           let VisitorUsers = JSON.parse(JSON.stringify(data))
           this.visitors = VisitorUsers.Data.TopResults
           let possibleVisitor = VisitorUsers.Data.PossibleMatches
-          let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
-          
+          // let pvisitors = possibleVisitor.filter((v)=>v.IsPreRegistration ===this.isPreRegistered);
+          let pvisitors = possibleVisitor;
           if(this.visitors.length>0){
             this.exactMatch = true;
             this.visitorToSave = this.visitors[0]
