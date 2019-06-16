@@ -216,12 +216,14 @@ export class FindVisitorComponent implements OnInit {
 
 
   onAddToVisitors(newVis){
-
+    if(newVis.value){
+        newVis = newVis
+    }
     let element1:HTMLElement = document.getElementById('closeNewVis') as HTMLElement;
     element1.click();
     this.router.navigate(['/mannedvisitormanagement/visitor'])
     let visitor = {
-      profile: newVis.value,
+      profile: newVis,
       isPreRegistered: this.isPreRegistered
     }
     this.mannedVisitorMangementService.setVisitor(visitor)
@@ -229,8 +231,12 @@ export class FindVisitorComponent implements OnInit {
   }
 
   addNewVisitor(e){
+    if(this.visitorToSave.WatchList){
     let element1:HTMLElement = document.getElementById('newVisitor') as HTMLElement;
           element1.click();
+    }else{
+      this.onAddToVisitors(this.visitorToSave)
+    }
 
   }
 }
