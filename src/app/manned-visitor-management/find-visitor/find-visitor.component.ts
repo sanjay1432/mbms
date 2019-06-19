@@ -148,19 +148,23 @@ export class FindVisitorComponent implements OnInit {
 
 
   onNext(){
-    if(this.visitorToSave.WatchList){
-      let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
-      element.click();
-    }else{
-        
-      let visitor = {
-        profile: this.visitorToSave?this.visitorToSave:this.profileForm.value,
-        isPreRegistered: this.isPreRegistered
-      }
-      this.mannedVisitorMangementService.setVisitor(visitor)
-      this.router.navigate(['/mannedvisitormanagement/visitor'])
+    if(this.hasSelecteduser){ 
+      if(this.visitorToSave.WatchList){
+        let element:HTMLElement = document.getElementById('isInWatchList') as HTMLElement;
+        element.click();
+      }else{
+          
+        let visitor = {
+          profile: this.visitorToSave?this.visitorToSave:this.profileForm.value,
+          isPreRegistered: this.isPreRegistered
+        }
+        this.mannedVisitorMangementService.setVisitor(visitor)
+        this.router.navigate(['/mannedvisitormanagement/visitor'])
 
       }
+    }else{
+      this.onAddToVisitors(this.profileForm.value)
+    }
     
     
     
@@ -231,12 +235,16 @@ export class FindVisitorComponent implements OnInit {
   }
 
   addNewVisitor(e){
+   if(this.hasSelecteduser){ 
     if(this.visitorToSave.WatchList){
     let element1:HTMLElement = document.getElementById('newVisitor') as HTMLElement;
           element1.click();
     }else{
       this.onAddToVisitors(this.visitorToSave)
     }
+  }else{
+    this.onAddToVisitors(this.profileForm.value)
+  }
 
   }
 }
